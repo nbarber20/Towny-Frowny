@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>fastnoise.h</FILENAME>
+      <LINE>48</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'FastNoise::m_fractalBounding' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>FastNoise::{ctor}</FUNCTION>
+    <DECORATED>??0FastNoise@@QAE@H@Z</DECORATED>
+    <FUNCLINE>48</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>fastnoise.h</FILENAME>
+      <LINE>48</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'FastNoise::m_perm12' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>FastNoise::{ctor}</FUNCTION>
+    <DECORATED>??0FastNoise@@QAE@H@Z</DECORATED>
+    <FUNCLINE>48</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>fastnoise.h</FILENAME>
+      <LINE>48</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'FastNoise::m_perm' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>FastNoise::{ctor}</FUNCTION>
+    <DECORATED>??0FastNoise@@QAE@H@Z</DECORATED>
+    <FUNCLINE>48</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>worldtile.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'WorldTile::tileEntitiesCount' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>WorldTile::{ctor}</FUNCTION>
+    <DECORATED>??0WorldTile@@QAE@PAVFastNoise@@AAVWorld@@FF@Z</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>worldtile.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'WorldTile::contentsVolume' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>WorldTile::{ctor}</FUNCTION>
+    <DECORATED>??0WorldTile@@QAE@PAVFastNoise@@AAVWorld@@FF@Z</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>worldtile.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'WorldTile::hcost' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>WorldTile::{ctor}</FUNCTION>
+    <DECORATED>??0WorldTile@@QAE@PAVFastNoise@@AAVWorld@@FF@Z</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>worldtile.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'WorldTile::gcost' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>WorldTile::{ctor}</FUNCTION>
+    <DECORATED>??0WorldTile@@QAE@PAVFastNoise@@AAVWorld@@FF@Z</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>worldtile.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'WorldTile::pathingParent' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>WorldTile::{ctor}</FUNCTION>
+    <DECORATED>??0WorldTile@@QAE@PAVFastNoise@@AAVWorld@@FF@Z</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>e:\personalwork\townyfrowny\townyfrowny\townyfrowny\</FILEPATH>
+      <FILENAME>world.cpp</FILENAME>
+      <LINE>5</LINE>
+      <COLUMN>7</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'World::tileCount' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>World::{ctor}</FUNCTION>
+    <DECORATED>??0World@@QAE@PAVFastNoise@@@Z</DECORATED>
+    <FUNCLINE>5</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

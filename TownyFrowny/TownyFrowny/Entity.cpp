@@ -1,0 +1,124 @@
+#include "Entity.h"
+#include "World.h"
+#include "Camera.h"
+#include "TileManager.h"
+#include "LogHandler.h"
+#include "EntityHandler.h"
+#include "TaskManager.h"
+#include "Entity_Living.h"
+Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref , std::vector<TargetedHumanBehaviors> TargetedBehaviors)
+{
+	world = worldref;
+	this->spriteX= spritePos.x;
+	this->spriteY = spritePos.y;
+	this->EntityID = EntityID;
+	this->age = 0;
+	this->parent = nullptr;
+	this->TargetedBehaviors = TargetedBehaviors;
+}
+
+
+void Entity::OnSpawn()
+{
+	inworld = true;
+	world->tileToTick.push_back(world->GetWorldTile(this->GetPosition()));
+}
+
+void Entity::RemoveFromWorld()
+{
+	world->DespawnEntity(this,sf::Vector2i(x,y));
+	inworld = false;
+}
+
+void Entity::Tick()
+{
+	if(age<32768)age++;
+}
+
+void Entity::SetPosition(short x, short y)
+{
+	this->x = x;
+	this->y = y;
+}
+
+sf::Vector2i Entity::GetPosition()
+{
+	sf::Vector2i p = sf::Vector2i(x, y);
+	return p;
+}
+
+void Entity::DrawEntity()
+{
+	sf::Sprite* sprite = TileManager::Instance().GetEntityTileByID(spriteX, spriteY)->sprite;
+	sf::Vector2f worldf;
+	worldf.x = x;
+	worldf.y = y;
+	sprite->setPosition(worldf*8.0f);
+	Camera::Instance().getHighLod()->draw(*sprite);
+	Camera::Instance().getLowLod()->setPixel(x, world->GetWorldSize() - 1 - y, *TileManager::Instance().GetEntityTileByID(spriteX,spriteY)->tileColor);
+}
+
+bool Entity::MoveToTile(short dx, short dy)
+{	
+	if (dx > world->GetWorldSize() - 1 || dx < 0 || dy<0 || dy>world->GetWorldSize() - 1)return false; //Out of bounds
+	if (world->IsTileWalkable(sf::Vector2i(dx, dy),this) == false)return false; //Cannot walk here
+	world->MoveEntity(this, x,y,dx,dy);
+}
+
+bool Entity::StepTiles(short dx, short dy)
+{
+	if (canMove) {
+		return MoveToTile(x + dx, y + dy);
+	}
+}
+
+wchar_t Entity::GetID()
+{
+	return this->EntityID;
+}
+
+bool Entity::isInWorld()
+{
+	return inworld;
+}
+
+void Entity::SetObjectName(std::string to)
+{
+	this->objectName = to;
+}
+
+std::string Entity::GetObjectName()
+{
+	return this->objectName;
+}
+
+Entity_Container* Entity::GetParent()
+{
+	return this->parent;
+}
+
+void Entity::SetParent(Entity_Container* e)
+{
+	if (inworld)RemoveFromWorld();
+	if (parent!=nullptr) parent->RemoveItemFromInventory(this); //we are in an inv, so remove from that first
+	this->parent = e;
+}
+
+void Entity::SetMovementCapability(bool to)
+{
+	canMove = to;
+}
+
+bool Entity::GetMovementCapability()
+{
+	return canMove;
+}
+
+void Entity::SetSpriteVariant(wchar_t x, wchar_t y)
+{
+	spriteX = x;
+	spriteY = y;
+	if (inworld) {
+		world->tileToTick.push_back(world->GetWorldTile(GetPosition()));
+	}
+}
