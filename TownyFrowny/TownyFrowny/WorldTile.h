@@ -8,6 +8,7 @@ struct WorldTile {
 		wallTile = nullptr;
 		this->x = x;
 		this->y = y;
+		tileEntitiesCount = 0;
 	};
 	~WorldTile() {
 		delete wallTile;

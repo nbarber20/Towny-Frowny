@@ -76,11 +76,18 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
 			{
-				EntityHandler::Instance().SpawnAtCursor(1, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(15, debugWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 			{
-				EntityHandler::Instance().SpawnAtCursor(2, debugWorld, &window);
+				sf::Vector2i worldPos;
+				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
+				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
+					if (debugWorld->GetTileDesignations(worldPos).size() == 0) {
+						debugWorld->NewDesignation(worldPos, sf::Vector2i(4, 4), Designation::MaterialStorage);
+					}
+				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4))
 			{

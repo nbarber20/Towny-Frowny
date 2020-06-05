@@ -11,7 +11,9 @@ public:
 		this->tickspeed = tickSpeed;
 		this->length = stepCount;
 	};
-	virtual ~Task() {};
+	virtual ~Task() {
+		std::cout << "here";
+	}
 	virtual void Setup(World* w, Entity_Living* o, Entity_Living* i) {
 		world = w;
 		ownerEntity = o;
@@ -68,10 +70,9 @@ public:
 		this->deepSearch = isDeepSearch;
 		spiral = get_spiral(this->range);
 	};
-	~Task_EntityRetrieval() {
+	virtual ~Task_EntityRetrieval(){
 		spiral.clear();
 		spiral.shrink_to_fit();
-
 	}
 	std::vector<sf::Vector2i> get_spiral(int size)
 	{
@@ -123,7 +124,9 @@ public:
 	Task_Search_Singluar( int range,bool isDeepSearch, bool OnlyLiving, std::vector<int> TargetIDs,int tickSpeed, int length):Task_EntityRetrieval(range, isDeepSearch, OnlyLiving,TargetIDs,tickspeed,length) {
 	
 	}; 
-	~Task_Search_Singluar() {};
+	virtual ~Task_Search_Singluar() {
+		std::cout << "here";
+	};
 	TaskStatus Execute() override;
 	sf::Vector2i* FoundTarget;
 	Entity* FoundTargetEntity;
@@ -133,7 +136,7 @@ public:
 	Task_Search_For(Entity** toSearchFor, int range, bool isDeepSearch, int tickSpeed, int length) :Task_EntityRetrieval(range, isDeepSearch, tickspeed, length) {
 		this->toSearchFor = toSearchFor;
 	};
-	~Task_Search_For() {};
+	virtual ~Task_Search_For() {};
 	TaskStatus Execute() override;
 private:
 	Entity** toSearchFor;
@@ -144,7 +147,7 @@ public:
 	Task_Search(int range, bool isDeepSearch, bool OnlyLiving, std::vector<int> TargetIDs, int tickSpeed, int length) :Task_EntityRetrieval(range, isDeepSearch, OnlyLiving, TargetIDs, tickspeed, length) {
 
 	};
-	~Task_Search() {};
+	virtual ~Task_Search() {};
 	TaskStatus Execute() override;
 	std::vector<sf::Vector2i*> FoundTargets;
 	std::vector<Entity*> FoundTargetEntities;
@@ -226,6 +229,19 @@ public:
 private:
 	Entity** toDrop;
 };
+
+class Task_DropInStockDesignation : public Task {
+public:
+	Task_DropInStockDesignation(Entity** entity, Designation::Type chceckfor, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->toDrop = entity;
+		this->typetoCheck = chceckfor;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** toDrop;
+	Designation::Type typetoCheck;
+};
+
 
 class Task_CheckEntityAlive : public Task {
 public:
@@ -319,10 +335,11 @@ private:
 
 class Task_LocateStockDesignation : public Task_EntityRetrieval {
 public:
-	Task_LocateStockDesignation(int range, bool DoDeepSearch, Designation::Type typetoCheck, Entity** refEntity, int tickSpeed, int length) :Task_EntityRetrieval(range, DoDeepSearch,tickspeed, length) {
+	Task_LocateStockDesignation(int range, Designation::Type typetoCheck, Entity** refEntity, int tickSpeed, int length) :Task_EntityRetrieval(range, false,tickspeed, length) {
 		this->refEntity = refEntity;
-		this->typetoCheck = typetoCheck;
+		this->typetoCheck = typetoCheck; 
 	};
+	virtual ~Task_LocateStockDesignation() {};
 	TaskStatus Execute() override;
 
 	sf::Vector2i* FoundTarget;

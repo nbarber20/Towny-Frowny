@@ -6,6 +6,7 @@
 #include "EntityHandler.h"
 #include "TaskManager.h"
 #include "Entity_Living.h"
+#include "Designation.h"
 Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref , std::vector<TargetedHumanBehaviors> TargetedBehaviors)
 {
 	world = worldref;
@@ -101,7 +102,20 @@ void Entity::SetParent(Entity_Container* e)
 {
 	if (inworld)RemoveFromWorld();
 	if (parent!=nullptr) parent->RemoveItemFromInventory(this); //we are in an inv, so remove from that first
+	if (designationParent != nullptr) designationParent = nullptr; //we are in a stock designation so remove ourselves from that list
 	this->parent = e;
+}
+
+Designation* Entity::GetDesignationParent()
+{
+	return designationParent;
+}
+
+void Entity::SetDesignationParent(Designation* d)
+{
+	if(designationParent != nullptr) designationParent->HeldEntities.erase(std::remove(designationParent->HeldEntities.begin(), designationParent->HeldEntities.end(), this), designationParent->HeldEntities.end());
+	if (d != nullptr) d->HeldEntities.push_back(this);
+	designationParent = d;
 }
 
 void Entity::SetMovementCapability(bool to)

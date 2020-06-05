@@ -15,6 +15,13 @@ public:
 		this->pathFinder = pathfinder;
 	};
 
+
+	void DeleteTask(Task* t) {
+		delete t;
+	}
+
+
+
 	//General Behaviors
 
 	std::vector<Task*> TREE_FindFood(int searchSize) {
@@ -66,7 +73,7 @@ public:
 
 	std::vector<Task*> TREE_StoreFood(int searchSize){
 		Task_GetItemFromOwner* heldItemCheck = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Food),1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,false, Designation::Type::FoodStorage, &heldItemCheck->foundEntity, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::FoodStorage, &heldItemCheck->foundEntity, 5, 50);
 		return
 		{
 			heldItemCheck,
@@ -79,7 +86,7 @@ public:
 	std::vector<Task*> TREE_HarvestWood(int searchSize) {
 		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize, false, false, EntityHandler::Instance().GetIDGroup(EntityHandler::Tree), 5, 50);
 		Task_Take* take = new Task_Take(&lookTask->FoundTargetEntity, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize, false, Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
 		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 
 		return
@@ -90,7 +97,7 @@ public:
 			desLook,
 			new Task_WalkTo(pathFinder,0,&desLook->FoundTarget,1,10),
 			invsearchforwood,
-			new Task_Drop(&invsearchforwood->foundEntity,1,10),
+			new Task_DropInStockDesignation(&invsearchforwood->foundEntity,Designation::Type::MaterialStorage,1,10),
 		};
 	}
 
@@ -99,7 +106,7 @@ public:
 
 	std::vector<Task*> TargetTREE_HarvestWood(Entity** TreeTarget) {
 		Task_Take* take = new Task_Take(TreeTarget, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(20, false, Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(20,Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
 		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 		return
 		{

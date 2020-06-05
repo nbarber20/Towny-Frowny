@@ -51,7 +51,7 @@ void World::SpawnEntity(Entity* entity, sf::Vector2i tilePosition)
 void World::DespawnEntity(Entity* entity, sf::Vector2i tilePosition)
 {
 	tilePosition = VectorHelper::ClampVector(tilePosition, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize() - 1));
-	if (ContainsEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity)) {
+	if (DoesTileContainEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity)) {
 		RemoveEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity);
 		tileToTick.push_back(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y]);
 		return;
@@ -65,7 +65,7 @@ void World::MoveEntity(Entity* entity, short fromx, short fromy, short tox, shor
 	sf::Vector2i to = sf::Vector2i(tox, toy);
 	from = VectorHelper::ClampVector(from, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize()-1));
 	to = VectorHelper::ClampVector(to, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize() - 1));
-	if (ContainsEntity(worldTiles[(GetWorldSize()*from.x) + from.y],entity)) {
+	if (DoesTileContainEntity(worldTiles[(GetWorldSize()*from.x) + from.y],entity)) {
 		RemoveEntity(worldTiles[(GetWorldSize()*from.x) + from.y],entity);
 		AddEntity(worldTiles[(GetWorldSize()*to.x) + to.y],entity);
 		tileToTick.push_back(worldTiles[(GetWorldSize()*from.x) + from.y]);
@@ -97,14 +97,25 @@ int World::GetWallTileIDAtPosition(sf::Vector2i tile)
 	return GetWallTileID(worldTiles[(GetWorldSize()*tile.x) + tile.y]);
 }
 
-bool World::DoesTileContainEntity(sf::Vector2i tile, Entity* entity)
+bool World::DoesTileContainEntity(WorldTile* tile, Entity* entity)
 {
-	tile = VectorHelper::ClampVector(tile, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize() - 1));
-	const int num = worldTiles[(GetWorldSize()*tile.x) + tile.y]->tileEntitiesCount;
-	Entity** ptr = (num > 0) ? worldTiles[(GetWorldSize()*tile.x) + tile.y]->tileEntities.data() : nullptr;
-	for (int i = 0; i < num; i++)
-	{
-		if (ptr[i] == entity) return true;
+	if (std::find(tile->tileEntities.begin(), tile->tileEntities.end(), entity) != tile->tileEntities.end()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+	return false;
+}
+
+bool World::DoesTileContainEntity(sf::Vector2i position, Entity* entity)
+{
+	WorldTile* tile = GetWorldTile(position);
+	if (std::find(tile->tileEntities.begin(), tile->tileEntities.end(), entity) != tile->tileEntities.end()) {
+		return true;
+	}
+	else {
+		return false;
 	}
 	return false;
 }
@@ -165,7 +176,7 @@ void World::NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Typ
 			tileToTick.push_back(t);
 		}
 	}
-	Designation* des = new Designation(tiles, t);
+	Designation* des = new Designation(tiles, t,this);
 	designations.push_back(des);
 }
 
@@ -314,17 +325,6 @@ void World::RemoveEntity(WorldTile* tile, Entity* entity)
 	tile->tileEntities.shrink_to_fit();
 	tile->tileEntitiesCount = tile->tileEntities.size();
 	tile->contentsVolume -= entity->volume;
-}
-
-bool World::ContainsEntity(WorldTile* tile, Entity* entity)
-{
-	if (std::find(tile->tileEntities.begin(), tile->tileEntities.end(), entity) != tile->tileEntities.end()) {
-		return true;
-	}
-	else {
-		return false;
-	}
-	return false;
 }
 
 void World::SetGroundTileID(WorldTile* tile, wchar_t id)

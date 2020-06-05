@@ -12,7 +12,6 @@
 #include "Entity_Plant.h"
 #include "Entity_Manufactured.h"
 #include "InputHandler.h"
-#include <iostream>
 class TaskManager;
 
 class EntityHandler
@@ -69,7 +68,7 @@ public:
 	}
 	void DestroyEntity(Entity * e, World* w) {
 		e->SetParent(nullptr);
-		if(e->isInWorld())w->DespawnEntity(e, e->GetPosition()); //de spawn if in world
+		if(e->isInWorld())w->DespawnEntity(e, e->GetPosition()); //remove from world
 		entities.erase(std::remove(entities.begin(), entities.end(), e), entities.end());
 		delete e; 
 	}
@@ -124,7 +123,6 @@ public:
 		if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
 			if (world->DoesTileContainEntity(worldPos, id, true) == false) {
 				EntityHandler::Instance().CreateAndSpawnEntity(id, world, sf::Vector2i(worldPos.x, worldPos.y));
-				std::cout << "spawned";
 			}
 		}
 	}
@@ -176,6 +174,17 @@ public:
 				playableHumans[i]->Tick();
 			}
 		}
+	}
+
+	bool IsEntityValid(Entity* e) {
+		if (e == nullptr) return false;
+		if (std::find(entities.begin(), entities.end(), e) != entities.end()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		return false;
 	}
 
 private:

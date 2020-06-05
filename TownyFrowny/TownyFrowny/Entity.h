@@ -3,6 +3,7 @@
 class World;
 class Entity_Living;
 class Entity_Container;
+class Designation;
 struct Entity
 {
 public: 
@@ -42,6 +43,9 @@ public:
 	virtual std::string GetObjectName();
 	virtual Entity_Container* GetParent();
 	virtual void SetParent(Entity_Container* e);
+	virtual Designation* GetDesignationParent();
+	virtual void SetDesignationParent(Designation* d);
+
 	void SetMovementCapability(bool to);
 	bool GetMovementCapability();
 	virtual void SetSpriteVariant(wchar_t x, wchar_t y);
@@ -105,5 +109,6 @@ protected:
 	bool canMove = false;
 	std::string objectName;
 	Entity_Container* parent;
+	Designation* designationParent;
 };
 

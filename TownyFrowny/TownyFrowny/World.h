@@ -24,6 +24,7 @@ public:
 	void SetWallTile(sf::Vector2i tile, int id);
 	int GetGroundTileIDAtPosition(sf::Vector2i tile);
 	int GetWallTileIDAtPosition(sf::Vector2i tile);
+	bool DoesTileContainEntity(WorldTile* tile, Entity* entity);
 	bool DoesTileContainEntity(sf::Vector2i tile, wchar_t entityId, bool deepSearch);
 	bool DoesTileContainEntity(sf::Vector2i tile, Entity* entity);
 	Entity* GetEntityInTileByID(wchar_t entityId, sf::Vector2i tile);
@@ -40,7 +41,6 @@ private:
 	void AddEntity(WorldTile* tile, Entity* entity);
 	void RemoveEntity(WorldTile* tile, Entity* entity);
 	void DrawTile(WorldTile* tile);
-	bool ContainsEntity(WorldTile* tile, Entity* entity);
 	void SetGroundTileID(WorldTile* tile, wchar_t id);
 	int GetGroundTileID(WorldTile* tile);
 	void SetWallTileID(WorldTile* tile, int id);

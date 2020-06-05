@@ -42,13 +42,17 @@ void Entity_Living::TaskFail(Task* t)
 		if (TaskTree[taskTreeIndex]->FailTree.size() > 0) { //there is a taskfallback for this tree set
 			std::vector<BehaviorBranch*> temp;
 			std::vector<BehaviorBranch*> failTemp = TaskTree[taskTreeIndex]->FailTree;
+
+
 			for (int i = taskTreeIndex+1; i < TaskTree.size();i++) {
-				temp.push_back(TaskTree[i]);
+				temp.push_back(TaskTree[i]); //add the tasks we had queued
 			}
+			delete TaskTree[taskTreeIndex]; //delete the current task branch
+
 			TaskTree.clear();			
 			TaskTree = failTemp; //mark the fail tree to be executed
 
-			for (int j = 0; j < temp.size(); j++) { //continue from where we left off
+			for (int j = 0; j < temp.size(); j++) { //append the branches onto the end after the failtree
 				TaskTree.push_back(temp[j]);
 			}
 			taskIndex = 0;
@@ -159,6 +163,7 @@ void Entity_Living::clearAllTasks()
 	taskIndex = 0;
 	taskTreeIndex = 0;
 	for (int i = 0; i < TaskTree.size(); i++) {
+		TaskTree[i]->DeleteFailTree();
 		delete TaskTree[i];
 	}
 	TaskTree.clear();

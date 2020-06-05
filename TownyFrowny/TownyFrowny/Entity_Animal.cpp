@@ -53,13 +53,13 @@ void Entity_Animal::SetBehavoir(Entity::Behaviors b)
 	switch (b)
 	{
 	case Entity::Wait:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Wait(20)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Wait(20), taskManager));
 		break;
 	case Entity::Pase:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10), taskManager));
 		break;
 	case Entity::Roam:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10), taskManager));
 		break;
 	case Entity::Graze:
 		return;

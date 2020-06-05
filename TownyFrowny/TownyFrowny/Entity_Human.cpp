@@ -63,26 +63,26 @@ void Entity_Human::SetBehavoir(Entity::Behaviors b)
 	switch (b)
 	{
 	case Entity::GatherWood:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20)));
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20)));
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20),taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_HarvestWood(20), taskManager));
 		break;
 	case Entity::SlaughterAnimal:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SlaughterAnimal(20), 4));
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_StoreFood(20)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SlaughterAnimal(20), 4, taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_StoreFood(20), taskManager));
 		break;
 	case Entity::Eat:
 		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_EatHeldFood(), {
 			//FailTasks
-			new BehaviorBranch(taskManager->TREE_FindFood(20)),
-			new BehaviorBranch(taskManager->TREE_EatHeldFood())
-			}));
+			new BehaviorBranch(taskManager->TREE_FindFood(20),taskManager),
+			new BehaviorBranch(taskManager->TREE_EatHeldFood(),taskManager)
+			}, taskManager));
 		break;
 	case Entity::Pase:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Pase(10), taskManager));
 		break;
 	case Entity::Wait:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Wait(10)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_Wait(10), taskManager));
 		break;
 	default:
 		break;
@@ -102,40 +102,40 @@ void Entity_Human::SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskSte
 		clearAllTasks();
 		return;
 	case TargetedHumanBehaviors::Targeted_HarvestWood:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_HarvestWood(&step->entity)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_HarvestWood(&step->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_SlaughterAnimal:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_SlaughterAnimal(&step->entity),5));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_SlaughterAnimal(&step->entity),5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_PickUp:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_PickUp(&step->entity)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_PickUp(&step->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_WalkTo:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_WalkTo(&step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_WalkTo(&step->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_ConstructWall:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructWall(&step->entity, &step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructWall(&step->entity, &step->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DestroyWall:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructWall(&step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructWall(&step->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_ConstructFloor:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructFloor(&step->entity, &step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructFloor(&step->entity, &step->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DestroyFloor:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructFloor(&step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructFloor(&step->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_LootBody:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_LootBody(&step->entity), 2));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_LootBody(&step->entity), 2, taskManager));
 		break; 
 	case TargetedHumanBehaviors::Targeted_Attack:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Attack(&step->entity), 5));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Attack(&step->entity), 5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_Rotate:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Rotate(&step->entity), 5));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Rotate(&step->entity), 5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DropItem:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DropItem(&step->entity, &step->Pos)));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DropItem(&step->entity, &step->Pos), taskManager));
 		break;
 	}
 	startTaskQueue();

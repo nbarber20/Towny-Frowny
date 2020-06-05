@@ -3,48 +3,57 @@
 #include <string>
 #include "NameGenerator.h"
 #include "Entity_Container.h"
+#include "BehaviorBranch.h"
 class Task;
 class TaskManager;
+/*
 
 struct BehaviorBranch {
 
-	BehaviorBranch(std::vector<Task*> Branch) {
+	BehaviorBranch(std::vector<Task*> Branch, TaskManager* taskManager) {
 		this->Branch = Branch;
 		this->FailTree = {};
 		this->retries = 0;
+		this->taskManager = taskManager;
 	}
 
-	BehaviorBranch(std::vector<Task*> Branch,int retries) {
+	BehaviorBranch(std::vector<Task*> Branch,int retries, TaskManager* taskManager) {
 		this->Branch = Branch;
 		this->FailTree = {};
 		this->retries = retries;
+		this->taskManager = taskManager;
 	}
-	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree) {
+	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree, TaskManager* taskManager) {
 		this->Branch = Branch;
 		this->FailTree = FailTree;
 		this->retries = 0;
+		this->taskManager = taskManager;
 	}
 
-	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree , int retries) {
+	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree , int retries, TaskManager* taskManager) {
 		this->Branch = Branch;
 		this->FailTree = FailTree;
 		this->retries = retries;
+		this->taskManager = taskManager;
 	}
 
 	~BehaviorBranch() {
-		for (auto b : Branch) {
-			delete b;
+		for (int i = 0; i < Branch.size();i++) {
+			taskManager->DeleteTask(Branch[i]);
 		}
-		for (auto f : FailTree) {
-			delete f;
+		for (int j = 0; j < FailTree.size(); j++) {
+			delete this->FailTree[j];
 		}
+		this->Branch.clear();
+		this->FailTree.clear();
 	}
 
 	std::vector<Task*> Branch;
 	int retries;
 	std::vector <BehaviorBranch*>  FailTree;
+	TaskManager* taskManager;
 };
-
+*/
 
 class Entity_Living : public Entity_Container {
 public:
