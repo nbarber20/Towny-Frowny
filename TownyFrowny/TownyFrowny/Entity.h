@@ -51,7 +51,7 @@ public:
 	virtual void SetSpriteVariant(wchar_t x, wchar_t y);
 	bool doTick = true;
 	int volume = 0;
-	virtual void InitilizeSpawnInventory() {};
+	virtual void Initilize() {};
 
 	virtual Entity* clone() const { return new Entity(*this); };
 	virtual void getTargetedBehaviors(std::vector<TargetedHumanBehaviors>* list, std::vector<TargetedHumanBehaviors>* failList = new std::vector<TargetedHumanBehaviors>) {

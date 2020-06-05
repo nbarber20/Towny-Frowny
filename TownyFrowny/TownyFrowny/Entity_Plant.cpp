@@ -12,7 +12,7 @@ void Entity_Plant::RemoveItemFromInventory(Entity* e)
 	}
 }
 
-void Entity_Plant::InitilizeSpawnInventory()
+void Entity_Plant::Initilize()
 {
 	AddItemToInventory(EntityHandler::Instance().CreateEntity(MatierialID));
 }

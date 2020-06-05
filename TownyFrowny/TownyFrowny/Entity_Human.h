@@ -13,13 +13,10 @@ public:
 	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, InputHandler* inputHandler, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
 	{
 		volume = 6;
-		individualName = NameGenerator::Instance().GenName();
-		srand(time(NULL));
-		int id = rand() % TileManager::Instance().GetNumEntityVariants(spritePos.x);
-		this->inputHandler = inputHandler;
 	};
 	void SetBehavoir(Entity::Behaviors b);
 	void SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskStep* step, bool doOverride);
+	void Initilize() override;
 	void Tick() override;
 	void TaskComplete(Task* t) override;
 	void TaskFail(Task* t) override;

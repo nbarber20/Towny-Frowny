@@ -31,7 +31,7 @@ public:
 
 		Entity* newEntity = (entityList[id].second)->clone();
 		newEntity->SetObjectName(GetEntityNameByID(id));
-		newEntity->InitilizeSpawnInventory();
+		newEntity->Initilize();
 		Entity_Living* check = dynamic_cast<Entity_Living*>(newEntity);
 		if (check != NULL) { // this entity is alive
 			if (livingEntitiesCount < maxLivingEntities) {

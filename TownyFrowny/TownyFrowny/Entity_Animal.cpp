@@ -4,9 +4,14 @@
 
 Entity_Animal::Entity_Animal(wchar_t EntityID, sf::Vector2i spritePos, int volume, wchar_t MeatID, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
 {
-	individualName = NameGenerator::Instance().GenNameFirstName() + " the" + GetObjectName();
 	this->volume = volume;
 	this->MeatID = MeatID;
+}
+
+void Entity_Animal::Initilize()
+{
+	individualName = NameGenerator::Instance().GenNameFirstName() + " the" + GetObjectName();
+	AddItemToBodilyInventory(EntityHandler::Instance().CreateEntity(MeatID));
 }
 
 void Entity_Animal::Tick()
@@ -40,11 +45,6 @@ void Entity_Animal::Die(Entity_Living* source)
 {
 	Entity_Living::Die(source);
 	SetSpriteVariant(spriteX, 1);
-}
-
-void Entity_Animal::InitilizeSpawnInventory()
-{
-	AddItemToBodilyInventory(EntityHandler::Instance().CreateEntity(MeatID));
 }
 
 void Entity_Animal::SetBehavoir(Entity::Behaviors b)

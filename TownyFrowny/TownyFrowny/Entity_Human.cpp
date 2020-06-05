@@ -140,3 +140,12 @@ void Entity_Human::SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskSte
 	}
 	startTaskQueue();
 }
+
+void Entity_Human::Initilize()
+{
+	individualName = NameGenerator::Instance().GenName();
+	srand(time(NULL));
+	int id = rand() % TileManager::Instance().GetNumEntityVariants(spriteX);
+	SetSpriteVariant(0, id);
+	this->inputHandler = inputHandler;
+}
