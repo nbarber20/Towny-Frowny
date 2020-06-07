@@ -11,9 +11,7 @@ public:
 		this->tickspeed = tickSpeed;
 		this->length = stepCount;
 	};
-	virtual ~Task() {
-		std::cout << "here";
-	}
+	virtual ~Task() {}
 	virtual void Setup(World* w, Entity_Living* o, Entity_Living* i) {
 		world = w;
 		ownerEntity = o;
@@ -124,9 +122,7 @@ public:
 	Task_Search_Singluar( int range,bool isDeepSearch, bool OnlyLiving, std::vector<int> TargetIDs,int tickSpeed, int length):Task_EntityRetrieval(range, isDeepSearch, OnlyLiving,TargetIDs,tickspeed,length) {
 	
 	}; 
-	virtual ~Task_Search_Singluar() {
-		std::cout << "here";
-	};
+	virtual ~Task_Search_Singluar() {};
 	TaskStatus Execute() override;
 	sf::Vector2i* FoundTarget;
 	Entity* FoundTargetEntity;
@@ -204,6 +200,18 @@ public:
 private:
 	Entity** ToCheck;
 	std::vector<int> targetIDs;
+};
+
+class Task_Give : public Task {
+public:
+	Task_Give(Entity** eToGiveto, std::vector< std::vector<int>> giveList, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->eToGiveto = eToGiveto;
+		this->giveList = giveList;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** eToGiveto;
+	std::vector< std::vector<int>> giveList;
 };
 
 class Task_PickUp : public Task {
@@ -400,4 +408,29 @@ public:
 	TaskStatus Execute() override;
 private:
 	Entity** target;
+};
+
+class Task_Craft : public Task {
+public:
+	Task_Craft(int id, Entity** targetCrafter) :Task(tickspeed, length) {
+		this->id = id;
+		this->targetCrafter = targetCrafter;
+	};
+	TaskStatus Execute() override;
+	Entity* crafted;
+private:
+	int id;
+	Entity** targetCrafter;
+};
+
+class Task_SourceMaterials : public Task {
+public:
+	Task_SourceMaterials(int id,PathFinder* pathfinder) :Task(tickspeed, length) {
+		this->id = id;
+		this->pathfinder = pathfinder;
+	};
+	TaskStatus Execute() override;
+private:
+	int id;
+	PathFinder* pathfinder;
 };

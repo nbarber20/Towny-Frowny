@@ -58,6 +58,7 @@ int main()
 	FpsText.setFillColor(sf::Color(248,255,138));
 	LogHandler::Instance().WriteLog("Began Game");
 
+	EntityHandler::Instance().CreateAndSpawnEntity(0, debugWorld, sf::Vector2i(debugWorld->GetWorldSize()*.5f, debugWorld->GetWorldSize()*.5f));
 
 	while (window.isOpen())
 	{
@@ -80,14 +81,7 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 			{
-				sf::Vector2i worldPos;
-				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
-				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					if (debugWorld->GetTileDesignations(worldPos).size() == 0) {
-						debugWorld->NewDesignation(worldPos, sf::Vector2i(4, 4), Designation::MaterialStorage);
-					}
-				}
+				EntityHandler::Instance().SpawnAtCursor(27, debugWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4))
 			{
@@ -160,17 +154,17 @@ int main()
 					
 				}
 				else {
-
+					//TODO: not this
 					float i = floor(mouseScreenPos.y / 10.0f);
 					switch (UiHandler::Instance().GetWindow())
 					{
-					case UiHandler::Crafting:
-						inputHandler->OnTaskUIClick(i);
-						break;
 					case UiHandler::Tasks:
 						inputHandler->OnTaskUIClick(i);
 						break;
 					case UiHandler::Inventory:
+						inputHandler->OnTaskUIClick(i);
+						break;
+					case UiHandler::Designation:
 						inputHandler->OnTaskUIClick(i);
 						break;
 					case UiHandler::Logs:

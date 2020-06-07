@@ -6,6 +6,7 @@
 
 class InputHandler;
 struct targetedTaskStep;
+struct TargetedBehaviorStep;
 class Entity_Human : public Entity_Living {
 public:
 	
@@ -13,9 +14,10 @@ public:
 	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, InputHandler* inputHandler, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
 	{
 		volume = 6;
+		this->inputHandler = inputHandler;
 	};
 	void SetBehavoir(Entity::Behaviors b);
-	void SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskStep* step, bool doOverride);
+	void SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep* step, bool doOverride);
 	void Initilize() override;
 	void Tick() override;
 	void TaskComplete(Task* t) override;
@@ -36,6 +38,7 @@ public:
 	}
 	virtual Entity_Human* clone() const { return new Entity_Human(*this); };
 	void DestroyTaskSteps();
+
 private:
 
 	std::vector<std::pair<Entity::Behaviors, float>> behaviorWeights = {

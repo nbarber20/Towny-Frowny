@@ -6,6 +6,7 @@
 #include "PathFinder.h"
 #include "EntityHandler.h"
 #include "Designation.h"
+#include "Recipies.h"
 class TaskManager {
 public:
 	
@@ -25,7 +26,7 @@ public:
 	//General Behaviors
 
 	std::vector<Task*> TREE_FindFood(int searchSize) {
-		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize,false,false, EntityHandler::Instance().GetIDGroup(EntityHandler::Food), 5, 50);
+		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize,false,false, EntityHandler::Instance().GetIDGroup(EntityHandler::Food), 5, 200);
 		return
 		{
 			lookTask,
@@ -56,7 +57,7 @@ public:
 	}
 
 	std::vector<Task*> TREE_SlaughterAnimal(int searchSize) {
-		Task_Search* lookTask = new Task_Search(searchSize, false, true, EntityHandler::Instance().GetIDGroup(EntityHandler::FoodAnimals), 5, 50);
+		Task_Search* lookTask = new Task_Search(searchSize, false, true, EntityHandler::Instance().GetIDGroup(EntityHandler::FoodAnimals), 5, 200);
 		Task_SelectRandomEntityFromList* randSelect = new Task_SelectRandomEntityFromList(&lookTask->FoundTargetEntities, 1, 10);
 		return
 		{
@@ -64,7 +65,7 @@ public:
 			randSelect,//pick one
 			new Task_AssignTaskToEntity(TREE_Wait(40),&randSelect->selected,1,10), //tell it to wait
 			new Task_WalkTo(pathFinder,1,&randSelect->selectedTarget, 1, 10), //go next to it
-			new Task_Search_For(&randSelect->selected,1,true, 1, 50), //ensure we are next to it
+			new Task_Search_For(&randSelect->selected,1,true, 1, 200), //ensure we are next to it
 			new Task_RestrainLivingEntity(&randSelect->selected,1,10), //restrain animal
 			new Task_AttackLivingEntityUntilDead(&randSelect->selected,1,10), //attack till dead
 			new Task_LootBodilyInventory(&randSelect->selected,1,10), //remove all meat from the cows body
@@ -73,7 +74,7 @@ public:
 
 	std::vector<Task*> TREE_StoreFood(int searchSize){
 		Task_GetItemFromOwner* heldItemCheck = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Food),1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::FoodStorage, &heldItemCheck->foundEntity, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::FoodStorage, &heldItemCheck->foundEntity, 5, 200);
 		return
 		{
 			heldItemCheck,
@@ -84,9 +85,9 @@ public:
 	}
 
 	std::vector<Task*> TREE_HarvestWood(int searchSize) {
-		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize, false, false, EntityHandler::Instance().GetIDGroup(EntityHandler::Tree), 5, 50);
+		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize, false, false, EntityHandler::Instance().GetIDGroup(EntityHandler::Tree), 5, 200);
 		Task_Take* take = new Task_Take(&lookTask->FoundTargetEntity, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::MaterialStorage, &take->foundItem, 5, 200);
 		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 
 		return
@@ -100,13 +101,26 @@ public:
 			new Task_DropInStockDesignation(&invsearchforwood->foundEntity,Designation::Type::MaterialStorage,1,10),
 		};
 	}
-
+	std::vector<Task*> TREE_SourceMaterials(int recipeID) {
+		return {
+			new Task_SourceMaterials(recipeID,pathFinder),
+		};
+	}
+	std::vector<Task*> TREE_CraftItem(int recipeID) {
+		Task_Search_Singluar* lookTask = new Task_Search_Singluar(20, false, false, EntityHandler::Instance().GetIDGroup(EntityHandler::Crafter), 5, 200);
+		return { 
+			lookTask,
+			new Task_WalkTo(pathFinder, 1, &lookTask->FoundTarget, 1, 10),
+			new Task_Give(&lookTask->FoundTargetEntity,Recipies::getRecipe(recipeID),1,10),
+			new Task_Craft(recipeID,&lookTask->FoundTargetEntity),
+		};
+	}
 
 	//Targeted Behaviors
 
 	std::vector<Task*> TargetTREE_HarvestWood(Entity** TreeTarget) {
 		Task_Take* take = new Task_Take(TreeTarget, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(20,Designation::Type::MaterialStorage, &take->foundItem, 5, 50);
+		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(20,Designation::Type::MaterialStorage, &take->foundItem, 5, 200);
 		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 		return
 		{
@@ -124,7 +138,7 @@ public:
 		{		
 			new Task_AssignTaskToEntity(TREE_Wait(40),AnimalTarget,1,10), //tell it to wait
 			new Task_WalkTo(pathFinder,1,AnimalTarget, 1, 10), //go next to it
-			new Task_Search_For(AnimalTarget,1,true, 1, 50), //ensure we are next to it
+			new Task_Search_For(AnimalTarget,1,true, 1, 200), //ensure we are next to it
 			new Task_RestrainLivingEntity(AnimalTarget,1,10), //restrain animal
 			new Task_AttackLivingEntityUntilDead(AnimalTarget,1,10), //attack till dead
 			new Task_LootBodilyInventory(AnimalTarget,1,10), //remove all meat from the cows body

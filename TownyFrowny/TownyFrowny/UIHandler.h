@@ -29,7 +29,7 @@ public:
 		Logs,
 		Tasks,
 		Inventory,
-		Crafting,
+		Designation,
 	};
 
 	void SetWindow(Windows window) {
@@ -55,14 +55,14 @@ public:
 	}
 
 	void UpdateTaskList(std::vector<std::string> taskNames) {
-			uiTex.draw(*RightUIPanel);
-			for (int i = 0; i < taskNames.size(); i++)
-			{
-				logText.setFillColor(sf::Color(248, 255, 138));
-				logText.setPosition(808, i * 10);
-				logText.setString(taskNames[i]);
-				uiTex.draw(logText);
-			}
+		uiTex.draw(*RightUIPanel);
+		for (int i = 0; i < taskNames.size(); i++)
+		{
+			logText.setFillColor(sf::Color(248, 255, 138));
+			logText.setPosition(808, i * 10);
+			logText.setString(taskNames[i]);
+			uiTex.draw(logText);
+		}
 	}
 
 	//Draws the ui container

@@ -22,6 +22,7 @@ public:
 		Targeted_Attack,
 		Targeted_Rotate,
 		Targeted_DropItem,
+		Targeted_Craft,
 	};
 
 	

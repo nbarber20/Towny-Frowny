@@ -6,54 +6,6 @@
 #include "BehaviorBranch.h"
 class Task;
 class TaskManager;
-/*
-
-struct BehaviorBranch {
-
-	BehaviorBranch(std::vector<Task*> Branch, TaskManager* taskManager) {
-		this->Branch = Branch;
-		this->FailTree = {};
-		this->retries = 0;
-		this->taskManager = taskManager;
-	}
-
-	BehaviorBranch(std::vector<Task*> Branch,int retries, TaskManager* taskManager) {
-		this->Branch = Branch;
-		this->FailTree = {};
-		this->retries = retries;
-		this->taskManager = taskManager;
-	}
-	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree, TaskManager* taskManager) {
-		this->Branch = Branch;
-		this->FailTree = FailTree;
-		this->retries = 0;
-		this->taskManager = taskManager;
-	}
-
-	BehaviorBranch(std::vector<Task*> Branch, std::vector <BehaviorBranch*>  FailTree , int retries, TaskManager* taskManager) {
-		this->Branch = Branch;
-		this->FailTree = FailTree;
-		this->retries = retries;
-		this->taskManager = taskManager;
-	}
-
-	~BehaviorBranch() {
-		for (int i = 0; i < Branch.size();i++) {
-			taskManager->DeleteTask(Branch[i]);
-		}
-		for (int j = 0; j < FailTree.size(); j++) {
-			delete this->FailTree[j];
-		}
-		this->Branch.clear();
-		this->FailTree.clear();
-	}
-
-	std::vector<Task*> Branch;
-	int retries;
-	std::vector <BehaviorBranch*>  FailTree;
-	TaskManager* taskManager;
-};
-*/
 
 class Entity_Living : public Entity_Container {
 public:
@@ -66,7 +18,8 @@ public:
 	void Tick() override;
 	virtual void TaskComplete(Task* t);
 	virtual void TaskFail(Task* t);
-	virtual void OverwriteTasks(std::vector<Task*> newTree, Entity_Living* issuer);
+	virtual void OverwriteTasks(std::vector<Task*> newBranch, Entity_Living* issuer);
+	virtual void SwitchCurrentTask(std::vector<Task*> newBranch, Entity_Living* issuer);
 
 	std::vector<Entity*>* GetBodilyInventory();
 	void AddItemToBodilyInventory(Entity* e);
@@ -105,16 +58,10 @@ public:
 		Entity::getTargetedBehaviors(list,failList);
 	}
 	virtual Entity_Living* clone() const { return new Entity_Living(*this); };
-	void CraftItem(int id); 
 
-	bool GetCraftable(std::vector<std::vector<int>> r);
-	std::vector<int> GetAllCraftable();
+	bool holdingItem(int id, Entity** outEntity);
 
 protected:
-	bool ConsumeCraftingItem(std::vector<int > recipeItem);
-	bool holdingItem(std::vector<Entity*>* List, std::vector<int > recipeItem); 
-	std::vector< std::vector<int>> getRecipe(int id);
-	std::vector < std::pair<int, std::vector<std::vector<int>>>> getRecipes();
 
 	std::string individualName;
 	short hungerLevel = 0;

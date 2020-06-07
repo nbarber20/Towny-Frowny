@@ -129,6 +129,7 @@
     <ClCompile Include="Designation.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Entity_Animal.cpp" />
+    <ClCompile Include="Entity_Crafter.cpp" />
     <ClCompile Include="Entity_Food.cpp" />
     <ClCompile Include="Entity_Human.cpp" />
     <ClCompile Include="Entity_Living.cpp" />
@@ -146,11 +147,13 @@
     <ClInclude Include="Designation.h" />
     <ClInclude Include="Entity_Animal.h" />
     <ClInclude Include="Entity_Container.h" />
+    <ClInclude Include="Entity_Crafter.h" />
     <ClInclude Include="Entity_Human.h" />
     <ClInclude Include="Entity_Manufactured.h" />
     <ClInclude Include="Entity_Material.h" />
     <ClInclude Include="Entity_Pet.h" />
     <ClInclude Include="Entity_Plant.h" />
+    <ClInclude Include="Recipies.h" />
     <ClInclude Include="UIHandler.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="PathFinder.h" />

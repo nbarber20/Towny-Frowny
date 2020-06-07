@@ -1,10 +1,11 @@
 #include "Task.h"
-#include "TaskManager.h"
 #include <iostream>
 #include "VectorHelper.h"
 #include "LogHandler.h"
 #include "Entity_Living.h"
 #include "EntityHandler.h"
+#include "Entity_Crafter.h"
+#include "Recipies.h"
 #include <math.h>   
 #include <cmath>
 void Task::Tick() {
@@ -505,6 +506,27 @@ Task::TaskStatus Task_Take::Execute()
 	return Task::Fail;
 }
 
+Task::TaskStatus Task_Give::Execute()
+{
+	Entity_Container* target = dynamic_cast<Entity_Container*>(*eToGiveto);
+	if (target != NULL) {
+		if (giveList.size() == 0) return Task::Fail;
+		std::vector<Entity*> tempHeldItems = *(ownerEntity->GetInventory());
+
+		for (int r = 0; r < giveList.size(); r++) {
+			for (int i = 0; i < giveList[r].size(); i++) {
+				Entity* e = nullptr;
+				if (ownerEntity->holdingItem(giveList[r][i], &e)) {
+					target->AddItemToInventory(e);
+					break;
+				}
+			}
+		}
+		return Task::Complete;
+	}
+	return Task::Fail;
+}
+
 Task::TaskStatus Task_ConstructWall::Execute()
 {
 	if (targetEntity != nullptr) {
@@ -606,4 +628,37 @@ Task::TaskStatus Task_DropInStockDesignation::Execute()
 		}
 	}
 	return Task::Fail;
+}
+
+Task::TaskStatus Task_Craft::Execute()
+{
+	Entity_Crafter* crafter = dynamic_cast<Entity_Crafter*>(*targetCrafter);
+	if (crafter != NULL) {
+		if (crafter->CraftItem(id, ownerEntity, crafted)) {
+			return Task::Complete;
+		}
+	}
+	return Task::Fail;
+}
+
+
+Task::TaskStatus Task_SourceMaterials::Execute()
+{
+	if (Recipies::GetCraftable(Recipies::getRecipe(id), ownerEntity)) {
+		return Task::Complete;
+	}
+	else {
+		std::vector<Task*> TaskList;
+
+		std::vector<std::vector<int>> materialList = Recipies::GetGatherList(id, ownerEntity);
+		for (int i = 0; i < materialList.size(); i++) {
+			std::vector<int> materialGroup = materialList[i];
+			Task_Search_Singluar* lookTask = new Task_Search_Singluar(40, false, false, materialGroup, 5, 200);
+			TaskList.push_back(lookTask);
+			TaskList.push_back(new Task_WalkTo(pathfinder, 0, &lookTask->FoundTarget, 1, 10));
+			TaskList.push_back(new Task_PickUp(&lookTask->FoundTargetEntity, 1, 10));
+		}
+		//Delete this task and instead go and grab needed materials
+		ownerEntity->SwitchCurrentTask(TaskList, ownerEntity);
+	}
 }

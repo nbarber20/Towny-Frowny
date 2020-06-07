@@ -37,13 +37,13 @@ public:
 		switch (t)
 		{
 		case Designation::GeneralStoreage:
-			return sf::Color(255, 0, 0, designationOpacity);
+			return sf::Color(84, 219, 235, designationOpacity);
 		case Designation::FoodStorage:
-			return sf::Color(255, 0, 0, designationOpacity);
+			return sf::Color(117,79, 242, designationOpacity);
 		case Designation::MaterialStorage:
-			return sf::Color(255, 0, 0, designationOpacity);
+			return sf::Color(87, 179,237, designationOpacity);
 		case Designation::GeneralRoom:
-			return sf::Color(255, 0, 0, designationOpacity);
+			return sf::Color(237, 218, 87, designationOpacity);
 		default:
 			return sf::Color(255, 0, 0, designationOpacity);
 		}

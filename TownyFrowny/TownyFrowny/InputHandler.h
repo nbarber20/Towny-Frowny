@@ -12,6 +12,16 @@ struct targetedTaskStep {
 	sf::Vector2i* Pos;
 	Entity* entity;
 };
+
+struct TargetedBehaviorStep {
+	TargetedBehaviorStep(Entity::TargetedHumanBehaviors behavior, int variantID = 0) {
+		this->behavior = behavior;
+		this->variantID = variantID;
+	}
+	Entity::TargetedHumanBehaviors behavior;
+	int variantID;
+};
+
 class InputHandler {
 
 
@@ -46,16 +56,16 @@ public:
 				AssignTasks(index);
 			}
 		}
-		if (UiHandler::Instance().GetWindow() == UiHandler::Crafting)
-		{
-			if (index >= 0 && index < CraftingList.size()) {
-				pilotingPlayer->CraftItem(CraftingList[index]);
-			}
-		}
 		if (UiHandler::Instance().GetWindow() == UiHandler::Inventory)
 		{
 			if (index >= 0 && index < InventoryList.size()) {
 				ReleventHeldItemID = InventoryList[index].second->GetID();
+			}
+		}
+		if (UiHandler::Instance().GetWindow() == UiHandler::Designation)
+		{
+			if (index >= 0 && index < 4) {
+				SelectedDesignationType = (Designation::Type)index;
 			}
 		}
 	}
@@ -101,12 +111,12 @@ private:
 
 	void AssignTasks(int index) {
 
-		if (ReleventBehaviors[index] == Entity::Targeted_ClearAll) {
+		if (ReleventBehaviors[index].behavior == Entity::Targeted_ClearAll) {
 			pilotingPlayer->SetTargetedBehavior(Entity::Targeted_ClearAll, nullptr, false);
 		}
 
 		//Reorder list if task is directional
-		if (isTaskDirectional(ReleventBehaviors[index])) {
+		if (isTaskDirectional(ReleventBehaviors[index].behavior)) {
 			for (int i = 0; i < selectedPositions.size(); i++) {
 				std::vector<sf::Vector2i> walksteps;
 				if (pathfinder->FindPath(pilotingPlayer, 1, walksteps, pilotingPlayer->GetPosition(), selectedPositions[i], world)){
@@ -120,7 +130,7 @@ private:
 		for (auto e : selectedEntity) {
 			std::vector<Entity::TargetedHumanBehaviors> tempBehaviors;
 			e->getTargetedBehaviors(&tempBehaviors);
-			if (std::find(tempBehaviors.begin(), tempBehaviors.end(), ReleventBehaviors[index]) != tempBehaviors.end()) { // in list
+			if (TargetedBehaviorListContains(tempBehaviors,ReleventBehaviors[index])) { // in list
 				steps.push_back(new targetedTaskStep(e, new sf::Vector2i(e->GetPosition())));
 			}
 		}
@@ -128,7 +138,7 @@ private:
 		for (int pos = 0; pos < selectedPositions.size(); pos++) {
 			std::vector<Entity::TargetedHumanBehaviors> tempEmptyTileBehaviors = getEmptyTileBehaviors(selectedPositions[pos]);
 			for (int j = 0; j < tempEmptyTileBehaviors.size(); j++) {
-				if (ReleventBehaviors[index] == tempEmptyTileBehaviors[j]) { //this task can be used on empty tiles
+				if (ReleventBehaviors[index].behavior == tempEmptyTileBehaviors[j]) { //this task can be used on empty tiles
 					steps.push_back(new targetedTaskStep(nullptr, new sf::Vector2i(selectedPositions[pos])));
 					break;
 				}
@@ -139,10 +149,11 @@ private:
 			int posIndex = 0;
 			for (int i = 0; i < InventoryList.size(); i++) {
 				if(InventoryList[i].first == true) continue;
+				//TODO: this sometimes breaks
 				if (InventoryList[i].second->GetID() == ReleventHeldItemID) {
 					std::vector<Entity::TargetedHumanBehaviors> tempBehaviors;
 					InventoryList[i].second->getTargetedBehaviors(&tempBehaviors);
-					if (std::find(tempBehaviors.begin(), tempBehaviors.end(), ReleventBehaviors[index]) != tempBehaviors.end()) { // in list
+					if (TargetedBehaviorListContains(tempBehaviors, ReleventBehaviors[index])){ // in list
 						if (posIndex < selectedPositions.size()) {
 							InventoryList[i].first = true;
 							steps.push_back(new targetedTaskStep(InventoryList[i].second, new sf::Vector2i(selectedPositions[posIndex])));
@@ -168,6 +179,9 @@ private:
 		}
 		return false;
 	}
+
+	bool BehaviorListContains(std::vector<TargetedBehaviorStep> steps, Entity::TargetedHumanBehaviors behavior, int variantID = 0);
+	bool TargetedBehaviorListContains(std::vector<Entity::TargetedHumanBehaviors> steps, TargetedBehaviorStep behavior);
 
 	std::vector<Entity::TargetedHumanBehaviors> getEmptyTileBehaviors(sf::Vector2i tilePos) {
 		std::vector<Entity::TargetedHumanBehaviors> List = {
@@ -231,7 +245,7 @@ private:
 
 
 	int ReleventHeldItemID=-1;
-	std::vector<Entity::TargetedHumanBehaviors> ReleventBehaviors;
+	std::vector<TargetedBehaviorStep> ReleventBehaviors;
 	int ReleventBehaviorOffset = 0;
 
 
@@ -250,4 +264,6 @@ private:
 	//int stepIndexOffset = 0;
 
 	PathFinder* pathfinder;
+
+	Designation::Type SelectedDesignationType;
 };

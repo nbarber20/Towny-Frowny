@@ -72,12 +72,26 @@ void Entity_Living::TaskFail(Task* t)
 	}	
 }
 
-void Entity_Living::OverwriteTasks(std::vector<Task*> newTree, Entity_Living* issuer)
+void Entity_Living::OverwriteTasks(std::vector<Task*> newBranch, Entity_Living* issuer)
 {
 	if (dead == true)return;
 	clearAllTasks();
-	TaskTree.push_back(new BehaviorBranch(newTree, {}, 0));
+	TaskTree.push_back(new BehaviorBranch(newBranch, {}, 0));
 	startTaskQueue(issuer);	
+}
+
+void Entity_Living::SwitchCurrentTask(std::vector<Task*> newBranch, Entity_Living* issuer)
+{
+	if (dead == true)return;
+	std::vector<BehaviorBranch*> temp = TaskTree;
+	std::vector<BehaviorBranch*> newTree;
+	newTree.push_back(new BehaviorBranch(newBranch, {}, 0));
+	for (int i = 1; i < temp.size(); i++) {
+		newTree.push_back(temp[i]);
+	}
+	TaskTree = newTree;
+	taskIndex = 0;
+	startTaskQueue(issuer);
 }
 
 void Entity_Living::AddItemToBodilyInventory(Entity* e)
@@ -189,120 +203,13 @@ void Entity_Living::startTaskQueue(Entity_Living* issuer)
 	idle = false;
 }
 
-void Entity_Living::CraftItem(int id)
+bool Entity_Living::holdingItem(int id, Entity** outEntity = nullptr)
 {
-	clearAllTasks();
-	std::vector< std::vector<int>> recipe = getRecipe(id);
-	if (recipe.size() == 0) return; //This is an invalid recipe
-	std::vector<Entity*> tempHeldItems = heldItems;
-	bool matchingItemFound = false;
-
-	if (GetCraftable(recipe) == false) {
-		LogHandler::Instance().WriteLog("Crafting Impossible");
-		return;
-	}
-
-	int stepsCompleted = 0;
-	for (int r = 0; r < recipe.size(); r++) {
-		if(ConsumeCraftingItem(recipe[r])) stepsCompleted++;
-	}
-	if (stepsCompleted >= recipe.size()) {
-		LogHandler::Instance().WriteLog("Crafting Complete");
-		AddItemToInventory(EntityHandler::Instance().CreateEntity(id));
-	}
-	else {
-		LogHandler::Instance().WriteLog("Crafting MegaFail");
-	}
-}
-
-std::vector<int> Entity_Living::GetAllCraftable()
-{
-	std::vector<int> result;
-	std::vector < std::pair<int, std::vector<std::vector<int>>>> recipies = getRecipes();
-	for (auto recipie : recipies) {
-		if (GetCraftable(recipie.second)) {
-			result.push_back(recipie.first);
-		}
-	}
-	return result;
-}
-
-bool Entity_Living::GetCraftable(std::vector<std::vector<int>> r)
-{
-	std::vector<Entity*> tempHeldItems = heldItems;
-	for (int i = 0; i < r.size(); i++) {
-		if (holdingItem(&tempHeldItems, r[i]) == false) {
-			return false;
-		}
-	}
-	return true;
-}
-
-bool Entity_Living::ConsumeCraftingItem(std::vector<int > recipeItem)
-{
-	for (int i = 0; i < heldItems.size(); i++) {
-		for (int j = 0; j < recipeItem.size(); j++) {
-			if (heldItems[i]->GetID() == recipeItem[j]) {
-				EntityHandler::Instance().DestroyEntity(heldItems[i], world);
-				return true;
-			}
+	for (int j = 0; j < heldItems.size(); j++) {
+		if (id == heldItems[j]->GetID()) {
+			*outEntity = heldItems[j];
+			return true;
 		}
 	}
 	return false;
 }
-
-bool Entity_Living::holdingItem(std::vector<Entity*>* List, std::vector<int > recipeItem)
-{
-	for (int i = 0; i < List->size(); i++) {
-		for (int j = 0; j < recipeItem.size(); j++) {
-			if ((*List)[i]->GetID() == recipeItem[j]) {
-				List->erase(std::remove(List->begin(), List->end(), (*List)[i]), List->end());
-				return true;
-			}
-		}
-	}
-	return false;
-}
-std::vector<std::vector<int>> Entity_Living::getRecipe(int id)
-{
-	std::vector < std::pair<int, std::vector<std::vector<int>>>> recipies = getRecipes();
-	for (auto recipie : recipies) {
-		if (recipie.first == id) {
-			return recipie.second;
-		}
-	}
-}
-std::vector < std::pair<int, std::vector<std::vector<int>>>> Entity_Living::getRecipes()
-{
-	std::vector < std::pair<int, std::vector<std::vector<int>>>> list;
-	std::vector<std::vector<int>> Bed{
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-	};
-	list.push_back(std::make_pair(23, Bed));
-
-	std::vector<std::vector<int>> Chair{
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-	};
-	list.push_back(std::make_pair(24, Chair));
-
-	std::vector<std::vector<int>> LargeTable{
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-	};
-	list.push_back(std::make_pair(25, LargeTable));
-
-	std::vector<std::vector<int>> SmallTable{
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-			EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-	};
-	list.push_back(std::make_pair(26, SmallTable));
-
-	return list;
-}
-

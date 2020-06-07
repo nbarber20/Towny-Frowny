@@ -1,5 +1,7 @@
 #include "InputHandler.h"
 #include "EntityHandler.h"
+#include "Recipies.h"
+#include "Entity_Crafter.h"
 
 void InputHandler::GetInput(sf::Event e)
 {
@@ -26,7 +28,6 @@ void InputHandler::GetInput(sf::Event e)
 	{
 		if (e.mouseButton.button == sf::Mouse::Left)
 		{
-
 			selectionBoxScreenStart = window->mapPixelToCoords(sf::Mouse::getPosition(*window)) / 800.0f;
 			if (selectionBoxScreenStart.x * 800 < 800)Clicking = true;
 		}
@@ -51,63 +52,90 @@ void InputHandler::GetInput(sf::Event e)
 				indexEnd.x = (CursorStart.x < CursorEnd.x) ? CursorEnd.x : CursorStart.x;
 				indexEnd.y = (CursorStart.y < CursorEnd.y) ? CursorEnd.y : CursorStart.y;
 
-				for (int x = indexStart.x; x <= indexEnd.x; x++)
-				{
-					for (int y = indexStart.y; y <= indexEnd.y; y++)
+				if (UiHandler::Instance().GetWindow() == UiHandler::Tasks) {				
+					for (int x = indexStart.x; x <= indexEnd.x; x++)
 					{
-						std::vector<Entity*> list = world->GetWorldTile(sf::Vector2i(x, y))->tileEntities;
-						selectedPositions.push_back(sf::Vector2i(x, y));
-						for (auto e : list) {
-							selectedEntity.push_back(e);
-						}
-					}
-				}
-				ReleventBehaviors.clear();
-				ReleventBehaviors.push_back(Entity::TargetedHumanBehaviors::Targeted_ClearAll);
-				for (auto e : selectedEntity) {
-					std::vector<Entity::TargetedHumanBehaviors> tempBehaviors;
-					e->getTargetedBehaviors(&tempBehaviors);
-					for (int j = 0; j < tempBehaviors.size(); j++) {
-						if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) { //is possible
-							if (std::find(ReleventBehaviors.begin(), ReleventBehaviors.end(), tempBehaviors[j]) == ReleventBehaviors.end()) { // not in list
-								ReleventBehaviors.push_back(tempBehaviors[j]);
+						for (int y = indexStart.y; y <= indexEnd.y; y++)
+						{
+							std::vector<Entity*> list = world->GetWorldTile(sf::Vector2i(x, y))->tileEntities;
+							selectedPositions.push_back(sf::Vector2i(x, y));
+							for (auto e : list) {
+								selectedEntity.push_back(e);
 							}
 						}
 					}
-				}
-				for (int pos = 0; pos < selectedPositions.size(); pos++) {
-					std::vector<Entity::TargetedHumanBehaviors> tempBehaviors = getEmptyTileBehaviors(selectedPositions[pos]);
-					for (int j = 0; j < tempBehaviors.size(); j++) {
-						if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) {
-							if (std::find(ReleventBehaviors.begin(), ReleventBehaviors.end(), tempBehaviors[j]) == ReleventBehaviors.end()) { // not in list
-								ReleventBehaviors.push_back(tempBehaviors[j]);
+					ReleventBehaviors.clear();
+					ReleventBehaviors.push_back(Entity::TargetedHumanBehaviors::Targeted_ClearAll);
+
+					//Tasks for entities
+					for (auto e : selectedEntity) {
+						Entity_Crafter* crafter = dynamic_cast<Entity_Crafter*>(e);
+						if (crafter != NULL) { //this is a crafter
+							std::vector<int> craftable = crafter->GetCraftable();
+							for (int i = 0; i < craftable.size(); i++) {
+								if (BehaviorListContains(ReleventBehaviors,Entity::Targeted_Craft, craftable[i]) == false) { // not in list
+									ReleventBehaviors.push_back(TargetedBehaviorStep(Entity::Targeted_Craft, craftable[i]));
+								}
 							}
 						}
-					}
-				}
-				if (ReleventHeldItemID != -1) {
-					std::vector<Entity*> inv = *pilotingPlayer->GetInventory();
-					for (int i = 0; i < inv.size(); i++) {
-						if (inv[i]->GetID() == ReleventHeldItemID) {
+						else {
 							std::vector<Entity::TargetedHumanBehaviors> tempBehaviors;
-							inv[i]->getTargetedBehaviors(&tempBehaviors);
+							e->getTargetedBehaviors(&tempBehaviors);
 							for (int j = 0; j < tempBehaviors.size(); j++) {
-								if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) {
-									if (std::find(ReleventBehaviors.begin(), ReleventBehaviors.end(), tempBehaviors[j]) == ReleventBehaviors.end()) { // not in list
+								if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) { //is possible
+									if(BehaviorListContains(ReleventBehaviors, tempBehaviors[j])==false) { // not in list
 										ReleventBehaviors.push_back(tempBehaviors[j]);
+									}
+								}
+							}
+						}						
+					}
+
+					//Tasks for empty tiles
+					for (int pos = 0; pos < selectedPositions.size(); pos++) {
+						std::vector<Entity::TargetedHumanBehaviors> tempBehaviors = getEmptyTileBehaviors(selectedPositions[pos]);
+						for (int j = 0; j < tempBehaviors.size(); j++) {
+							if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) {
+								if (BehaviorListContains(ReleventBehaviors, tempBehaviors[j]) == false) { // not in list
+									ReleventBehaviors.push_back(tempBehaviors[j]);
+								}
+							}
+						}
+					}
+
+					//Tasks for held items
+					if (ReleventHeldItemID != -1) {
+						std::vector<Entity*> inv = *pilotingPlayer->GetInventory();
+						for (int i = 0; i < inv.size(); i++) {
+							if (inv[i]->GetID() == ReleventHeldItemID) {
+								std::vector<Entity::TargetedHumanBehaviors> tempBehaviors;
+								inv[i]->getTargetedBehaviors(&tempBehaviors);
+								for (int j = 0; j < tempBehaviors.size(); j++) {
+									if (pilotingPlayer->isTargetedBehaviorPossible(tempBehaviors[j]) == true) {
+										if (BehaviorListContains(ReleventBehaviors, tempBehaviors[j]) == false) { // not in list
+											ReleventBehaviors.push_back(tempBehaviors[j]);
+										}
 									}
 								}
 							}
 						}
 					}
-				}
 
-				std::vector<std::string> names;
-				for (int i = 0; i < ReleventBehaviors.size(); i++) {
-					names.push_back(getTargetedBehaviorNames(ReleventBehaviors[i]));
+					std::vector<std::string> names;
+					for (int i = 0; i < ReleventBehaviors.size(); i++) {
+						if (ReleventBehaviors[i].behavior == Entity::Targeted_Craft) {
+							names.push_back("Craft " + EntityHandler::Instance().GetEntityNameByID(ReleventBehaviors[i].variantID));
+						}
+						else {
+							names.push_back(getTargetedBehaviorNames(ReleventBehaviors[i].behavior));
+						}
+					}
+					UiHandler::Instance().UpdateTaskList(names);
 				}
-				UiHandler::Instance().UpdateTaskList(names);
-
+				else if (UiHandler::Instance().GetWindow() == UiHandler::Designation) {
+					sf::Vector2i size = sf::Vector2i(indexEnd.x, indexEnd.y) - sf::Vector2i(indexStart.x, indexStart.y);
+					world->NewDesignation(sf::Vector2i(indexStart.x, indexStart.y), size, SelectedDesignationType);
+				}
 			}
 			Clicking = false;
 		}
@@ -152,11 +180,6 @@ void InputHandler::GetInput(sf::Event e)
 	{
 		task = 8;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
-	{
-		//task = 9;
-		pilotingPlayer->CraftItem(24);
-	}
 
 	if (UiHandler::Instance().GetWindow() == UiHandler::Tasks) {
 		if (task >= 0 && task < ReleventBehaviors.size()) {
@@ -164,7 +187,7 @@ void InputHandler::GetInput(sf::Event e)
 		}
 	}
 
-
+	//TODO: make these buttons
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
 		UiHandler::Instance().SetWindow(UiHandler::Logs);
@@ -179,7 +202,7 @@ void InputHandler::GetInput(sf::Event e)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::U))
 	{
-		UiHandler::Instance().SetWindow(UiHandler::Crafting);
+		UiHandler::Instance().SetWindow(UiHandler::Designation);
 	}
 
 	if (UiHandler::Instance().GetWindow() == UiHandler::Inventory) {
@@ -192,14 +215,30 @@ void InputHandler::GetInput(sf::Event e)
 		}
 		UiHandler::Instance().UpdateTaskList(names);
 	}
-	if (UiHandler::Instance().GetWindow() == UiHandler::Crafting) {
+	if (UiHandler::Instance().GetWindow() == UiHandler::Designation) {
 		std::vector<std::string> names;
-		std::vector<int> craftable = pilotingPlayer->GetAllCraftable();
-		CraftingList.clear();
-		for (int i = 0; i < craftable.size(); i++) {
-			CraftingList.push_back(craftable[i]);
-			names.push_back(EntityHandler::Instance().GetEntityNameByID(craftable[i]));
-		}
+		names = {
+			"GeneralStoreage",
+			"FoodStorage",
+			"MaterialStorage",
+			"GeneralRoom",
+		};
 		UiHandler::Instance().UpdateTaskList(names);
 	}
+}
+
+bool InputHandler::BehaviorListContains(std::vector<TargetedBehaviorStep> steps, Entity::TargetedHumanBehaviors behavior, int variantID)
+{
+	for (int i = 0; i < steps.size(); i++) {
+		if (steps[i].behavior == behavior && steps[i].variantID == variantID) return true;
+	}
+	return false;
+}
+
+bool InputHandler::TargetedBehaviorListContains(std::vector<Entity::TargetedHumanBehaviors> steps, TargetedBehaviorStep behavior)
+{
+	for (int i = 0; i < steps.size(); i++) {
+		if (steps[i] == behavior.behavior) return true;
+	}
+	return false;
 }

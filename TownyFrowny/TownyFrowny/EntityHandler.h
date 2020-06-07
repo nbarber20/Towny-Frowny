@@ -12,6 +12,7 @@
 #include "Entity_Plant.h"
 #include "Entity_Manufactured.h"
 #include "InputHandler.h"
+#include "Entity_Crafter.h"
 class TaskManager;
 
 class EntityHandler
@@ -108,6 +109,13 @@ public:
 			std::make_pair("Chair",new Entity_Manufactured(24,sf::Vector2i(12,0), true, world, { Entity::Targeted_PickUp,Entity::Targeted_Rotate,Entity::Targeted_DropItem})),
 			std::make_pair("Large Table",new Entity_Manufactured(25,sf::Vector2i(13,0), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 			std::make_pair("Small Table",new Entity_Manufactured(26,sf::Vector2i(13,1), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("WorkBench",new Entity_Crafter(27,sf::Vector2i(17,0),taskManager,world,{23,24,25,26,31,32,33}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
+			std::make_pair("Anvil",new Entity_Crafter(28,sf::Vector2i(17,1),taskManager,world,{}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
+			std::make_pair("Kiln",new Entity_Crafter(29,sf::Vector2i(17,2),taskManager,world,{}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
+			std::make_pair("Furnace",new Entity_Crafter(30,sf::Vector2i(17,3),taskManager,world,{}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
+			std::make_pair("Chest",new Entity_Container(31,sf::Vector2i(18,0),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("Bin",new Entity_Container(32,sf::Vector2i(18,1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("Bucket",new Entity_Container(33,sf::Vector2i(18,2),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 		};
 	}
 
@@ -134,6 +142,7 @@ public:
 		Food,
 		Tree,
 		Wood,
+		Crafter,
 	};
 
 	std::vector<int> GetIDGroup(EntityGroups group) {
@@ -156,6 +165,9 @@ public:
 				break;
 			case Wood:
 				return std::vector<int>({ 11,12,13,14 });
+				break;
+			case Crafter:
+				return std::vector<int>({ 27,28,29,30 });
 				break;
 		}
 		LogHandler::Instance().WriteLog("Requested invalid group ids", logContext::ERROR);

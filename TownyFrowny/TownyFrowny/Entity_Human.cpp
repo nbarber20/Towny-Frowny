@@ -1,6 +1,7 @@
 #include "Entity_Human.h"
 #include "TaskManager.h"
 #include "InputHandler.h"
+#include "Recipies.h"
 void Entity_Human::Tick()
 {
 	Entity_Living::Tick();
@@ -48,14 +49,12 @@ void Entity_Human::NewTaskList(std::vector<Task*> SetCurrent)
 void Entity_Human::DestroyTaskSteps()
 {
 	if (currentTargetedTasks.size() > 0) {
-		/*for (int i = 0; i < currentTargetedTasks.size(); i++) {
-			delete (currentTargetedTasks[i]);
-		}*/
 		currentTargetedTasks.clear();
 		currentTargetedTasks.shrink_to_fit();
 	}
 	inputHandler->ClearBehaviorList();
 }
+
 
 void Entity_Human::SetBehavoir(Entity::Behaviors b)
 {
@@ -90,13 +89,13 @@ void Entity_Human::SetBehavoir(Entity::Behaviors b)
 	startTaskQueue();
 }
 
-void Entity_Human::SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskStep* step, bool doOverride)
+void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep* step, bool doOverride)
 {
 	if (doOverride == true) {
 		clearAllTasks();
 	}
 	currentTargetedTasks.push_back(step);
-	switch (b)
+	switch (b.behavior)
 	{
 	case Entity::Targeted_ClearAll:
 		clearAllTasks();
@@ -137,7 +136,12 @@ void Entity_Human::SetTargetedBehavior(TargetedHumanBehaviors b, targetedTaskSte
 	case TargetedHumanBehaviors::Targeted_DropItem:
 		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DropItem(&step->entity, &step->Pos), taskManager));
 		break;
+	case TargetedHumanBehaviors::Targeted_Craft:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SourceMaterials(b.variantID), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_CraftItem(b.variantID), taskManager));
+		break;
 	}
+
 	startTaskQueue();
 }
 
