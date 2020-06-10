@@ -3,22 +3,63 @@
 #include "Camera.h"
 #include "LogHandler.h"
 #include "EntityHandler.h"
-World::World(FastNoise* noiseGen)
+#include "FastNoise.h"
+
+void World::GenerateOverworld(FastNoise* noiseGen)
 {
-	GenerateTiles(noiseGen);
+	worldTiles.clear();
+	for (int x = 0; x < GetWorldSize(); x++) {
+		for (int y = 0; y < GetWorldSize(); y++) {
+
+			int tileID = 0;
+			float randCol = noiseGen->GetNoise(x, y) * 4;
+			if (randCol <= -0.5) {
+				tileID = 2;
+			}
+			else if (randCol <= 1) {
+				tileID = 2;
+			}
+			else if (randCol <= 1.5) {
+				tileID = 3;
+			}
+			else {
+				tileID = 5;
+			}
+			WorldTile* tile = new WorldTile(*this, x, y, tileID,-1);
+			worldTiles.push_back(tile);
+			tileToTick.push_back(tile);
+			tileToLight.push_back(tile);
+		}
+	}
+	delete noiseGen;
 }
 
-
-World::~World()
+void World::GenerateCave(FastNoise* noiseGen)
 {
-}
-
-
-void World::GenerateTiles(FastNoise* noiseGen)
-{
-	for (int i = 0; i < GetWorldSize(); i++) {
-		for (int j = 0; j < GetWorldSize(); j++) {
-			WorldTile* tile = new WorldTile(noiseGen,*this,i, j);
+	worldTiles.clear();
+	for (int x = 0; x < GetWorldSize(); x++) {
+		for (int y = 0; y < GetWorldSize(); y++) {
+			int tileID = 0;
+			float randCol = noiseGen->GetNoise(x, y) * 4;
+			if (randCol <= -0.5) {
+				tileID = 0;
+			}
+			else if (randCol <= 1.0) {
+				tileID = 14;
+			}
+			else if (randCol <= 1.5) {
+				tileID = 15;
+			}
+			else if (randCol <= 2.0) {
+				tileID = 16;
+			}
+			else if (randCol <= 2.5) {
+				tileID = 17;
+			}
+			else if (randCol <= 3) {
+				tileID = 18;
+			}
+			WorldTile* tile = new WorldTile(*this, x, y,0, tileID);
 			worldTiles.push_back(tile);
 			tileToTick.push_back(tile);
 		}
@@ -26,8 +67,61 @@ void World::GenerateTiles(FastNoise* noiseGen)
 	delete noiseGen;
 }
 
-void World::GenerateEntities(FastNoise* noiseGen)
+void World::GenerateEntities()
 {
+	FastNoise* biomeMap = new FastNoise(time(NULL));
+	biomeMap->SetNoiseType(FastNoise::Cellular);
+	biomeMap->SetFrequency(0.07f);
+
+	FastNoise* TreeDeletionNoise = new FastNoise(time(NULL));
+	TreeDeletionNoise->SetNoiseType(FastNoise::WhiteNoise);
+
+	std::vector<Entity*> treepos;
+
+	for (int x = 0; x < GetWorldSize(); x++) {
+		for (int y = 0; y < GetWorldSize(); y++) {
+			if (GetWorldTile(sf::Vector2i(x, y))->groundTile->GetTileID() == 2) {
+				bool dospawn = false;
+				int EntityID = 0;
+				float randCol = (biomeMap->GetNoise(x, y) + 1) * 8;
+				if (randCol <= 0.5) {
+					EntityID = 15;
+					dospawn = true;
+				}
+				else if (randCol <= 1) {
+					EntityID = 16;
+					dospawn = true;
+				}
+				else if (randCol <= 1.5) {
+					EntityID = 17;
+					dospawn = true;
+				}
+				else if (randCol <= 2.0) {
+					EntityID = 18;
+					dospawn = true;
+				}
+				if (dospawn) {
+					treepos.push_back(EntityHandler::Instance().CreateAndSpawnEntity(EntityID, this, sf::Vector2i(x, y)));
+					tileToTick.push_back(GetWorldTile(sf::Vector2i(x, y)));
+				}
+			}
+		}
+	}
+	
+	for (int i = 0; i < treepos.size();i++) {
+		std::vector<WorldTile*> neighbors = GetNeighborsOfTile(treepos[i]->GetPosition());
+		for (auto neighbor : neighbors) {
+			if (neighbor == nullptr)continue;
+			if (DoesTileContainEntity(neighbor->GetPosition(), treepos[i]->GetID(), false) == false) {
+				if (TreeDeletionNoise->GetNoise(treepos[i]->GetPosition().x, treepos[i]->GetPosition().y) < 0) {
+					EntityHandler::Instance().DestroyEntity(treepos[i], this);
+					break;
+				}
+			}
+		}
+	}
+
+	delete biomeMap;
 }
 
 void World::Draw() {
@@ -40,12 +134,33 @@ void World::Draw() {
 	tileToTick.clear();
 }
 
+void World::DrawLighting()
+{
+	const int num = tileToLight.size();
+	WorldTile** ptr = (num > 0) ? tileToLight.data() : nullptr;
+	for (int i = 0; i < num; i++)
+	{
+		Camera::Instance().getShading()->setPixel((ptr[i])->GetPosition().x,  (ptr[i])->GetPosition().y, sf::Color(0,0,0,60));
+	}
+	tileToLight.clear();
+}
+
+void World::ReDraw()
+{
+	const int num = worldTiles.size();
+	WorldTile** ptr = (num > 0) ? worldTiles.data() : nullptr;
+	for (int i = 0; i < num; i++)
+	{
+		DrawTile(ptr[i]);
+	}
+}
+
 void World::SpawnEntity(Entity* entity, sf::Vector2i tilePosition)
 {
 	tilePosition = VectorHelper::ClampVector(tilePosition, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize() - 1));
 	AddEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y],entity);
-	entity->OnSpawn();
 	tileToTick.push_back(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y]);
+	entity->OnSpawn(this);
 }
 
 void World::DespawnEntity(Entity* entity, sf::Vector2i tilePosition)
@@ -54,6 +169,7 @@ void World::DespawnEntity(Entity* entity, sf::Vector2i tilePosition)
 	if (DoesTileContainEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity)) {
 		RemoveEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity);
 		tileToTick.push_back(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y]);
+		entity->OnDespawn(this);
 		return;
 	}
 	LogHandler::Instance().WriteLog( "Failed to despawn "+entity->GetObjectName(), tilePosition, logContext::ERROR);
@@ -262,20 +378,39 @@ std::vector<WorldTile*> World::GetNeighborsOfTile(sf::Vector2i tilePos)
 {
 	std::vector<WorldTile*> neighbours;
 	if(tilePos.x+1 < GetWorldSize()) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x + 1)) + tilePos.y]);
+	else neighbours.push_back(nullptr);
 	if (tilePos.x - 1 >=0) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x - 1)) + tilePos.y]);
-	if (tilePos.y + 1 < GetWorldSize()) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x)) + (tilePos.y+1)]);
-	if (tilePos.y- 1 >= 0) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x)) + (tilePos.y-1)]);
+	else neighbours.push_back(nullptr);
+	if (tilePos.y + 1 < GetWorldSize()) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x)) + (tilePos.y + 1)]);
+	else neighbours.push_back(nullptr);
+	if (tilePos.y - 1 >= 0) neighbours.push_back(worldTiles[(GetWorldSize()*(tilePos.x)) + (tilePos.y - 1)]);
+	else neighbours.push_back(nullptr);
 	return neighbours;
 }
 
 bool World::IsTileWalkable(sf::Vector2i tilePos, Entity* refEntity)
 {
-	return worldTiles[(GetWorldSize()*tilePos.x) + tilePos.y]->contentsVolume+ refEntity->volume <= tileVolume && worldTiles[(GetWorldSize()*tilePos.x) + tilePos.y]->wallTile ==nullptr;
+	if (DoesTileContainEntity(tilePos, 47, false) == true && dynamic_cast<Entity_Human*>(refEntity)!=NULL) { //this is a door and we are human
+		return true;
+	}
+	if (DoesTileContainEntity(tilePos, 49, false) == true && dynamic_cast<Entity_Human*>(refEntity) != NULL) { //this is a door and we are human
+		return true;
+	}
+	WorldTile* tile = GetWorldTile(tilePos);
+	int newTileSize = GetWorldTile(tilePos)->contentsVolume + refEntity->GetVolume();
+	return GetWorldTile(tilePos)->contentsVolume+ refEntity->GetVolume() <= tileVolume && GetWorldTile(tilePos)->wallTile ==nullptr;
 }
 
 bool World::IsTileWalkable(WorldTile* tile, Entity* refEntity)
 {
-	return tile->contentsVolume + refEntity->volume <=tileVolume && tile->wallTile == nullptr;
+	if (DoesTileContainEntity(tile->GetPosition(),47,false) == true && dynamic_cast<Entity_Human*>(refEntity) != NULL) { //this is a door and we are human
+		return true;
+	}
+	if (DoesTileContainEntity(tile->GetPosition(), 49, false) == true && dynamic_cast<Entity_Human*>(refEntity) != NULL) { //this is a door and we are human
+		return true;
+	}
+	int newTileSize = tile->contentsVolume + refEntity->GetVolume();
+	return tile->contentsVolume + refEntity->GetVolume() <=tileVolume && tile->wallTile == nullptr;
 }
 
 void World::DrawTile(WorldTile* tile)
@@ -316,7 +451,7 @@ void World::AddEntity(WorldTile* tile, Entity* entity)
 	entity->SetPosition(tile->x, tile->y);
 	tile->tileEntities.push_back(entity);
 	tile->tileEntitiesCount = tile->tileEntities.size();
-	tile->contentsVolume += entity->volume;
+	tile->contentsVolume += entity->GetVolume();
 }
 
 void World::RemoveEntity(WorldTile* tile, Entity* entity)
@@ -324,7 +459,7 @@ void World::RemoveEntity(WorldTile* tile, Entity* entity)
 	tile->tileEntities.erase(std::remove(tile->tileEntities.begin(), tile->tileEntities.end(), entity), tile->tileEntities.end());
 	tile->tileEntities.shrink_to_fit();
 	tile->tileEntitiesCount = tile->tileEntities.size();
-	tile->contentsVolume -= entity->volume;
+	tile->contentsVolume -= entity->GetVolume();
 }
 
 void World::SetGroundTileID(WorldTile* tile, wchar_t id)
@@ -353,6 +488,7 @@ void World::SetWallTileID(WorldTile* tile, int id)
 
 	std::vector<WorldTile*> neighbors = GetNeighborsOfTile(tile->GetPosition());
 	for (int i = 0; i < neighbors.size();i++) {
+		if(neighbors[i]==nullptr)continue;
 		tileToTick.push_back(neighbors[i]);
 	}
 	tileToTick.push_back(tile);

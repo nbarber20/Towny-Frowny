@@ -47,10 +47,14 @@ public:
 			std::vector<WorldTile*> neighbors = world->GetNeighborsOfTile(currentNode->GetPosition());
 			for (auto neighbor : neighbors)
 			{
+				if (neighbor == nullptr) continue;
 				if (std::find(closedSet.begin(), closedSet.end(), neighbor) != closedSet.end())continue;
 				int dist = floor(VectorHelper::GetMagnitude(neighbor->GetPosition() - targetNode->GetPosition()));
 				if (dist >= stopDistance) {
-					if (world->IsTileWalkable(neighbor, refEntity) == false)continue;
+					if (world->IsTileWalkable(neighbor, refEntity) == false) {
+					
+						continue;
+					}
 				}
 				int costToNeighbor = currentNode->gcost + GetDistance(currentNode, neighbor);
 				if (costToNeighbor < neighbor->gcost || std::find(openSet.begin(), openSet.end(), neighbor) == openSet.end()) {

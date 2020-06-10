@@ -59,7 +59,7 @@ public:
 			for (int j = 0; j < entitytextureAtlasImage->getSize().y / 8.0f; j++) {
 				if (isEmpty(entitytextureAtlasImage,sf::Vector2i(i*8,j* 8)) == false)
 				{
-					Tile* t = new Tile(entitytextureAtlas, i, j, new sf::Color(entityColorLookup->getPixel(i, 0)));
+					Tile* t = new Tile(entitytextureAtlas, i, j, new sf::Color(entityColorLookup->getPixel(i, j)));
 					col.push_back(t);
 				}
 			}

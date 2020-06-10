@@ -8,11 +8,15 @@ class World
 {
 public:
 	std::vector <WorldTile*> tileToTick;
-	World(FastNoise* noiseGen);
-	~World();
-	void GenerateTiles(FastNoise* noiseGen);
-	void GenerateEntities(FastNoise* noiseGen);
+	std::vector <WorldTile*> tileToLight;
+	World() {};
+	~World() {};
+	void GenerateOverworld(FastNoise* noiseGen);
+	void GenerateCave(FastNoise* noiseGen);
+	void GenerateEntities();
 	void Draw();
+	void DrawLighting();
+	void ReDraw();
 	void SpawnEntity(Entity* entity, sf::Vector2i tilePosition);
 	void DespawnEntity(Entity* entity, sf::Vector2i tilePosition);
 	void MoveEntity(Entity* entity, short fromx, short fromy, short tox, short toy);

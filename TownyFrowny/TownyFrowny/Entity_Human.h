@@ -38,7 +38,7 @@ public:
 	}
 	virtual Entity_Human* clone() const { return new Entity_Human(*this); };
 	void DestroyTaskSteps();
-
+	bool MoveToTile(short dx, short dy) override;
 private:
 
 	std::vector<std::pair<Entity::Behaviors, float>> behaviorWeights = {

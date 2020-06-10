@@ -27,8 +27,7 @@ class InputHandler {
 
 public:
 	
-	InputHandler(PathFinder* pathfinder,World* world, sf::RenderWindow* window) {
-		this->world = world;
+	InputHandler(PathFinder* pathfinder, sf::RenderWindow* window) {
 		this->window = window;
 		this->pathfinder = pathfinder;
 	};
@@ -59,7 +58,7 @@ public:
 		if (UiHandler::Instance().GetWindow() == UiHandler::Inventory)
 		{
 			if (index >= 0 && index < InventoryList.size()) {
-				ReleventHeldItemID = InventoryList[index].second->GetID();
+				ReleventHeldItemID = InventoryCollapsed[index].first;
 			}
 		}
 		if (UiHandler::Instance().GetWindow() == UiHandler::Designation)
@@ -119,7 +118,7 @@ private:
 		if (isTaskDirectional(ReleventBehaviors[index].behavior)) {
 			for (int i = 0; i < selectedPositions.size(); i++) {
 				std::vector<sf::Vector2i> walksteps;
-				if (pathfinder->FindPath(pilotingPlayer, 1, walksteps, pilotingPlayer->GetPosition(), selectedPositions[i], world)){
+				if (pathfinder->FindPath(pilotingPlayer, 1, walksteps, pilotingPlayer->GetPosition(), selectedPositions[i], pilotingPlayer->getWorld())){
 					selectedPositions = sortArr(selectedPositions, selectedPositions.size(), selectedPositions[i]);
 					selectedEntity = sortEntityArr(selectedEntity, selectedEntity.size(), selectedPositions[i]);
 					break;
@@ -174,7 +173,10 @@ private:
 
 
 	bool isTaskDirectional(Entity::TargetedHumanBehaviors behavior) { //true is closest last
-		if( behavior == Entity::Targeted_DestroyWall){
+		if(behavior == Entity::Targeted_DestroyWall){
+			return true;
+		}
+		else if (behavior == Entity::Targeted_PickUp) {
 			return true;
 		}
 		return false;
@@ -188,15 +190,23 @@ private:
 			Entity::Targeted_WalkTo,
 			Entity::Targeted_DestroyWall,
 			Entity::Targeted_DestroyFloor,
+			Entity::Targeted_MakeStaircase,
+			Entity::Targeted_UseStaircase,
 		};
-		WorldTile* tile = world->GetWorldTile(tilePos);
+		WorldTile* tile = pilotingPlayer->getWorld()->GetWorldTile(tilePos);
 		std::vector<Entity::TargetedHumanBehaviors> temp;
 		for (auto b : List) {
 			if (b == Entity::Targeted_DestroyWall) {
 				if (tile->wallTile != nullptr) temp.push_back(b);
 			}
 			else if (b == Entity::Targeted_DestroyFloor) {
-				if (tile->groundTile->GetTileID() != 0) temp.push_back(b);
+				if (tile->groundTile->GetTileID() != 12 && tile->groundTile->GetTileID() != 13&&tile->groundTile->GetTileID() != 0) temp.push_back(b);
+			}
+			else if (b == Entity::Targeted_MakeStaircase) {
+				if (tile->groundTile->GetTileID() != 12 && tile->groundTile->GetTileID() != 13)temp.push_back(b);
+			}
+			else if (b == Entity::Targeted_UseStaircase) {
+				if (tile->groundTile->GetTileID() == 12 || tile->groundTile->GetTileID() == 13)temp.push_back(b);
 			}
 			else { //this behavior has no specification
 				temp.push_back(b);
@@ -235,6 +245,10 @@ private:
 			return "Rotate";
 		case Entity::Targeted_DropItem:
 			return "Drop Item";
+		case Entity::Targeted_MakeStaircase:
+			return "Make Staircase";
+		case Entity::Targeted_UseStaircase:
+			return "Use Staircase";
 		default:
 			return "Null Task";
 		}
@@ -242,6 +256,7 @@ private:
 
 	std::vector<int> CraftingList;
 	std::vector<std::pair<bool,Entity*>> InventoryList;
+	std::vector<std::pair<int, int>> InventoryCollapsed;
 
 
 	int ReleventHeldItemID=-1;
@@ -257,7 +272,7 @@ private:
 	std::vector < Entity*> selectedEntity;
 
 	Entity_Human* pilotingPlayer;
-	World* world;
+	//World* world;
 	sf::RenderWindow* window;
 
 	std::vector<targetedTaskStep*> steps;

@@ -11,8 +11,9 @@ class TaskManager {
 public:
 	
 
-	TaskManager(World* world, PathFinder* pathfinder) {
-		this->world = world;
+	TaskManager(World* OverWorld, World* UnderWorld, PathFinder* pathfinder) {
+		this->OverWorld = OverWorld;
+		this->UnderWorld = UnderWorld;
 		this->pathFinder = pathfinder;
 	};
 
@@ -103,7 +104,7 @@ public:
 	}
 	std::vector<Task*> TREE_SourceMaterials(int recipeID) {
 		return {
-			new Task_SourceMaterials(recipeID,pathFinder),
+			new Task_SourceMaterials(recipeID,pathFinder, 1, 10),
 		};
 	}
 	std::vector<Task*> TREE_CraftItem(int recipeID) {
@@ -112,7 +113,7 @@ public:
 			lookTask,
 			new Task_WalkTo(pathFinder, 1, &lookTask->FoundTarget, 1, 10),
 			new Task_Give(&lookTask->FoundTargetEntity,Recipies::getRecipe(recipeID),1,10),
-			new Task_Craft(recipeID,&lookTask->FoundTargetEntity),
+			new Task_Craft(recipeID,&lookTask->FoundTargetEntity, 1, 10),
 		};
 	}
 
@@ -148,7 +149,7 @@ public:
 	std::vector<Task*> TargetTREE_PickUp(Entity** ItemTarget) {
 		return
 		{
-			new Task_WalkTo(pathFinder,0,ItemTarget, 1, 10),
+			new Task_WalkTo(pathFinder,1,ItemTarget, 1, 10),
 			new Task_PickUp(ItemTarget, 1, 10),
 		};
 	}
@@ -220,8 +221,29 @@ public:
 			new Task_Drop(Target,1,10),
 		};
 	}
-
+	std::vector<Task*> TargetTREE_MakeStairCase(sf::Vector2i** Position) {
+		return
+		{
+			new Task_WalkTo(pathFinder,0,Position, 1, 10),
+			new Task_CreateStaircase(OverWorld,UnderWorld,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_UseStairCase(sf::Vector2i** Position) {
+		return
+		{
+			new Task_WalkTo(pathFinder,0,Position, 1, 10),
+			new Task_UseStaircase(OverWorld,UnderWorld,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_UseDoor(Entity** Door) {
+		return
+		{
+			new Task_WalkTo(pathFinder,1,Door, 1, 10),
+			new Task_UseDoor(Door,1,10),
+		};
+	}
 private:
-	World* world;
+	World* OverWorld;
+	World* UnderWorld;
 	PathFinder* pathFinder;
 };

@@ -42,8 +42,8 @@ void InputHandler::GetInput(sf::Event e)
 				sf::Vector2i CursorEnd;
 				Camera::Instance().ScreenToWorld(selectionBoxScreenStart, CursorStart);
 				Camera::Instance().ScreenToWorld(selectionBoxScreenEnd, CursorEnd);
-				CursorStart = VectorHelper::ClampVector(CursorStart, sf::Vector2i(0, 0), sf::Vector2i(world->GetWorldSize(), world->GetWorldSize()));
-				CursorEnd = VectorHelper::ClampVector(CursorEnd, sf::Vector2i(0, 0), sf::Vector2i(world->GetWorldSize(), world->GetWorldSize()));
+				CursorStart = VectorHelper::ClampVector(CursorStart, sf::Vector2i(0, 0), sf::Vector2i(pilotingPlayer->getWorld()->GetWorldSize(), pilotingPlayer->getWorld()->GetWorldSize()));
+				CursorEnd = VectorHelper::ClampVector(CursorEnd, sf::Vector2i(0, 0), sf::Vector2i(pilotingPlayer->getWorld()->GetWorldSize(), pilotingPlayer->getWorld()->GetWorldSize()));
 				sf::Vector2i indexStart;
 				indexStart.x = (CursorStart.x < CursorEnd.x) ? CursorStart.x : CursorEnd.x;
 				indexStart.y = (CursorStart.y < CursorEnd.y) ? CursorStart.y : CursorEnd.y;
@@ -57,7 +57,7 @@ void InputHandler::GetInput(sf::Event e)
 					{
 						for (int y = indexStart.y; y <= indexEnd.y; y++)
 						{
-							std::vector<Entity*> list = world->GetWorldTile(sf::Vector2i(x, y))->tileEntities;
+							std::vector<Entity*> list = pilotingPlayer->getWorld()->GetWorldTile(sf::Vector2i(x, y))->tileEntities;
 							selectedPositions.push_back(sf::Vector2i(x, y));
 							for (auto e : list) {
 								selectedEntity.push_back(e);
@@ -134,7 +134,7 @@ void InputHandler::GetInput(sf::Event e)
 				}
 				else if (UiHandler::Instance().GetWindow() == UiHandler::Designation) {
 					sf::Vector2i size = sf::Vector2i(indexEnd.x, indexEnd.y) - sf::Vector2i(indexStart.x, indexStart.y);
-					world->NewDesignation(sf::Vector2i(indexStart.x, indexStart.y), size, SelectedDesignationType);
+					pilotingPlayer->getWorld()->NewDesignation(sf::Vector2i(indexStart.x, indexStart.y), size, SelectedDesignationType);
 				}
 			}
 			Clicking = false;
@@ -209,10 +209,26 @@ void InputHandler::GetInput(sf::Event e)
 		std::vector<std::string> names;
 		std::vector<Entity*> inventory = *pilotingPlayer->GetInventory();
 		InventoryList.clear();
+		InventoryCollapsed.clear();
 		for (int i = 0; i < inventory.size(); i++) {
 			InventoryList.push_back(std::make_pair(false,inventory[i]));
-			names.push_back(inventory[i]->GetObjectName());
+			
+			bool found = false;
+			for (int j = 0; j < InventoryCollapsed.size();j++) {
+				if (InventoryCollapsed[j].first == inventory[i]->GetID()) {
+					InventoryCollapsed[j].second++;
+					found = true;
+				}
+			}
+			if (found == false) {
+				InventoryCollapsed.push_back(std::make_pair(inventory[i]->GetID(), 1));
+			}
 		}
+		for (int j = 0; j < InventoryCollapsed.size(); j++) {
+			names.push_back(EntityHandler::Instance().GetEntityNameByID(InventoryCollapsed[j].first) + " x" + std::to_string(InventoryCollapsed[j].second));
+		}
+
+
 		UiHandler::Instance().UpdateTaskList(names);
 	}
 	if (UiHandler::Instance().GetWindow() == UiHandler::Designation) {

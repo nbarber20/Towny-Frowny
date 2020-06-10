@@ -412,7 +412,7 @@ private:
 
 class Task_Craft : public Task {
 public:
-	Task_Craft(int id, Entity** targetCrafter) :Task(tickspeed, length) {
+	Task_Craft(int id, Entity** targetCrafter, int tickSpeed, int length) :Task(tickspeed, length) {
 		this->id = id;
 		this->targetCrafter = targetCrafter;
 	};
@@ -425,7 +425,7 @@ private:
 
 class Task_SourceMaterials : public Task {
 public:
-	Task_SourceMaterials(int id,PathFinder* pathfinder) :Task(tickspeed, length) {
+	Task_SourceMaterials(int id,PathFinder* pathfinder, int tickSpeed, int length) :Task(tickspeed, length) {
 		this->id = id;
 		this->pathfinder = pathfinder;
 	};
@@ -433,4 +433,38 @@ public:
 private:
 	int id;
 	PathFinder* pathfinder;
+};
+
+class Task_CreateStaircase : public Task {
+public:
+	Task_CreateStaircase(World* OverWorld, World* UnderWorld, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->OverWorld = OverWorld;
+		this->UnderWorld = UnderWorld;
+	};
+	TaskStatus Execute() override;
+private:
+	World* OverWorld;
+	World* UnderWorld;
+};
+
+class Task_UseStaircase : public Task {
+public:
+	Task_UseStaircase(World* OverWorld, World* UnderWorld, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->OverWorld = OverWorld;
+		this->UnderWorld = UnderWorld;
+	};
+	TaskStatus Execute() override;
+private:
+	World* OverWorld;
+	World* UnderWorld;
+};
+
+class Task_UseDoor : public Task {
+public:
+	Task_UseDoor(Entity** targetDoor, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->targetDoor = targetDoor;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** targetDoor;
 };

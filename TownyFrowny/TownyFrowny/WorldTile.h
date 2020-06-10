@@ -3,13 +3,16 @@
 #include "Entity.h"
 #include "GroundTile.h"
 struct WorldTile {
-	WorldTile(FastNoise* noiseGen, World& worldref, short x, short y) {
-		groundTile = new GroundTile(noiseGen, worldref,x,y);
-		wallTile = nullptr;
+	WorldTile(World& worldref, short x, short y, int groundId, int wallID) {
+		groundTile = new GroundTile(groundId, worldref, x, y);
+		if (wallID >= 0)wallTile = new GroundTile(wallID,worldref,x,y);
+		else wallTile = nullptr;
 		this->x = x;
 		this->y = y;
 		tileEntitiesCount = 0;
+		contentsVolume = 0;
 	};
+
 	~WorldTile() {
 		delete wallTile;
 		delete groundTile;

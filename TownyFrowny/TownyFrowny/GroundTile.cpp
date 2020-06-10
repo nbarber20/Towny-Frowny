@@ -12,27 +12,6 @@ GroundTile::GroundTile(wchar_t id, World & worldref, short x, short y)
 	this->y = y;
 }
 
-GroundTile::GroundTile(FastNoise* noiseGen, World& worldref, short x, short y)
-{
-	world = &worldref;
-	float randCol = noiseGen->GetNoise(x,y)*4;
-	if (randCol <= -0.5) {
-		tileID = 2;		
-	}
-	else if (randCol <= 1) {
-		tileID = 2;
-	}
-	else if (randCol <= 1.5) {
-		tileID = 3;
-	}
-	else {
-		tileID = 5;
-	}
-	this->x = x;
-	this->y = y;
-}
-
-
 GroundTile::~GroundTile()
 {
 }

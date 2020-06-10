@@ -6,22 +6,24 @@ class Camera
 {
 private:
 	float cameraZoom = 0.123f;
-	sf::Vector2f cameraOffset = sf::Vector2f(3200, 3200);
+	sf::Vector2f cameraOffset;
 	sf::RenderTexture HighLod;
 	sf::Image LowLod;
+	sf::Image Shading;
 	std::vector<sf::RectangleShape*> designationTiles;
-	const int worldSize = 800;
+	const int worldSize = 400;
 	bool lodLevel = 0;
 	int designationOpacity= 50;
 
 	Camera() {
 		HighLod.create(worldSize *8, worldSize *8);
 		LowLod.create(worldSize, worldSize);
-
+		Shading.create(worldSize, worldSize);
 		for (int i=0; i<4; i++)
 		{
 			makeDesignationTile(getDesignationTileColor((Designation::Type)i));
 		}
+		cameraOffset = sf::Vector2f((worldSize/2)*8, (worldSize / 2) * 8);
 	};
 
 	void makeDesignationTile(sf::Color color) {
@@ -56,6 +58,9 @@ public:
 	}
 	sf::Image* getLowLod() {
 		return &LowLod;
+	}
+	sf::Image* getShading() {
+		return &Shading;
 	}
 	float getCameraZoom() {
 		return cameraZoom;

@@ -15,52 +15,59 @@ public:
 
 	static std::vector<std::pair<int, std::vector<std::vector<int>>>> getRecipes()
 	{
+
 		std::vector < std::pair<int, std::vector<std::vector<int>>>> list;
-		std::vector<std::vector<int>> Bed{
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(23, Bed));
+		list.push_back(std::make_pair(29, std::vector<std::vector<int>>({ {23} }))); //Brick
+		list.push_back(std::make_pair(30, std::vector<std::vector<int>>({ {25} }))); //Copper
+		list.push_back(std::make_pair(31, std::vector<std::vector<int>>({ {26} }))); //Iron
+		list.push_back(std::make_pair(32, std::vector<std::vector<int>>({ {27} }))); //Gold
+		list.push_back(std::make_pair(33, std::vector<std::vector<int>>({ {28} }))); //Silver
 
-		std::vector<std::vector<int>> Chair{
+		//Bed
+		list.push_back(std::make_pair(34, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(24, Chair));
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+		})); 
 
-		std::vector<std::vector<int>> LargeTable{
+		//Chair
+		list.push_back(std::make_pair(35, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(25, LargeTable));
+		}));
 
-		std::vector<std::vector<int>> SmallTable{
+		//Large Table
+		list.push_back(std::make_pair(36, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(26, SmallTable));
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+		}));
 
-		std::vector<std::vector<int>> Chest{
+		//Small Table
+		list.push_back(std::make_pair(37, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(31, Chest));
+		}));
 
-		std::vector<std::vector<int>> Bin{
+		//Chest		
+		list.push_back(std::make_pair(44, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(32, Bin));
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+		}));
 
-		std::vector<std::vector<int>> Bucket{
+		//Bin		
+		list.push_back(std::make_pair(45, std::vector<std::vector<int>>{
 				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
-		};
-		list.push_back(std::make_pair(33, Bucket));
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+		}));
+
+		//Bucket
+		list.push_back(std::make_pair(46, std::vector<std::vector<int>>{
+				EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),
+		}));
 
 		return list;
 	};

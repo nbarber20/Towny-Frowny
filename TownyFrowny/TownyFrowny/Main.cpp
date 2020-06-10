@@ -20,7 +20,6 @@
 
 int main()
 {	
-
 	const float gameSpeed = 0.05f;
 	sf::Event event;
 	sf::RenderWindow window(sf::VideoMode(1000, 800), "Towny Frowny");
@@ -32,13 +31,21 @@ int main()
 	FastNoise* noiseGen = new FastNoise(time(NULL));
 	noiseGen->SetNoiseType(FastNoise::Perlin);
 
+	FastNoise* noiseGen2 = new FastNoise(time(NULL));
+	noiseGen2->SetNoiseType(FastNoise::WhiteNoise);
 
-	World* debugWorld = new World(noiseGen);
+	World* OverWorld = new World();
+	OverWorld->GenerateOverworld(noiseGen);
+
+	World* UnderWorld = new World();
+	UnderWorld->GenerateCave(noiseGen2);
+
+	World* selectedWorld = OverWorld;
 
 	PathFinder* pathFinder = new PathFinder();
 
-	InputHandler* inputHandler = new InputHandler(pathFinder, debugWorld, &window);
-	EntityHandler::Instance().Init(new TaskManager(debugWorld, pathFinder),inputHandler,debugWorld);
+	InputHandler* inputHandler = new InputHandler(pathFinder, &window);
+	EntityHandler::Instance().Init(new TaskManager(OverWorld,UnderWorld, pathFinder),inputHandler, selectedWorld);
 
 	sf::Clock clock;
 
@@ -58,7 +65,8 @@ int main()
 	FpsText.setFillColor(sf::Color(248,255,138));
 	LogHandler::Instance().WriteLog("Began Game");
 
-	EntityHandler::Instance().CreateAndSpawnEntity(0, debugWorld, sf::Vector2i(debugWorld->GetWorldSize()*.5f, debugWorld->GetWorldSize()*.5f));
+	EntityHandler::Instance().CreateAndSpawnEntity(0, selectedWorld, sf::Vector2i(selectedWorld->GetWorldSize()*.5f, selectedWorld->GetWorldSize()*.5f));
+	OverWorld->GenerateEntities();
 
 	while (window.isOpen())
 	{
@@ -73,39 +81,44 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
 			{
-				EntityHandler::Instance().SpawnAtCursor(0,debugWorld,&window);
+				EntityHandler::Instance().SpawnAtCursor(49, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
 			{
-				EntityHandler::Instance().SpawnAtCursor(15, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(48, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 			{
-				EntityHandler::Instance().SpawnAtCursor(27, debugWorld, &window);
+				sf::Vector2i worldPos;
+				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+				sf::Vector2f mouseScreenPos = (&window)->mapPixelToCoords(mousePos) / 800.0f;
+				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
+					OverWorld->SetWallTile(worldPos, 1);
+				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4))
 			{
-				EntityHandler::Instance().SpawnAtCursor(3, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(47, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad5))
 			{
-				EntityHandler::Instance().SpawnAtCursor(19, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(19, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad6))
 			{
-				EntityHandler::Instance().SpawnAtCursor(11, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(11, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7))
 			{
-				EntityHandler::Instance().SpawnAtCursor(23, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(23, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8))
 			{
-				EntityHandler::Instance().SpawnAtCursor(24, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(24, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad9))
 			{
-				EntityHandler::Instance().SpawnAtCursor(25, debugWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(25, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0))
 			{
@@ -113,11 +126,19 @@ int main()
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
 				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					debugWorld->NewDesignation(worldPos,sf::Vector2i(3,3),Designation::MaterialStorage);
+					selectedWorld->NewDesignation(worldPos,sf::Vector2i(3,3),Designation::MaterialStorage);
 				}
 			}
-
-
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+			{
+				selectedWorld = OverWorld;
+				selectedWorld->ReDraw();
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+			{
+				selectedWorld = UnderWorld;
+				selectedWorld->ReDraw();
+			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
 			{
 				float currentZoom = cameraInstance.getCameraZoom();
@@ -179,7 +200,7 @@ int main()
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
 				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					debugWorld->SetWallTile(worldPos, -1);
+					selectedWorld->SetWallTile(worldPos, -1);
 				}
 			}
 			inputHandler->GetInput(event);
@@ -207,27 +228,49 @@ int main()
 		//RenderPass
 //////////
 		window.clear();
-		debugWorld->Draw();
+		selectedWorld->Draw();
+		selectedWorld->DrawLighting();
 		if (Camera::Instance().GetLodLevel() == 0) {
 			sf::Texture* lowLod = new sf::Texture();
-			lowLod->loadFromImage(*cameraInstance.getLowLod(), sf::IntRect(0, 0, debugWorld->GetWorldSize(), debugWorld->GetWorldSize()));
+			lowLod->loadFromImage(*cameraInstance.getLowLod(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));
 			sf::Sprite lowLodsprite(*lowLod);
-			lowLodsprite.setOrigin((debugWorld->GetWorldSize()) / 2, (debugWorld->GetWorldSize()) / 2);
+			lowLodsprite.setOrigin((selectedWorld->GetWorldSize()) / 2, (selectedWorld->GetWorldSize()) / 2);
 			lowLodsprite.scale(cameraInstance.getCameraZoom()*8.0f, -1.0f*(cameraInstance.getCameraZoom()*8.0f));
 			lowLodsprite.setOrigin(cameraInstance.getCameraOffset()/8.0f);
 			lowLodsprite.setPosition(400,400);
 			window.draw(lowLodsprite);
+
+
+			sf::Texture* shading = new sf::Texture();
+			shading->loadFromImage(*cameraInstance.getShading(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));
+			sf::Sprite shadingsprite(*shading);
+			shadingsprite.setOrigin((selectedWorld->GetWorldSize()) / 2, (selectedWorld->GetWorldSize()) / 2);
+			shadingsprite.scale(cameraInstance.getCameraZoom()*8.0f, -1.0f*(cameraInstance.getCameraZoom()*8.0f));
+			shadingsprite.setOrigin(cameraInstance.getCameraOffset() / 8.0f);
+			shadingsprite.setPosition(400, 400);
+			window.draw(shadingsprite);
 			delete lowLod;
+			delete shading;
 		}
 		else {
 			sf::Texture* texture = new sf::Texture(cameraInstance.getHighLod()->getTexture());
 			sf::Sprite sprite(*texture);
-			sprite.setOrigin((debugWorld->GetWorldSize()*8.0f) / 2, (debugWorld->GetWorldSize()*8.0f) / 2);
+			sprite.setOrigin((selectedWorld->GetWorldSize()*8.0f) / 2, (selectedWorld->GetWorldSize()*8.0f) / 2);
 			sprite.scale(cameraInstance.getCameraZoom(), -1.0f*cameraInstance.getCameraZoom());
 			sprite.setOrigin(cameraInstance.getCameraOffset());
 			sprite.setPosition(400,400);
 			window.draw(sprite);
+
+			sf::Texture* shading = new sf::Texture();
+			shading->loadFromImage(*cameraInstance.getShading(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));
+			sf::Sprite shadingsprite(*shading);
+			shadingsprite.setOrigin((selectedWorld->GetWorldSize()) / 2, (selectedWorld->GetWorldSize()) / 2);
+			shadingsprite.scale(cameraInstance.getCameraZoom()*8.0f, -1.0f*(cameraInstance.getCameraZoom()*8.0f));
+			shadingsprite.setOrigin(cameraInstance.getCameraOffset() / 8.0f);
+			shadingsprite.setPosition(400, 400);
+			window.draw(shadingsprite);
 			delete texture;
+			delete shading;
 		}
 		UiHandler::Instance().DrawUI(&window);
 		window.draw(FpsText);

@@ -16,12 +16,21 @@ Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref , std::
 	this->age = 0;
 	this->parent = nullptr;
 	this->TargetedBehaviors = TargetedBehaviors;
+	this->volume = 0;
 }
 
 
-void Entity::OnSpawn()
+void Entity::OnSpawn(World* newworld)
 {
 	inworld = true;
+	world = newworld;
+	world->tileToTick.push_back(world->GetWorldTile(this->GetPosition()));
+}
+
+
+void Entity::OnDespawn(World* newworld)
+{
+	inworld = false;
 	world->tileToTick.push_back(world->GetWorldTile(this->GetPosition()));
 }
 
@@ -63,7 +72,7 @@ bool Entity::MoveToTile(short dx, short dy)
 {	
 	if (dx > world->GetWorldSize() - 1 || dx < 0 || dy<0 || dy>world->GetWorldSize() - 1)return false; //Out of bounds
 	if (world->IsTileWalkable(sf::Vector2i(dx, dy),this) == false)return false; //Cannot walk here
-	world->MoveEntity(this, x,y,dx,dy);
+	world->MoveEntity(this, x, y, dx, dy);	
 }
 
 bool Entity::StepTiles(short dx, short dy)
@@ -135,4 +144,16 @@ void Entity::SetSpriteVariant(wchar_t x, wchar_t y)
 	if (inworld) {
 		world->tileToTick.push_back(world->GetWorldTile(GetPosition()));
 	}
+}
+
+int Entity::GetVolume()
+{
+	return volume;
+}
+
+void Entity::SetVolume(int to)
+{
+	if (inworld)world->GetWorldTile(GetPosition())->contentsVolume -= volume;
+	volume = to;
+	if (inworld)world->GetWorldTile(GetPosition())->contentsVolume += volume;	
 }

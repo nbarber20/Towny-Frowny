@@ -23,6 +23,9 @@ public:
 		Targeted_Rotate,
 		Targeted_DropItem,
 		Targeted_Craft,
+		Targeted_MakeStaircase,
+		Targeted_UseStaircase,
+		Targeted_UseDoor,
 	};
 
 	
@@ -30,7 +33,8 @@ public:
 
 	Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors);
 	virtual ~Entity() {};
-	virtual void OnSpawn();
+	virtual void OnSpawn(World* newworld);
+	virtual void OnDespawn(World* newworld);
 	virtual void RemoveFromWorld();
 	virtual void Tick();
 	virtual void SetPosition(short x, short y);
@@ -51,7 +55,8 @@ public:
 	bool GetMovementCapability();
 	virtual void SetSpriteVariant(wchar_t x, wchar_t y);
 	bool doTick = true;
-	int volume = 0;
+	int GetVolume();
+	void SetVolume(int to);
 	virtual void Initilize() {};
 
 	virtual Entity* clone() const { return new Entity(*this); };
@@ -82,6 +87,7 @@ public:
 		delete failList;
 	}
 
+	World* getWorld() { return world; };
 
 protected:
 
@@ -104,7 +110,8 @@ protected:
 	wchar_t spriteY = 0;
 	short x;
 	short y;
-	short age;
+	short age; 
+	int volume = 0;
 	World* world;
 	bool inworld = false;
 	bool canMove = false;

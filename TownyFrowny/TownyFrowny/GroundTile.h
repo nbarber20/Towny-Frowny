@@ -6,7 +6,6 @@ class GroundTile
 {
 public:
 	GroundTile(wchar_t id, World& worldref, short x, short y);
-	GroundTile(FastNoise* noiseGen, World& worldref, short x, short y);
 	~GroundTile();
 	void Draw(bool isWall, bool isFrontWall, bool isTopWall);
 	void SetTile(int id);

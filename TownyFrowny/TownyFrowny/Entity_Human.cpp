@@ -56,6 +56,35 @@ void Entity_Human::DestroyTaskSteps()
 }
 
 
+bool Entity_Human::MoveToTile(short dx, short dy)
+{
+	if (dx > world->GetWorldSize() - 1 || dx < 0 || dy<0 || dy>world->GetWorldSize() - 1)return false; //Out of bounds
+	if (world->IsTileWalkable(sf::Vector2i(dx, dy), this) == false)return false; //Cannot walk here
+
+	if (world->DoesTileContainEntity(sf::Vector2i(dx, dy), 47, true) == true) { //this is a door
+		Entity_Door* door = dynamic_cast<Entity_Door*>(world->GetEntityInTileByID(47, sf::Vector2i(dx, dy)));
+		door->OpenDoor();
+	}
+
+	if (world->DoesTileContainEntity(sf::Vector2i(x, y), 47, true) == true) { //this is a door
+		Entity_Door* door = dynamic_cast<Entity_Door*>(world->GetEntityInTileByID(47, sf::Vector2i(x, y)));
+		door->CloseDoor();
+	}
+
+	if (world->DoesTileContainEntity(sf::Vector2i(dx, dy), 49, true) == true) { //this is a Gate
+		Entity_FenceGate* door = dynamic_cast<Entity_FenceGate*>(world->GetEntityInTileByID(49, sf::Vector2i(dx, dy)));
+		door->OpenDoor();
+	}
+
+	if (world->DoesTileContainEntity(sf::Vector2i(x, y), 49, true) == true) { //this is a Gate
+		Entity_FenceGate* door = dynamic_cast<Entity_FenceGate*>(world->GetEntityInTileByID(49, sf::Vector2i(x, y)));
+		door->CloseDoor();
+	}
+
+	world->MoveEntity(this, x, y, dx, dy);
+
+}
+
 void Entity_Human::SetBehavoir(Entity::Behaviors b)
 {
 	clearAllTasks();
@@ -139,6 +168,15 @@ void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep*
 	case TargetedHumanBehaviors::Targeted_Craft:
 		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SourceMaterials(b.variantID), taskManager));
 		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_CraftItem(b.variantID), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_MakeStaircase:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_MakeStairCase(&step->Pos), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_UseStaircase:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseStairCase(&step->Pos), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_UseDoor:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseDoor(&step->entity), taskManager));
 		break;
 	}
 
