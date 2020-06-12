@@ -16,6 +16,7 @@
 #include "Entity_Door.h"
 #include "Entity_Fence.h"
 #include "Entity_FenceGate.h"
+#include "Entity_Light.h"
 class TaskManager;
 
 class EntityHandler
@@ -97,7 +98,7 @@ public:
 			std::make_pair("Meat",new Entity_Food(6,sf::Vector2i(6,0), world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 			std::make_pair("Cat Meat",new Entity_Food(7,sf::Vector2i(6,1), world, { Entity::Targeted_PickUp ,Entity::Targeted_DropItem })),
 			std::make_pair("Dog Meat",new Entity_Food(8,sf::Vector2i(6,1), world, { Entity::Targeted_PickUp ,Entity::Targeted_DropItem })),
-			std::make_pair("Chicken",new Entity_Food(9,sf::Vector2i(6,2), world, {Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("Poultry",new Entity_Food(9,sf::Vector2i(6,2), world, {Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 			std::make_pair("Pork",new Entity_Food(10,sf::Vector2i(6,3), world, {Entity::Targeted_PickUp ,Entity::Targeted_DropItem })),
 
 			std::make_pair("Oak Wood",new Entity_Material(11,sf::Vector2i(7,0), world, { Entity::Targeted_PickUp ,Entity::Targeted_DropItem,Entity::Targeted_ConstructWall,Entity::Targeted_ConstructFloor})),
@@ -133,30 +134,55 @@ public:
 			std::make_pair("Large Table",new Entity_Manufactured(36,sf::Vector2i(14,0), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 			std::make_pair("Small Table",new Entity_Manufactured(37,sf::Vector2i(14,1), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 
-			std::make_pair("Lantern",new Entity_Manufactured(38,sf::Vector2i(15,0), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
-			std::make_pair("Fire",new Entity_Manufactured(39,sf::Vector2i(16,1), false, world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("Lantern",new Entity_Light(38,sf::Vector2i(15, 0),4,50,world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_TurnOnLight,Entity::Targeted_TurnOffLight})),
+			std::make_pair("Fire",new Entity_Light(39,sf::Vector2i(16, 0),4,50,world, {Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_TurnOnLight,Entity::Targeted_TurnOffLight})),
 
-			std::make_pair("WorkBench",new Entity_Crafter(40,sf::Vector2i(17,0),taskManager,world,{34,35,36,37,44,45,46}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
+			std::make_pair("WorkBench",new Entity_Crafter(40,sf::Vector2i(17,0),taskManager,world,{34,35,36,37,44,45,46,47,48,49}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
 			std::make_pair("Anvil",new Entity_Crafter(41,sf::Vector2i(17,1),taskManager,world,{}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
 			std::make_pair("Kiln",new Entity_Crafter(42,sf::Vector2i(17,2),taskManager,world,{29,30,31,32,33}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
 			std::make_pair("Furnace",new Entity_Crafter(43,sf::Vector2i(17,3),taskManager,world,{29}, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_Craft })),
 			
 			std::make_pair("Chest",new Entity_Container(44,sf::Vector2i(18,0),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
-			std::make_pair("Bin",new Entity_Container(45,sf::Vector2i(18,1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
+			std::make_pair("Barrel",new Entity_Container(45,sf::Vector2i(18,1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 			std::make_pair("Bucket",new Entity_Container(46,sf::Vector2i(18,2),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem })),
 
 			std::make_pair("Door",new Entity_Door(47,sf::Vector2i(19,0),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_UseDoor })),
 
 			std::make_pair("Fence",new Entity_Fence(48,sf::Vector2i(23, 0),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem})),
 
-			std::make_pair("Fence Gate",new Entity_FenceGate(49,sf::Vector2i(23, 1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_UseDoor})),
+			std::make_pair("Fence Gate",new Entity_FenceGate(49,sf::Vector2i(23, 1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_UseDoor})),		
+
+		
+		};
+		entityGroupList = {
+			std::make_pair(Humanoids,AssembleGroup({ "Human" })),
+			std::make_pair(Pets, AssembleGroup({ "Cat","Dog" })),
+			std::make_pair(FoodAnimals,AssembleGroup({ "Cow","Chicken","Pig" })),
+			std::make_pair(Food,AssembleGroup({"Meat","Cat Meat","Dog Meat","Poultry"})),
+			std::make_pair(Tree,AssembleGroup({ "Oak Tree","Walnut Tree","Maple Tree","Ash Tree" })),
+			std::make_pair(Wood,AssembleGroup({ "Oak Wood","Walnut Wood","Maple Wood","Ash Wood" })),
+			std::make_pair(Crafter,AssembleGroup({ "WorkBench" })),
+			std::make_pair(ConstructedObject,AssembleGroup({"Bed","Chair","Large Table","Small Table","WorkBench","Anvil","Kiln","Furnace","Chest","Barrel","Bucket","Door","Fence","Fence Gate"})),
 		};
 	}
 
 	std::string GetEntityNameByID(int id) {
+		if (id < 0 || id >= entityList.size()) {
+			LogHandler::Instance().WriteLog("Requested an name by id for a nonexistent id: " + std::to_string(id), logContext::ERROR);
+			return 0;
+		}
 		return (&entityList[id])->first;
 	}
 
+	int GetEntityIDByName(std::string name) {
+		for (int i = 0; i < entityList.size(); i++) {
+			if ((&entityList[i])->first == name) {
+				return (&entityList[i])->second->GetID();
+			}
+		}
+		LogHandler::Instance().WriteLog("Requested an id by name for a nonexistent name: " + name, logContext::ERROR);
+		return 0;
+	}
 
 	void SpawnAtCursor(int id, World* world, sf::RenderWindow* w) {
 		sf::Vector2i worldPos;
@@ -177,34 +203,33 @@ public:
 		Tree,
 		Wood,
 		Crafter,
+		ConstructedObject,
 	};
 
+	bool isIdInGroup(EntityGroups group, int id) {
+		std::vector<int> groupids = GetIDGroup(group);
+		if (std::find(groupids.begin(), groupids.end(), id) != groupids.end()) {
+			return true;
+		}
+		return false;
+	}
+
 	std::vector<int> GetIDGroup(EntityGroups group) {
-		switch (group)
-		{
-			case Humanoids:
-				return std::vector<int>({ 0 });
-				break;
-			case Pets:
-				return std::vector<int>({ 2,3 });
-				break;
-			case FoodAnimals:
-				return std::vector<int>({ 1,4,5 });
-				break;
-			case Food:
-				return std::vector<int>({ 6,7,8,9,10 });
-				break;
-			case Tree:
-				return std::vector<int>({ 15,16,17,18 });
-				break;
-			case Wood:
-				return std::vector<int>({ 11,12,13,14 });
-				break;
-			case Crafter:
-				return std::vector<int>({ 40,41,42,43 });
-				break;
+		for (int i = 0; i < entityGroupList.size(); i++) {
+			if (entityGroupList[i].first == group) {
+				return entityGroupList[i].second;
+			}
 		}
 		LogHandler::Instance().WriteLog("Requested invalid group ids", logContext::ERROR);
+		return{};
+	}
+
+	std::vector<int> AssembleGroup(std::vector<std::string> names) {
+		std::vector<int> list;
+		for (auto name : names) {
+			list.push_back(GetEntityIDByName(name));
+		}
+		return list;
 	}
 
 	int GetEntityFromWorldTile(int worldTileID) {
@@ -282,7 +307,8 @@ public:
 	}
 
 private:
-	std::vector<std::pair<std::string,Entity*>> entityList;
+	std::vector<std::pair<EntityGroups,std::vector<int>>> entityGroupList;
+	std::vector<std::pair<std::string, Entity*>> entityList;
 
 
 	std::vector<Entity*> entities;

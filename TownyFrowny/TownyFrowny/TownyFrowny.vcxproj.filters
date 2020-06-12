@@ -71,6 +71,9 @@
     <ClCompile Include="Entity_FenceGate.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Entity_Light.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WorldTile.h">
@@ -173,6 +176,9 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Entity_FenceGate.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity_Light.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

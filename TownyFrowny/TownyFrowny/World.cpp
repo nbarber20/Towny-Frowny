@@ -4,6 +4,7 @@
 #include "LogHandler.h"
 #include "EntityHandler.h"
 #include "FastNoise.h"
+#include "InputHandler.h"
 
 void World::GenerateOverworld(FastNoise* noiseGen)
 {
@@ -28,10 +29,10 @@ void World::GenerateOverworld(FastNoise* noiseGen)
 			WorldTile* tile = new WorldTile(*this, x, y, tileID,-1);
 			worldTiles.push_back(tile);
 			tileToTick.push_back(tile);
-			tileToLight.push_back(tile);
 		}
 	}
 	delete noiseGen;
+	SetAmbientLightLevel(200);
 }
 
 void World::GenerateCave(FastNoise* noiseGen)
@@ -65,6 +66,7 @@ void World::GenerateCave(FastNoise* noiseGen)
 		}
 	}
 	delete noiseGen;
+	SetAmbientLightLevel(50);
 }
 
 void World::GenerateEntities()
@@ -132,17 +134,79 @@ void World::Draw() {
 		DrawTile(ptr[i]);	
 	}
 	tileToTick.clear();
+
+	if (worldSelections.size()>0) {
+		for (auto worldselection : worldSelections)
+		{
+			sf::RectangleShape rect = TileManager::Instance().GetSelectionRectangle();
+			sf::Vector2f start;
+			start.x = worldselection->SelectionStart.x;
+			start.y = worldselection->SelectionStart.y;
+			rect.setPosition(start*8.0f);
+			sf::Vector2f size;
+			size.x = worldselection->SelectionEnd.x - worldselection->SelectionStart.x;
+			size.y = worldselection->SelectionEnd.y - worldselection->SelectionStart.y;
+			rect.setSize((size + sf::Vector2f(1, 1))*8.0f);
+			Camera::Instance().getHighLod()->draw(rect);
+			for (int x = worldselection->SelectionStart.x; x <= worldselection->SelectionEnd.x; x++) {
+				for (int y = worldselection->SelectionStart.y; y <= worldselection->SelectionEnd.y; y++) {
+					Camera::Instance().getLowLod()->setPixel(x, GetWorldSize() - 1 - y, sf::Color(255, 255, 255, 255));
+				}
+			}
+		}
+	}
+	
 }
 
-void World::DrawLighting()
+void World::NewLightSource(LightSource* ls)
 {
-	const int num = tileToLight.size();
-	WorldTile** ptr = (num > 0) ? tileToLight.data() : nullptr;
+	lights.push_back(ls);
+	UpdateLighting();
+}
+
+void World::RemoveLightSource(LightSource* ls)
+{
+	if (std::find(lights.begin(), lights.end(), ls) != lights.end()) {
+		lights.erase(std::remove(lights.begin(), lights.end(), ls), lights.end());
+		UpdateLighting();
+	}
+}
+
+void World::UpdateLighting()
+{
+	std::vector<sf::Vector2i> positions;
+	Camera::Instance().getShading()->create(GetWorldSize(), GetWorldSize(), sf::Color(0, 0, 0, 255-ambientLightLevel));
+	const int num = lights.size();
+	LightSource** ptr = (num > 0) ? lights.data() : nullptr;
 	for (int i = 0; i < num; i++)
 	{
-		Camera::Instance().getShading()->setPixel((ptr[i])->GetPosition().x,  (ptr[i])->GetPosition().y, sf::Color(0,0,0,60));
+		if (std::find(positions.begin(), positions.end(), (ptr[i])->position) != positions.end()) {
+			
+			continue;
+		}
+		positions.push_back((ptr[i])->position);
+		for (int xpos = (ptr[i])->position.x - (ptr[i])->lightDistance; xpos <= (ptr[i])->position.x + (ptr[i])->lightDistance; xpos++)
+		{
+			for (int ypos = (ptr[i])->position.y - (ptr[i])->lightDistance; ypos <= (ptr[i])->position.y + (ptr[i])->lightDistance; ypos++)
+			{
+				sf::Vector2i pos = sf::Vector2i(xpos, ypos);
+				float dist = VectorHelper::GetMagnitude((ptr[i])->position - pos);
+				WorldTile* tile = GetWorldTile(pos);
+				int level = VectorHelper::Lerpf(255, ambientLightLevel, VectorHelper::Clampf(dist / (ptr[i])->lightDistance, 0, 1));
+				sf::Color c = Camera::Instance().getShading()->getPixel(xpos, GetWorldSize() - 1 - ypos);
+				int color = (255-c.a) + ((level - ambientLightLevel));
+				Camera::Instance().getShading()->setPixel(xpos, GetWorldSize()-1-ypos, sf::Color(0, 0, 0,255- VectorHelper::Clampf(color,0,255)));
+
+			}
+		}
 	}
-	tileToLight.clear();
+	positions.clear();
+}
+
+void World::SetAmbientLightLevel(int to)
+{
+	ambientLightLevel = to;
+	UpdateLighting();
 }
 
 void World::ReDraw()
@@ -153,6 +217,23 @@ void World::ReDraw()
 	{
 		DrawTile(ptr[i]);
 	}
+	UpdateLighting();
+}
+
+void World::SelectArea(std::pair<sf::Vector2i, sf::Vector2i> newSelection)
+{
+	worldSelections.push_back(new worldSelection(newSelection.first, newSelection.second));
+}
+void World::ClearSelections()
+{
+	for (auto selection : worldSelections) {
+		for (int x = selection->SelectionStart.x; x <= selection->SelectionEnd.x; x++) {
+			for (int y = selection->SelectionStart.y; y <= selection->SelectionEnd.y; y++) {
+				tileToTick.push_back(GetWorldTile(sf::Vector2i(x, y)));
+			}
+		}
+	}
+	worldSelections.clear();
 }
 
 void World::SpawnEntity(Entity* entity, sf::Vector2i tilePosition)
@@ -398,7 +479,7 @@ bool World::IsTileWalkable(sf::Vector2i tilePos, Entity* refEntity)
 	}
 	WorldTile* tile = GetWorldTile(tilePos);
 	int newTileSize = GetWorldTile(tilePos)->contentsVolume + refEntity->GetVolume();
-	return GetWorldTile(tilePos)->contentsVolume+ refEntity->GetVolume() <= tileVolume && GetWorldTile(tilePos)->wallTile ==nullptr;
+	return newTileSize <= tileVolume && tile->wallTile ==nullptr;
 }
 
 bool World::IsTileWalkable(WorldTile* tile, Entity* refEntity)

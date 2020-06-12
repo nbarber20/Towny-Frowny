@@ -3,20 +3,42 @@
 #include "FastNoise.h"
 #include "Designation.h"
 #include <vector>
+struct LightSource {
+	sf::Vector2i position;
+	int lightLevel;
+	int lightDistance;
+};
+
+struct worldSelection {
+	worldSelection(sf::Vector2i SelectionStart, sf::Vector2i SelectionEnd) {
+		this->SelectionStart = SelectionStart;
+		this->SelectionEnd = SelectionEnd;
+	}
+	sf::Vector2i SelectionStart;
+	sf::Vector2i SelectionEnd;
+};
 
 class World
 {
 public:
 	std::vector <WorldTile*> tileToTick;
-	std::vector <WorldTile*> tileToLight;
+	std::vector <LightSource*> lights;
+
 	World() {};
 	~World() {};
 	void GenerateOverworld(FastNoise* noiseGen);
 	void GenerateCave(FastNoise* noiseGen);
 	void GenerateEntities();
 	void Draw();
-	void DrawLighting();
+	void NewLightSource(LightSource* ls);
+	void RemoveLightSource(LightSource* ls);
+	void UpdateLighting();
+	void SetAmbientLightLevel(int to);
 	void ReDraw();
+
+	void SelectArea(std::pair<sf::Vector2i, sf::Vector2i> newSelection);
+	void ClearSelections();
+
 	void SpawnEntity(Entity* entity, sf::Vector2i tilePosition);
 	void DespawnEntity(Entity* entity, sf::Vector2i tilePosition);
 	void MoveEntity(Entity* entity, short fromx, short fromy, short tox, short toy);
@@ -40,6 +62,7 @@ public:
 	std::vector<Designation*> GetTileDesignations(sf::Vector2i pos);
 	std::vector<Designation::Type> GetTileDesignationsTypes(sf::Vector2i pos);
 	bool DoesTileContainDesignations(sf::Vector2i tilepos, Designation::Type t);
+	
 private:
 	void DrawDesignation(WorldTile* tile, Designation::Type t);
 	void AddEntity(WorldTile* tile, Entity* entity);
@@ -54,9 +77,11 @@ private:
 
 	std::vector <WorldTile*> worldTiles;
 	std::vector <Designation*> designations;
+	std::vector <worldSelection*> worldSelections;
 	int tileCount;
 
 
+	short ambientLightLevel = 50;
 	int tileVolume = 10;
 };
 

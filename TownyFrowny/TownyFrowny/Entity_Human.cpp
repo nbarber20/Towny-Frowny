@@ -82,7 +82,9 @@ bool Entity_Human::MoveToTile(short dx, short dy)
 	}
 
 	world->MoveEntity(this, x, y, dx, dy);
-
+	for (int i = 0; i < heldItems.size(); i++) {
+		heldItems[i]->SetPosition(dx, dy);
+	}
 }
 
 void Entity_Human::SetBehavoir(Entity::Behaviors b)
@@ -177,6 +179,12 @@ void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep*
 		break;
 	case TargetedHumanBehaviors::Targeted_UseDoor:
 		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseDoor(&step->entity), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_TurnOnLight:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOn(&step->entity), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_TurnOffLight:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOff(&step->entity), taskManager));
 		break;
 	}
 

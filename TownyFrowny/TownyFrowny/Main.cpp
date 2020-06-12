@@ -67,7 +67,7 @@ int main()
 
 	EntityHandler::Instance().CreateAndSpawnEntity(0, selectedWorld, sf::Vector2i(selectedWorld->GetWorldSize()*.5f, selectedWorld->GetWorldSize()*.5f));
 	OverWorld->GenerateEntities();
-
+	selectedWorld->UpdateLighting();
 	while (window.isOpen())
 	{
 //////////
@@ -81,20 +81,21 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
 			{
-				EntityHandler::Instance().SpawnAtCursor(49, selectedWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(40, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
 			{
-				EntityHandler::Instance().SpawnAtCursor(48, selectedWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(11, selectedWorld, &window);
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 			{
+				/*
 				sf::Vector2i worldPos;
 				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 				sf::Vector2f mouseScreenPos = (&window)->mapPixelToCoords(mousePos) / 800.0f;
 				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
 					OverWorld->SetWallTile(worldPos, 1);
-				}
+				}*/
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4))
 			{
@@ -119,15 +120,6 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad9))
 			{
 				EntityHandler::Instance().SpawnAtCursor(25, selectedWorld, &window);
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad0))
-			{
-				sf::Vector2i worldPos;
-				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
-				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					selectedWorld->NewDesignation(worldPos,sf::Vector2i(3,3),Designation::MaterialStorage);
-				}
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
@@ -180,11 +172,7 @@ int main()
 					switch (UiHandler::Instance().GetWindow())
 					{
 					case UiHandler::Tasks:
-						inputHandler->OnTaskUIClick(i);
-						break;
 					case UiHandler::Inventory:
-						inputHandler->OnTaskUIClick(i);
-						break;
 					case UiHandler::Designation:
 						inputHandler->OnTaskUIClick(i);
 						break;
@@ -229,7 +217,6 @@ int main()
 //////////
 		window.clear();
 		selectedWorld->Draw();
-		selectedWorld->DrawLighting();
 		if (Camera::Instance().GetLodLevel() == 0) {
 			sf::Texture* lowLod = new sf::Texture();
 			lowLod->loadFromImage(*cameraInstance.getLowLod(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));

@@ -26,6 +26,8 @@ public:
 		Targeted_MakeStaircase,
 		Targeted_UseStaircase,
 		Targeted_UseDoor,
+		Targeted_TurnOnLight,
+		Targeted_TurnOffLight,
 	};
 
 	
@@ -88,7 +90,7 @@ public:
 	}
 
 	World* getWorld() { return world; };
-
+	bool selected = false;
 protected:
 
 	enum Behaviors {

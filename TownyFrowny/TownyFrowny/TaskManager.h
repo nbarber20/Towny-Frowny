@@ -81,13 +81,13 @@ public:
 			heldItemCheck,
 			desLook,
 			new Task_WalkTo(pathFinder,0,&desLook->FoundTarget,1,10),
-			new Task_Drop(&heldItemCheck->foundEntity,1,10),
+			new Task_Drop(&heldItemCheck->foundEntity,&desLook->FoundTarget,1,10),
 		};
 	}
 
 	std::vector<Task*> TREE_HarvestWood(int searchSize) {
 		Task_Search_Singluar* lookTask = new Task_Search_Singluar(searchSize, false, false, EntityHandler::Instance().GetIDGroup(EntityHandler::Tree), 5, 200);
-		Task_Take* take = new Task_Take(&lookTask->FoundTargetEntity, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
+		Task_Take* take = new Task_Take(&lookTask->FoundTargetEntity, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),true, 1, 10);
 		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(searchSize,Designation::Type::MaterialStorage, &take->foundItem, 5, 200);
 		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 
@@ -120,17 +120,10 @@ public:
 	//Targeted Behaviors
 
 	std::vector<Task*> TargetTREE_HarvestWood(Entity** TreeTarget) {
-		Task_Take* take = new Task_Take(TreeTarget, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
-		Task_LocateStockDesignation* desLook = new Task_LocateStockDesignation(20,Designation::Type::MaterialStorage, &take->foundItem, 5, 200);
-		Task_GetItemFromOwner* invsearchforwood = new Task_GetItemFromOwner(EntityHandler::Instance().GetIDGroup(EntityHandler::Wood), 1, 10);
 		return
 		{
 			new Task_WalkTo(pathFinder,1,TreeTarget, 1, 10), //go next to it
-			take,
-			desLook,
-			new Task_WalkTo(pathFinder,0,&desLook->FoundTarget,1,10),
-			invsearchforwood,
-			new Task_Drop(&invsearchforwood->foundEntity,1,10),
+			new Task_Take(TreeTarget, EntityHandler::Instance().GetIDGroup(EntityHandler::Wood),true, 1, 10),
 		};
 	}
 
@@ -217,8 +210,8 @@ public:
 	std::vector<Task*> TargetTREE_DropItem(Entity** Target, sf::Vector2i** Position) {
 		return
 		{
-			new Task_WalkTo(pathFinder,0,Position, 1, 10),
-			new Task_Drop(Target,1,10),
+			new Task_WalkTo(pathFinder,1,Position, 1, 10),
+			new Task_Drop(Target,Position,1,10),
 		};
 	}
 	std::vector<Task*> TargetTREE_MakeStairCase(sf::Vector2i** Position) {
@@ -240,6 +233,20 @@ public:
 		{
 			new Task_WalkTo(pathFinder,1,Door, 1, 10),
 			new Task_UseDoor(Door,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_TurnLightOn(Entity** Light) {
+		return
+		{
+			new Task_WalkTo(pathFinder,1,Light, 1, 10),
+			new Task_TurnOnLight(Light,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_TurnLightOff(Entity** Light) {
+		return
+		{
+			new Task_WalkTo(pathFinder,1,Light, 1, 10),
+			new Task_TurnOffLight(Light,1,10),
 		};
 	}
 private:

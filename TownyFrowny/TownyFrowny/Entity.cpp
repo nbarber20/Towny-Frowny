@@ -37,6 +37,7 @@ void Entity::OnDespawn(World* newworld)
 void Entity::RemoveFromWorld()
 {
 	world->DespawnEntity(this,sf::Vector2i(x,y));
+	OnDespawn(world);
 	inworld = false;
 }
 
@@ -66,6 +67,14 @@ void Entity::DrawEntity()
 	sprite->setPosition(worldf*8.0f);
 	Camera::Instance().getHighLod()->draw(*sprite);
 	Camera::Instance().getLowLod()->setPixel(x, world->GetWorldSize() - 1 - y, *TileManager::Instance().GetEntityTileByID(spriteX,spriteY)->tileColor);
+	if (selected == true) {
+		sf::Sprite* selectionsprite = TileManager::Instance().GetSelectionTile()->sprite;
+		selectionsprite->setPosition(worldf*8.0f);
+		Camera::Instance().getHighLod()->draw(*selectionsprite);
+		float colorAlpha = TileManager::Instance().GetSelectionTile()->tileColor->a;
+		sf::Color c = *TileManager::Instance().GetEntityTileByID(spriteX, spriteY)->tileColor + sf::Color(colorAlpha, colorAlpha, colorAlpha,255);
+		Camera::Instance().getLowLod()->setPixel(x, world->GetWorldSize() - 1 - y, c);
+	}
 }
 
 bool Entity::MoveToTile(short dx, short dy)

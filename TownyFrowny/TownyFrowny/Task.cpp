@@ -255,7 +255,9 @@ Task::TaskStatus Task_Drop::Execute()
 			if ((*toDrop)->GetParent() == ownerEntity) {
 				std::string s = ownerEntity->GetIndividualName() + " dropped " + (*toDrop)->GetObjectName();
 				LogHandler::Instance().WriteLog(s, ownerEntity->GetPosition(), logContext::WORLD);
-				ownerEntity->DropItem(*toDrop);
+				sf::Vector2i newPos = **targetPos;
+				(*toDrop)->SetPosition(newPos.x, newPos.y);
+				ownerEntity->DropItem(*toDrop);	
 				return Task::Complete;
 			}
 		}
@@ -495,14 +497,15 @@ Task::TaskStatus Task_Take::Execute()
 						if (id == targetIDs[j]) {
 							foundItem = (ptr[i]);
 							ownerEntity->AddItemToInventory(ptr[i]);
-							return Task::Complete;
+							if(takeAll)return Task::Running;
+							else return Task::Complete;
 						}
 					}
 				}
-				delete foundItem; // this pointer is bad, so get rid of it
 			}
 		}
 	}
+	if (takeAll&& foundItem != nullptr)return Task::Complete;
 	return Task::Fail;
 }
 
@@ -711,6 +714,26 @@ Task::TaskStatus Task_UseDoor::Execute()
 			gate->UseDoor();
 			return Task::Complete;
 		}
+	}
+	return Task::Fail;
+}
+
+Task::TaskStatus Task_TurnOnLight::Execute()
+{
+	Entity_Light* light = dynamic_cast<Entity_Light*>(*targetLight);
+	if (light != NULL) {
+		light->TurnOn();
+		return Task::Complete;
+	}
+	return Task::Fail;
+}
+
+Task::TaskStatus Task_TurnOffLight::Execute()
+{
+	Entity_Light* light = dynamic_cast<Entity_Light*>(*targetLight);
+	if (light != NULL) {
+		light->TurnOff();
+		return Task::Complete;
 	}
 	return Task::Fail;
 }

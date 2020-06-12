@@ -33,9 +33,6 @@ public:
 	bool GetAI() {
 		return UseAI;
 	};
-	bool isTargetedBehaviorPossible(TargetedHumanBehaviors behaviour) { //Check if the player is capable of doing this
-		return true;
-	}
 	virtual Entity_Human* clone() const { return new Entity_Human(*this); };
 	void DestroyTaskSteps();
 	bool MoveToTile(short dx, short dy) override;

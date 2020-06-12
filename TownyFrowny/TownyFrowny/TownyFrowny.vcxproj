@@ -135,6 +135,7 @@
     <ClCompile Include="Entity_FenceGate.cpp" />
     <ClCompile Include="Entity_Food.cpp" />
     <ClCompile Include="Entity_Human.cpp" />
+    <ClCompile Include="Entity_Light.cpp" />
     <ClCompile Include="Entity_Living.cpp" />
     <ClCompile Include="Entity_Plant.cpp" />
     <ClCompile Include="FastNoise.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="Entity_Fence.h" />
     <ClInclude Include="Entity_FenceGate.h" />
     <ClInclude Include="Entity_Human.h" />
+    <ClInclude Include="Entity_Light.h" />
     <ClInclude Include="Entity_Manufactured.h" />
     <ClInclude Include="Entity_Material.h" />
     <ClInclude Include="Entity_Pet.h" />

@@ -29,6 +29,12 @@ void Entity_Fence::UpdateFencePost()
 					else if (i == 3)north = true;
 				}
 			}
+			if (neighbors[i]->wallTile != nullptr) {
+				if (i == 0)east = true;
+				else if (i == 1)west = true;
+				else if (i == 2)south = true;
+				else if (i == 3)north = true;
+			}			
 		}
 	}
 
@@ -72,8 +78,6 @@ void Entity_Fence::OnSpawn(World* newworld)
 void Entity_Fence::OnDespawn(World* newworld)
 {
 	Entity::OnDespawn(newworld);
-	UpdateFencePost();
-
 	std::vector<WorldTile*> neighbors = world->GetNeighborsOfTile(GetPosition());
 	for (auto neighbor : neighbors) {
 		if (neighbor != nullptr) {

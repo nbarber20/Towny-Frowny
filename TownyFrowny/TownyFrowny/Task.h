@@ -190,16 +190,18 @@ private:
 
 class Task_Take : public Task {
 public:
-	Task_Take(Entity** eToCheck, std::vector<int> TargetIDs, int tickSpeed, int length) :Task(tickspeed, length) {
+	Task_Take(Entity** eToCheck, std::vector<int> TargetIDs,bool takeAll, int tickSpeed, int length) :Task(tickspeed, length) {
 		this->ToCheck = eToCheck;
 		this->targetIDs = TargetIDs;
 		this->foundItem = nullptr;
+		this->takeAll = takeAll;
 	};
 	TaskStatus Execute() override;
 	Entity* foundItem;
 private:
 	Entity** ToCheck;
 	std::vector<int> targetIDs;
+	bool takeAll;
 };
 
 class Task_Give : public Task {
@@ -230,12 +232,14 @@ private:
 
 class Task_Drop : public Task {
 public:
-	Task_Drop(Entity** entity, int tickSpeed, int length) :Task(tickspeed, length) {
+	Task_Drop(Entity** entity, sf::Vector2i** targetPos, int tickSpeed, int length) :Task(tickspeed, length) {
 		this->toDrop = entity;
+		this->targetPos = targetPos;
 	};
 	TaskStatus Execute() override;
 private:
 	Entity** toDrop;
+	sf::Vector2i** targetPos;
 };
 
 class Task_DropInStockDesignation : public Task {
@@ -467,4 +471,24 @@ public:
 	TaskStatus Execute() override;
 private:
 	Entity** targetDoor;
+};
+
+class Task_TurnOnLight : public Task {
+public:
+	Task_TurnOnLight(Entity** targetLight, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->targetLight = targetLight;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** targetLight;
+};
+
+class Task_TurnOffLight : public Task {
+public:
+	Task_TurnOffLight(Entity** targetLight, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->targetLight = targetLight;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** targetLight;
 };

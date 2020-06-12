@@ -21,6 +21,22 @@ public:
 		return &heldItems;
 	};
 
+	virtual bool MoveToTile(short dx, short dy) override {
+		if (Entity::MoveToTile(dx, dy)==true) {
+			for (int i = 0; i < heldItems.size(); i++) {
+				heldItems[i]->SetPosition(dx, dy);
+			}
+			return true;
+		}
+		return false;
+	};
+
+	virtual bool StepTiles(short dx, short dy) override {
+		if (canMove) {
+			return MoveToTile(x + dx, y + dy);
+		}
+	}
+
 	virtual Entity_Container* clone() const { return new Entity_Container(*this); };
 
 protected:

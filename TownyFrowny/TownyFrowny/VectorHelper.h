@@ -69,4 +69,10 @@ public:
 	{
 		return a + f * (b - a);
 	}
+
+	static float Clampf(float a, float from, float to) {
+		if (a < from)a = from;
+		else if (a > to)a = to;
+		return a;
+	}
 };

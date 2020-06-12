@@ -8,7 +8,7 @@ struct Tile
 		this->tileColor = c;
 	}
 	sf::Sprite* sprite;
-	sf::Color* tileColor;
+	sf::Color* tileColor; 
 };
 
 
@@ -31,7 +31,7 @@ public:
 		if (!worldColorLookup->loadFromFile("Tile/worldColorLookup.png"))
 		{
 			// error...
-		}
+		}		
 		for (int i = 0; i < worldtextureAtlas->getSize().x / 8.0f; i++) {
 			std::vector<Tile*> col;
 			for (int j = 0; j < worldtextureAtlas->getSize().y / 8.0f; j++) {
@@ -68,6 +68,21 @@ public:
 		
 		delete entityColorLookup;
 		delete entitytextureAtlasImage;
+
+		sf::Texture* selectionSpriteTex = new sf::Texture();
+		if (!selectionSpriteTex->loadFromFile("Tile/selection.png"))
+		{
+
+		}
+		selectionSprite = new Tile(selectionSpriteTex,0,0,new sf::Color(255,255,255,150));
+		//delete selectionSpriteTex;
+
+
+		selectionRectangle = sf::RectangleShape(sf::Vector2f(0,0));
+		selectionRectangle.setFillColor(sf::Color(255, 255, 255, 0));
+		selectionRectangle.setOutlineColor(sf::Color(255, 255, 255, 150));
+		selectionRectangle.setOutlineThickness(-1);
+
 	};
 
 	Tile* GetWorldTileByID(wchar_t id, bool isWall, bool isFrontWall, bool isTopWall)
@@ -98,6 +113,13 @@ public:
 	{
 		return entitytiles[id].size();
 	}
+	Tile* GetSelectionTile() {
+		return selectionSprite;
+	}
+	sf::RectangleShape GetSelectionRectangle() {
+		return selectionRectangle;
+	}
+
 private:
 	bool isEmpty(sf::Image* t, sf::Vector2i offset) {
 		for (int x = offset.x; x < offset.x + 8; x++) {
@@ -115,5 +137,7 @@ private:
 	sf::Texture* entitytextureAtlas;
 	std::vector< std::vector<Tile*>> entitytiles;
 	std::vector < std::vector<Tile*>> worldtiles;
+	Tile* selectionSprite;
+	sf::RectangleShape selectionRectangle;
 };
 

@@ -152,7 +152,6 @@ bool Entity_Living::IsAlive()
 void Entity_Living::DropItem(Entity* item)
 {
 	if (item->GetParent() == this) {
-		item->SetPosition(this->x, this->y);
 		item->SetParent(nullptr);
 		world->SpawnEntity(item, item->GetPosition());
 	}
