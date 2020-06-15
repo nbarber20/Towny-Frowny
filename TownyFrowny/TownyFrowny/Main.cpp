@@ -127,10 +127,11 @@ int main()
 				selectedWorld = UnderWorld;
 				selectedWorld->ReDraw();
 			}
-			UIHandler::Instance().TickWindow(event);
-			Camera::Instance().GetCameraInput(event);
 			playerController->GetInput(event);
+			Camera::Instance().GetCameraPolledInput(event);
 		}
+		UIHandler::Instance().TickWindow(event);
+		Camera::Instance().GetCameraInput(event);
 
 //////////
 		//Logic Update

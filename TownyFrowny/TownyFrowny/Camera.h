@@ -110,35 +110,39 @@ public:
 		cameraOffset = sf::Vector2f(pos.x, (worldSize) - pos.y)*8.0f;
 	}
 
-	void GetCameraInput(sf::Event e) {
+	void GetCameraPolledInput(sf::Event e) {
 		if (e.type == sf::Event::MouseWheelScrolled)
 		{
-			if (e.mouseWheelScroll.delta>0)
+			if (e.mouseWheelScroll.delta > 0)
 			{
 				if (cameraZoom < 40.0f)setCameraZoom(cameraZoom + (cameraZoom * 0.2f));
 			}
-			if (e.mouseWheelScroll.delta<0)
+			if (e.mouseWheelScroll.delta < 0)
 			{
 				if (cameraZoom > 0.1f)setCameraZoom(cameraZoom - (cameraZoom * 0.2f));
 			}
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			setCameraOffset(getCameraOffset() + sf::Vector2f(0, 1)*(10 / getCameraZoom()));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-		{
-			setCameraOffset(getCameraOffset() + sf::Vector2f(0, -1)*(10 / getCameraZoom()));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			setCameraOffset(getCameraOffset() + sf::Vector2f(-1, 0)*(10 / getCameraZoom()));
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			setCameraOffset(getCameraOffset() + sf::Vector2f(1, 0)*(10 / getCameraZoom()));
-		}
 	}
+
+	void GetCameraInput(sf::Event e) {
+		if (e.type == sf::Event::KeyPressed) {
+			if (e.key.code == sf::Keyboard::Up)CameraDir.y = 1;
+			else if (e.key.code == sf::Keyboard::Down)CameraDir.y = -1;
+			else if (e.key.code == sf::Keyboard::Left)CameraDir.x = -1;
+			else if (e.key.code == sf::Keyboard::Right)CameraDir.x = 1;
+		}
+		if (e.type == sf::Event::KeyReleased) {
+			if (e.key.code == sf::Keyboard::Up || e.key.code == sf::Keyboard::Down) {
+				CameraDir.y = 0;
+			}
+			if (e.key.code == sf::Keyboard::Left || e.key.code == sf::Keyboard::Right) {
+				CameraDir.x = 0;
+			}
+		}		
+		setCameraOffset(getCameraOffset() + CameraDir *(10 / getCameraZoom()));
+	}
+	sf::Vector2f CameraDir;
+
 
 	static Camera& Instance()
 	{

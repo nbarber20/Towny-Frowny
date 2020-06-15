@@ -27,6 +27,15 @@
     <Filter Include="Source Files\Libs">
       <UniqueIdentifier>{2343a54e-357e-42d6-9141-4445ca1f0e47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{4d64a40a-8cdb-4b5b-aa72-7ab3c0afb576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Behavior">
+      <UniqueIdentifier>{ff4c4ff8-d357-4511-8644-1e4e6ec878ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Behavior">
+      <UniqueIdentifier>{1e6f5fcd-e979-47d9-bf2a-4aac6ed3f670}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -47,9 +56,6 @@
     <ClCompile Include="Entity_Food.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Task.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entity_Human.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
@@ -60,9 +66,6 @@
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Designation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BehaviorBranch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Entity_Crafter.cpp">
@@ -98,15 +101,18 @@
     <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files\Libs</Filter>
     </ClCompile>
+    <ClCompile Include="BehaviorBranch.cpp">
+      <Filter>Source Files\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files\Behavior</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WorldTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VectorHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GroundTile.h">
@@ -127,19 +133,7 @@
     <ClInclude Include="Entity_Food.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="EntityHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LogHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NameGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TaskManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Task.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity_Animal.h">
@@ -147,9 +141,6 @@
     </ClInclude>
     <ClInclude Include="Entity_Human.h">
       <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="PathFinder.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity_Pet.h">
       <Filter>Header Files\Entities</Filter>
@@ -168,9 +159,6 @@
     </ClInclude>
     <ClInclude Include="Entity_Manufactured.h">
       <Filter>Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviorBranch.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity_Crafter.h">
       <Filter>Header Files\Entities</Filter>
@@ -216,6 +204,27 @@
     </ClInclude>
     <ClInclude Include="FastNoise.h">
       <Filter>Header Files\Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFinder.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="NameGenerator.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorHelper.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorBranch.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskManager.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityHandler.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -76,6 +76,7 @@ bool Entity_Human::MoveToTile(short dx, short dy)
 	for (int i = 0; i < heldItems.size(); i++) {
 		heldItems[i]->SetPosition(dx, dy);
 	}
+	return true;
 }
 
 void Entity_Human::SetBehavoir(Entity::Behaviors b)
