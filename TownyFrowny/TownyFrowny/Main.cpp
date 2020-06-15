@@ -15,7 +15,7 @@
 #include "LogHandler.h"
 #include  <cstddef>
 #include "TaskManager.h"
-#include "InputHandler.h"
+#include "PlayerController.h"
 #include "UIHandler.h"
 
 int main()
@@ -44,8 +44,10 @@ int main()
 
 	PathFinder* pathFinder = new PathFinder();
 
-	InputHandler* inputHandler = new InputHandler(pathFinder, &window);
-	EntityHandler::Instance().Init(new TaskManager(OverWorld,UnderWorld, pathFinder),inputHandler, selectedWorld);
+	PlayerController* playerController = new PlayerController(pathFinder, &window);
+	EntityHandler::Instance().Init(new TaskManager(OverWorld,UnderWorld, pathFinder), playerController, selectedWorld);
+
+	UIHandler::Instance().Setup(playerController, &window);
 
 	sf::Clock clock;
 
@@ -79,6 +81,7 @@ int main()
 			{
 				window.close();
 			}
+			/*
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
 			{
 				EntityHandler::Instance().SpawnAtCursor(40, selectedWorld, &window);
@@ -89,13 +92,6 @@ int main()
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 			{
-				/*
-				sf::Vector2i worldPos;
-				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-				sf::Vector2f mouseScreenPos = (&window)->mapPixelToCoords(mousePos) / 800.0f;
-				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					OverWorld->SetWallTile(worldPos, 1);
-				}*/
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad4))
 			{
@@ -120,7 +116,7 @@ int main()
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad9))
 			{
 				EntityHandler::Instance().SpawnAtCursor(25, selectedWorld, &window);
-			}
+			}*/
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 			{
 				selectedWorld = OverWorld;
@@ -131,67 +127,9 @@ int main()
 				selectedWorld = UnderWorld;
 				selectedWorld->ReDraw();
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Add))
-			{
-				float currentZoom = cameraInstance.getCameraZoom();
-				if (currentZoom < 40.0f)cameraInstance.setCameraZoom(currentZoom + (currentZoom * 0.2f));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Subtract))
-			{
-				float currentZoom = cameraInstance.getCameraZoom();
-				if (currentZoom > 0.1f)cameraInstance.setCameraZoom(currentZoom - (currentZoom * 0.2f)); 
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-			{
-				cameraInstance.setCameraOffset(cameraInstance.getCameraOffset() + sf::Vector2f(0, 1)*(10 / cameraInstance.getCameraZoom()));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-			{
-				cameraInstance.setCameraOffset(cameraInstance.getCameraOffset() + sf::Vector2f(0, -1)*(10 / cameraInstance.getCameraZoom()));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-			{
-				cameraInstance.setCameraOffset(cameraInstance.getCameraOffset() + sf::Vector2f(-1, 0)*(10 / cameraInstance.getCameraZoom()));
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-			{
-				cameraInstance.setCameraOffset(cameraInstance.getCameraOffset() + sf::Vector2f(1, 0)*(10 / cameraInstance.getCameraZoom()));
-			}
-			
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-			{
-				sf::Vector2i worldPos; 
-				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos);
-				if (mouseScreenPos.x < 800) { //worldClick
-					
-				}
-				else {
-					//TODO: not this
-					float i = floor(mouseScreenPos.y / 10.0f);
-					switch (UiHandler::Instance().GetWindow())
-					{
-					case UiHandler::Tasks:
-					case UiHandler::Inventory:
-					case UiHandler::Designation:
-						inputHandler->OnTaskUIClick(i);
-						break;
-					case UiHandler::Logs:
-						LogHandler::Instance().OnLogUIClick(i);
-						break;
-					}
-				}
-			}
-			if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
-			{
-				sf::Vector2i worldPos;
-				sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-				sf::Vector2f mouseScreenPos = window.mapPixelToCoords(mousePos) / 800.0f;
-				if (Camera::Instance().ScreenToWorld(mouseScreenPos, worldPos) == true) {
-					selectedWorld->SetWallTile(worldPos, -1);
-				}
-			}
-			inputHandler->GetInput(event);
+			UIHandler::Instance().TickWindow(event);
+			Camera::Instance().GetCameraInput(event);
+			playerController->GetInput(event);
 		}
 
 //////////
@@ -200,15 +138,8 @@ int main()
 		sf::Time elapsed1 = clock.getElapsedTime();
 		if (elapsed1.asSeconds() > gameSpeed) {
 			clock.restart();
-
 			FpsText.setString(std::to_string(int(frames / gameSpeed)));
-			
-			/*if (int(frames / 0.25f) <= 30) {
-				LogHandler::Instance().WriteLog(std::to_string(EntityHandler::Instance().GetNumEntities()), logContext::ERROR);
-			}*/
-
 			frames = 0;
-
 			EntityHandler::Instance().TickAll();
 			LogHandler::Instance().UpdateLogs();
 		}
@@ -227,7 +158,7 @@ int main()
 			lowLodsprite.setPosition(400,400);
 			window.draw(lowLodsprite);
 
-
+			//Shading Pass
 			sf::Texture* shading = new sf::Texture();
 			shading->loadFromImage(*cameraInstance.getShading(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));
 			sf::Sprite shadingsprite(*shading);
@@ -248,6 +179,7 @@ int main()
 			sprite.setPosition(400,400);
 			window.draw(sprite);
 
+			//Shading Pass
 			sf::Texture* shading = new sf::Texture();
 			shading->loadFromImage(*cameraInstance.getShading(), sf::IntRect(0, 0, selectedWorld->GetWorldSize(), selectedWorld->GetWorldSize()));
 			sf::Sprite shadingsprite(*shading);
@@ -259,7 +191,7 @@ int main()
 			delete texture;
 			delete shading;
 		}
-		UiHandler::Instance().DrawUI(&window);
+		UIHandler::Instance().DrawUI();
 		window.draw(FpsText);
 		window.display();
 		frames++;

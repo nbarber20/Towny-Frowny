@@ -4,7 +4,7 @@
 #include "LogHandler.h"
 #include "EntityHandler.h"
 #include "FastNoise.h"
-#include "InputHandler.h"
+#include "PlayerController.h"
 
 void World::GenerateOverworld(FastNoise* noiseGen)
 {
@@ -363,7 +363,7 @@ int World::GetWorldSize()
 
 
 //Designation Functions//
-void World::NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Type t)
+void World::NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Type t, Entity_Human* Owner)
 {
 	std::vector<WorldTile*> tiles;
 	for (int x = pos.x; x < pos.x + size.x; x++) {
@@ -373,7 +373,7 @@ void World::NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Typ
 			tileToTick.push_back(t);
 		}
 	}
-	Designation* des = new Designation(tiles, t,this);
+	Designation* des = new Designation(tiles, t,this, Owner);
 	designations.push_back(des);
 }
 
@@ -383,6 +383,7 @@ void World::DeleteDesignation(sf::Vector2i pos)
 	{
 		DeleteDesignation(a);
 	}
+	tileToTick.push_back(GetWorldTile(pos));
 }
 
 void World::DeleteDesignation(Designation* d)

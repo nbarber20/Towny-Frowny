@@ -109,6 +109,37 @@ public:
 		float width = 800 / (cameraZoom*8.0f);
 		cameraOffset = sf::Vector2f(pos.x, (worldSize) - pos.y)*8.0f;
 	}
+
+	void GetCameraInput(sf::Event e) {
+		if (e.type == sf::Event::MouseWheelScrolled)
+		{
+			if (e.mouseWheelScroll.delta>0)
+			{
+				if (cameraZoom < 40.0f)setCameraZoom(cameraZoom + (cameraZoom * 0.2f));
+			}
+			if (e.mouseWheelScroll.delta<0)
+			{
+				if (cameraZoom > 0.1f)setCameraZoom(cameraZoom - (cameraZoom * 0.2f));
+			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			setCameraOffset(getCameraOffset() + sf::Vector2f(0, 1)*(10 / getCameraZoom()));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			setCameraOffset(getCameraOffset() + sf::Vector2f(0, -1)*(10 / getCameraZoom()));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			setCameraOffset(getCameraOffset() + sf::Vector2f(-1, 0)*(10 / getCameraZoom()));
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			setCameraOffset(getCameraOffset() + sf::Vector2f(1, 0)*(10 / getCameraZoom()));
+		}
+	}
+
 	static Camera& Instance()
 	{
 		static Camera INSTANCE;

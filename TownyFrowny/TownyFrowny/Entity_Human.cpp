@@ -1,6 +1,6 @@
 #include "Entity_Human.h"
 #include "TaskManager.h"
-#include "InputHandler.h"
+#include "PlayerController.h"
 #include "Recipies.h"
 void Entity_Human::Tick()
 {
@@ -25,34 +25,25 @@ void Entity_Human::Tick()
 
 void Entity_Human::TaskComplete(Task* t)
 {
-	LogHandler::Instance().WriteLog(typeid(*t).name() + std::string(" complete"), this->GetPosition(), logContext::WORLD);
+	//LogHandler::Instance().WriteLog(typeid(*t).name() + std::string(" complete"), this->GetPosition(), logContext::WORLD);
 	Entity_Living::TaskComplete(t);
 }
 
 void Entity_Human::TaskFail(Task* t)
 {
-	LogHandler::Instance().WriteLog(typeid(*t).name() + std::string(" fail"), this->GetPosition(), logContext::ERROR);
+	//LogHandler::Instance().WriteLog(typeid(*t).name() + std::string(" fail"), this->GetPosition(), logContext::ERROR);
 	Entity_Living::TaskFail(t);
 }
 
 void Entity_Human::clearAllTasks()
 {
-	DestroyTaskSteps();
+	playerController->ClearBehaviorList();
 	Entity_Living::clearAllTasks();
 }
 
 void Entity_Human::NewTaskList(std::vector<Task*> SetCurrent)
 {
 	OverwriteTasks(SetCurrent, this);
-}
-
-void Entity_Human::DestroyTaskSteps()
-{
-	if (currentTargetedTasks.size() > 0) {
-		currentTargetedTasks.clear();
-		currentTargetedTasks.shrink_to_fit();
-	}
-	inputHandler->ClearBehaviorList();
 }
 
 
@@ -120,71 +111,67 @@ void Entity_Human::SetBehavoir(Entity::Behaviors b)
 	startTaskQueue();
 }
 
-void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep* step, bool doOverride)
+void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep* b)
 {
-	if (doOverride == true) {
-		clearAllTasks();
-	}
-	currentTargetedTasks.push_back(step);
-	switch (b.behavior)
+	switch (b->behavior)
 	{
 	case Entity::Targeted_ClearAll:
 		clearAllTasks();
 		return;
 	case TargetedHumanBehaviors::Targeted_HarvestWood:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_HarvestWood(&step->entity), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_HarvestWood(&b->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_SlaughterAnimal:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_SlaughterAnimal(&step->entity),5, taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_SlaughterAnimal(&b->entity),5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_PickUp:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_PickUp(&step->entity), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_PickUp(&b->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_WalkTo:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_WalkTo(&step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_WalkTo(&b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_ConstructWall:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructWall(&step->entity, &step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructWall(&b->entity, &b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DestroyWall:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructWall(&step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructWall(&b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_ConstructFloor:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructFloor(&step->entity, &step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_ConstructFloor(&b->entity, &b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DestroyFloor:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructFloor(&step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DeconstructFloor(&b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_LootBody:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_LootBody(&step->entity), 2, taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_LootBody(&b->entity), 2, taskManager));
 		break; 
 	case TargetedHumanBehaviors::Targeted_Attack:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Attack(&step->entity), 5, taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Attack(&b->entity), 5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_Rotate:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Rotate(&step->entity), 5, taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_Rotate(&b->entity), 5, taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_DropItem:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DropItem(&step->entity, &step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DropItem(&b->entity, &b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_Craft:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SourceMaterials(b.variantID), taskManager));
-		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_CraftItem(b.variantID), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_SourceMaterials(b->variantID), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TREE_CraftItem(b->variantID), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_MakeStaircase:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_MakeStairCase(&step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_MakeStairCase(&b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_UseStaircase:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseStairCase(&step->Pos), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseStairCase(&b->Pos), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_UseDoor:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseDoor(&step->entity), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_UseDoor(&b->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_TurnOnLight:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOn(&step->entity), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOn(&b->entity), taskManager));
 		break;
 	case TargetedHumanBehaviors::Targeted_TurnOffLight:
-		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOff(&step->entity), taskManager));
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOff(&b->entity), taskManager));
 		break;
 	}
 
@@ -197,5 +184,4 @@ void Entity_Human::Initilize()
 	srand(time(NULL));
 	int id = rand() % TileManager::Instance().GetNumEntityVariants(spriteX);
 	SetSpriteVariant(0, id);
-	this->inputHandler = inputHandler;
 }

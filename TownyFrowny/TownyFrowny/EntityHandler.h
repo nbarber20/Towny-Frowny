@@ -11,7 +11,7 @@
 #include "Entity_Material.h"
 #include "Entity_Plant.h"
 #include "Entity_Manufactured.h"
-#include "InputHandler.h"
+#include "PlayerController.h"
 #include "Entity_Crafter.h"
 #include "Entity_Door.h"
 #include "Entity_Fence.h"
@@ -57,8 +57,8 @@ public:
 				return nullptr;
 			}
 
-			if(handler->GetPilotingPlayer() == nullptr){
-				handler->SetPilotingPlayer(hcheck);
+			if(playerController->GetPilotingPlayer() == nullptr){
+				playerController->SetPilotingPlayer(hcheck);
 			}
 
 			playableHumans.push_back(hcheck);
@@ -82,12 +82,12 @@ public:
 	int GetNumEntities() {
 		return entities.size();
 	}
-	void Init(TaskManager* taskManager, InputHandler* inputHandler, World* world) {
+	void Init(TaskManager* taskManager, PlayerController* playerController, World* world) {
 		this->taskManager = taskManager;
 		this->world = world;
-		this->handler = inputHandler;
+		this->playerController = playerController;
 		entityList = {
-			std::make_pair("Human", new Entity_Human(0,sf::Vector2i(0,0),inputHandler, taskManager, world, {})),
+			std::make_pair("Human", new Entity_Human(0,sf::Vector2i(0,0),playerController, taskManager, world, {})),
 
 			std::make_pair("Cow",new Entity_Animal(1,sf::Vector2i(1,0), 8,6, taskManager, world, { Entity::Targeted_SlaughterAnimal,Entity::Targeted_Attack,Entity::Targeted_LootBody })),
 			std::make_pair("Cat",new Entity_Pet(2,sf::Vector2i(2,0),7, taskManager, world, { Entity::Targeted_SlaughterAnimal,Entity::Targeted_Attack,Entity::Targeted_LootBody })),
@@ -152,7 +152,6 @@ public:
 
 			std::make_pair("Fence Gate",new Entity_FenceGate(49,sf::Vector2i(23, 1),world, { Entity::Targeted_PickUp,Entity::Targeted_DropItem,Entity::Targeted_UseDoor})),		
 
-		
 		};
 		entityGroupList = {
 			std::make_pair(Humanoids,AssembleGroup({ "Human" })),
@@ -319,7 +318,7 @@ private:
 	int maxLivingEntities = 500;
 	int maxHumans = 100;
 	TaskManager* taskManager;
-	InputHandler* handler;
+	PlayerController* playerController;
 	World* world;
 
 };

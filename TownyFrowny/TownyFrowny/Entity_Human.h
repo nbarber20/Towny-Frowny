@@ -3,21 +3,19 @@
 #include "TileManager.h"
 #include "World.h"
 
-
-class InputHandler;
-struct targetedTaskStep;
+class PlayerController;
 struct TargetedBehaviorStep;
 class Entity_Human : public Entity_Living {
 public:
 	
 
-	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, InputHandler* inputHandler, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
+	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, PlayerController* playerController, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
 	{
 		volume = 6;
-		this->inputHandler = inputHandler;
+		this->playerController = playerController;
 	};
 	void SetBehavoir(Entity::Behaviors b);
-	void SetTargetedBehavior(TargetedBehaviorStep b, targetedTaskStep* step, bool doOverride);
+	void SetTargetedBehavior(TargetedBehaviorStep* b);
 	void Initilize() override;
 	void Tick() override;
 	void TaskComplete(Task* t) override;
@@ -34,7 +32,6 @@ public:
 		return UseAI;
 	};
 	virtual Entity_Human* clone() const { return new Entity_Human(*this); };
-	void DestroyTaskSteps();
 	bool MoveToTile(short dx, short dy) override;
 private:
 
@@ -46,8 +43,7 @@ private:
 		std::make_pair(Entity::Wait, 1.0),
 	};
 
-	InputHandler* inputHandler;
+	PlayerController* playerController;
 	bool UseAI = true;
-	std::vector<targetedTaskStep*> currentTargetedTasks;
 };
 

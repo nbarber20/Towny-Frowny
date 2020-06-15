@@ -56,7 +56,7 @@ public:
 	Entity* GetEntityInTileByID(wchar_t entityId, sf::Vector2i tile);
 	int GetWorldSize();
 	//Designations
-	void NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Type t);
+	void NewDesignation(sf::Vector2i pos, sf::Vector2i size, Designation::Type t, Entity_Human* Owner);
 	void DeleteDesignation(sf::Vector2i pos);
 	void DeleteDesignation(Designation* d);
 	std::vector<Designation*> GetTileDesignations(sf::Vector2i pos);

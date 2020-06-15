@@ -97,31 +97,8 @@ public:
 		}
 		else {
 			logsToShow = Logs;
-		}
-
-		std::vector<std::string> logstext;
-		std::vector<sf::Color> logColors;
-		const int num = logsToShow.size();
-		if (num == 0) {
-			logColors.push_back(sf::Color(248, 255, 138));
-			logstext.push_back("No Logs..");
-		}
-		Log** ptr = (num > 0) ? logsToShow.data() : nullptr;
-		for (int i = 0; i < num; i++)
-		{
-			if (doColorLogs == false) logColors.push_back(sf::Color(248, 255, 138));
-			else logColors.push_back(GetLogColor((*ptr[i]).context));
-
-			std::string l = "(" + (*ptr[i]).time + ")" + (*ptr[i]).text + "\n";
-			if (l.length() > 40)
-			{
-				l.erase(40);
-				l += "..";
-			}
-			logstext.push_back(l);
-		}
-		UiHandler::Instance().UpdateLogs(logstext,logColors);
-
+		}		
+		UIHandler::Instance().UpdateUI();
 	}
 	void OnLogUIClick(int i) {
 		if(i>=0&&i< logsToShow.size()){
@@ -132,13 +109,14 @@ public:
 			}
 		}
 	}
-private:
-
+	std::vector<Log*> GetLogs() {
+		return logsToShow;
+	}
 	sf::Color GetLogColor(logContext context) {
 		switch (context)
 		{
 		case ERROR:
-			return sf::Color(248,0, 0);
+			return sf::Color(248, 0, 0);
 		case SYSTEM:
 			return sf::Color(0, 255, 138);
 		case GLOBAL:
@@ -149,6 +127,9 @@ private:
 			return sf::Color(248, 255, 138);
 		}
 	}
+private:
+
+	
 	std::string getTime() {
 		time_t rawtime;
 		struct tm * timeinfo;

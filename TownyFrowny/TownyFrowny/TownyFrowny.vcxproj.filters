@@ -15,6 +15,18 @@
     <Filter Include="Header Files\Entities">
       <UniqueIdentifier>{7bfca540-b7aa-4ac2-8c61-2842ee234da5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{891393b5-8ffc-4a86-85b0-54d2f0dcdf2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{596adbc0-bafc-4b75-b2e0-e14de3072502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Libs">
+      <UniqueIdentifier>{6e0ed6bc-bdde-4732-9ad4-70d800504036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libs">
+      <UniqueIdentifier>{2343a54e-357e-42d6-9141-4445ca1f0e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -24,9 +36,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GroundTile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
@@ -50,9 +59,6 @@
     <ClCompile Include="Entity_Plant.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Designation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,6 +80,24 @@
     <ClCompile Include="Entity_Light.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow_Tasks.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow_Inventory.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow_Designations.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIWindow_Logs.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="FastNoise.cpp">
+      <Filter>Source Files\Libs</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WorldTile.h">
@@ -88,13 +112,7 @@
     <ClInclude Include="GroundTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FastNoise.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Entity_Living.h">
@@ -113,9 +131,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LogHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rapidcsv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NameGenerator.h">
@@ -151,12 +166,6 @@
     <ClInclude Include="Designation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UIHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entity_Manufactured.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -180,6 +189,33 @@
     </ClInclude>
     <ClInclude Include="Entity_Light.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIHandler.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow_Tasks.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow_Designations.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow_Inventory.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIWindow_Logs.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="rapidcsv.h">
+      <Filter>Header Files\Libs</Filter>
+    </ClInclude>
+    <ClInclude Include="FastNoise.h">
+      <Filter>Header Files\Libs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
