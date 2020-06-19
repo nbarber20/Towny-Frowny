@@ -2,14 +2,15 @@
 #include "VectorHelper.h"
 #include "World.h"
 #include "LogHandler.h"
-Entity_Light::Entity_Light(wchar_t EntityID, sf::Vector2i spritePos, int lightDistance, int lightLevel, World * worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, worldref, TargetedBehaviors)
+Entity_Light::Entity_Light(wchar_t EntityID, sf::Vector2i spritePos, int lightDistance, int lightLevel, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, TargetedBehaviors)
 {
 	this->lightDistance = lightDistance;
 	this->lightLevel = lightLevel;
 }
 
-void Entity_Light::Initilize()
+void Entity_Light::Initilize(World* worldref)
 {
+	Entity::Initilize(worldref);
 	ls = new LightSource();
 	ls->lightDistance = this->lightDistance;
 	ls->lightLevel = this->lightLevel;
@@ -46,10 +47,10 @@ void Entity_Light::OnSpawn(World* newworld)
 	ls->position = this->GetPosition();
 }
 
-void Entity_Light::OnDespawn(World* newworld)
+void Entity_Light::OnDespawn(World* newworld,bool doDropItems)
 {
 	TurnOff();
-	Entity::OnDespawn(newworld);
+	Entity::OnDespawn(newworld, doDropItems);
 }
 
 void Entity_Light::TurnOn()

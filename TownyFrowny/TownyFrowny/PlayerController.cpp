@@ -60,44 +60,13 @@ void PlayerController::GetInput(sf::Event e)
 	{
 		task = 8;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
+	{
+		task = 9;
+	}
 	if (task >= 0 && task < ReleventBehaviors.size()) {
 		AssignTasks(ReleventBehaviors[task]);
 	}
-
-	
-	/*
-	if (UiHandler::Instance().GetWindow() == UiHandler::Inventory) {
-		std::vector<std::string> names;
-		std::vector<Entity*> inventory = *pilotingPlayer->GetInventory();
-		InventoryCollapsed.clear();
-		for (int i = 0; i < inventory.size(); i++) {
-			bool found = false;
-			for (int j = 0; j < InventoryCollapsed.size(); j++) {
-				if (InventoryCollapsed[j].first == inventory[i]->GetID()) {
-					InventoryCollapsed[j].second++;
-					found = true;
-				}
-			}
-			if (found == false) {
-				InventoryCollapsed.push_back(std::make_pair(inventory[i]->GetID(), 1));
-			}
-		}
-		for (int j = 0; j < InventoryCollapsed.size(); j++) {
-			names.push_back(EntityHandler::Instance().GetEntityNameByID(InventoryCollapsed[j].first) + " x" + std::to_string(InventoryCollapsed[j].second));
-		}
-		UiHandler::Instance().UpdateTaskList(names);
-	}
-	if (UiHandler::Instance().GetWindow() == UiHandler::Designation) {
-		std::vector<std::string> names;
-		names = {
-			"GeneralStoreage",
-			"FoodStorage",
-			"MaterialStorage",
-			"GeneralRoom",
-		};
-		UiHandler::Instance().UpdateTaskList(names);
-	}
-	*/
 }
 
 void PlayerController::SetPilotingPlayer(Entity_Human* to)
@@ -440,7 +409,7 @@ std::vector<Entity::TargetedHumanBehaviors> PlayerController::getEmptyTileBehavi
 	return temp;
 }
 
-std::string PlayerController::getTargetedBehaviorNames(Entity::TargetedHumanBehaviors behaviour, int EntityRefID /*= 0*/)
+std::string PlayerController::getTargetedBehaviorNames(Entity::TargetedHumanBehaviors behaviour, int EntityRefID)
 {
 	switch (behaviour)
 	{
@@ -487,6 +456,12 @@ std::string PlayerController::getTargetedBehaviorNames(Entity::TargetedHumanBeha
 	case Entity::Targeted_TurnOnLight:
 		if (EntityHandler::Instance().GetEntityNameByID(EntityRefID) == "Fire") return "Light Fire";
 		return "Turn On " + EntityHandler::Instance().GetEntityNameByID(EntityRefID);
+	case Entity::Targeted_HarvestCrop:
+		return "Harvest Crop";
+	case Entity::Targeted_UpRoot:
+		return "Uproot"; 
+	case Entity::Targeted_PlantSeed:
+		return "Plant Seeds"; 
 	default:
 		return "Null Task";
 	}

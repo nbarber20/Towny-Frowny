@@ -28,7 +28,7 @@ bool Entity_Crafter::CraftItem(int id, Entity_Living* crafterOwner, Entity* outE
 	}
 	if (stepsCompleted >= recipe.size()) {
 		LogHandler::Instance().WriteLog("Crafting Complete");
-		outEntity = EntityHandler::Instance().CreateEntity(id);
+		outEntity = EntityHandler::Instance().CreateEntity(id, GetPosition());
 		crafterOwner->AddItemToInventory(outEntity);
 		return true;
 	}
@@ -45,7 +45,7 @@ bool Entity_Crafter::ConsumeCraftingItem(std::vector<int > recipeItem)
 	for (int i = 0; i < heldItems.size(); i++) {
 		for (int j = 0; j < recipeItem.size(); j++) {
 			if (heldItems[i]->GetID() == recipeItem[j]) {
-				EntityHandler::Instance().DestroyEntity(heldItems[i], world);
+				EntityHandler::Instance().DestroyEntity(heldItems[i], world,true);
 				return true;
 			}
 		}

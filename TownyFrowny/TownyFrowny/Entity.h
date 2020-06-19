@@ -28,15 +28,18 @@ public:
 		Targeted_UseDoor,
 		Targeted_TurnOnLight,
 		Targeted_TurnOffLight,
+		Targeted_HarvestCrop,
+		Targeted_UpRoot,
+		Targeted_PlantSeed,
 	};
 
 	
 
 
-	Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors);
+	Entity(wchar_t EntityID, sf::Vector2i spritePos,std::vector<TargetedHumanBehaviors> TargetedBehaviors);
 	virtual ~Entity() {};
 	virtual void OnSpawn(World* newworld);
-	virtual void OnDespawn(World* newworld);
+	virtual void OnDespawn(World* newworld, bool doDropItems);
 	virtual void RemoveFromWorld();
 	virtual void Tick();
 	virtual void SetPosition(short x, short y);
@@ -59,7 +62,9 @@ public:
 	bool doTick = true;
 	int GetVolume();
 	void SetVolume(int to);
-	virtual void Initilize() {};
+	virtual void Initilize(World* worldRef) {
+		this->world = worldRef;
+	};
 
 	virtual Entity* clone() const { return new Entity(*this); };
 	virtual void getTargetedBehaviors(std::vector<TargetedHumanBehaviors>* list, std::vector<TargetedHumanBehaviors>* failList = new std::vector<TargetedHumanBehaviors>) {

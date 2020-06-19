@@ -40,7 +40,7 @@ public:
 	void ClearSelections();
 
 	void SpawnEntity(Entity* entity, sf::Vector2i tilePosition);
-	void DespawnEntity(Entity* entity, sf::Vector2i tilePosition);
+	void DespawnEntity(Entity* entity, sf::Vector2i tilePosition, bool doDropItems);
 	void MoveEntity(Entity* entity, short fromx, short fromy, short tox, short toy);
 	WorldTile* GetWorldTile(sf::Vector2i tilePos);
 	std::vector<WorldTile*> GetNeighborsOfTile(sf::Vector2i tilePos);

@@ -3,7 +3,7 @@
 
 class Entity_Food : public Entity {
 public:
-	Entity_Food(wchar_t EntityID, sf::Vector2i spritePos, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, worldref,TargetedBehaviors)
+	Entity_Food(wchar_t EntityID, sf::Vector2i spritePos, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos,TargetedBehaviors)
 	{
 	};
 	~Entity_Food() {};

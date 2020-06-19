@@ -4,12 +4,12 @@ class WorldTile;
 struct LightSource;
 class Entity_Light : public Entity {
 public:
-	Entity_Light(wchar_t EntityID, sf::Vector2i spritePos, int lightDistance, int lightLevel, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors);
+	Entity_Light(wchar_t EntityID, sf::Vector2i spritePos, int lightDistance, int lightLevel, std::vector<TargetedHumanBehaviors> TargetedBehaviors);
 	~Entity_Light() {};
-	void Initilize() override;
+	void Initilize(World* worldref) override;
 	void Tick() override;
 	void OnSpawn(World* newworld) override;
-	void OnDespawn(World* newworld) override;
+	void OnDespawn(World* newworld, bool doDropItems) override;
 	virtual Entity_Light* clone() const { return new Entity_Light(*this); };
 	void TurnOn();
 	void TurnOff();

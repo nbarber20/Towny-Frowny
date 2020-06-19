@@ -56,9 +56,9 @@ Task::TaskStatus Task_Search_Singluar::Execute() {
 	for (int i = sprialIndex; i < spiral.size(); i++) {
 		sf::Vector2i offset = (spiral[i] - sf::Vector2i(rangeOffset, rangeOffset+1)) + ownerEntity->GetPosition();
 		for (int id = 0; id < targetIDs.size(); id++) {
-			if (world->DoesTileContainEntity(offset, targetIDs[id],deepSearch))
+			if (ownerEntity->getWorld()->DoesTileContainEntity(offset, targetIDs[id],deepSearch))
 			{		
-				Entity* newfoundtarget = world->GetEntityInTileByID(targetIDs[id], offset);
+				Entity* newfoundtarget = ownerEntity->getWorld()->GetEntityInTileByID(targetIDs[id], offset);
 				if (onlyLiving) {
 					Entity_Living* AsLiving = dynamic_cast<Entity_Living*>(newfoundtarget);
 					if (AsLiving == nullptr&& AsLiving->IsAlive()==false) continue;
@@ -83,15 +83,15 @@ Task::TaskStatus Task_Search::Execute()
 	for (int i = sprialIndex; i < spiral.size(); i++) {
 		sf::Vector2i offset = (spiral[i] - sf::Vector2i(rangeOffset, rangeOffset + 1)) + ownerEntity->GetPosition();
 		for (int id = 0; id < targetIDs.size(); id++) {
-			if (world->DoesTileContainEntity(offset, targetIDs[id], deepSearch))
+			if (ownerEntity->getWorld()->DoesTileContainEntity(offset, targetIDs[id], deepSearch))
 			{
-				Entity* newfoundtarget = world->GetEntityInTileByID(targetIDs[id], offset);
+				Entity* newfoundtarget = ownerEntity->getWorld()->GetEntityInTileByID(targetIDs[id], offset);
 				if (onlyLiving) {
 					Entity_Living* AsLiving = dynamic_cast<Entity_Living*>(newfoundtarget);
 					if (AsLiving != nullptr && AsLiving->IsAlive() == false)continue;
 				}
 				FoundTargets.push_back(new sf::Vector2i(offset));
-				FoundTargetEntities.push_back(world->GetEntityInTileByID(targetIDs[id], offset));		
+				FoundTargetEntities.push_back(ownerEntity->getWorld()->GetEntityInTileByID(targetIDs[id], offset));
 			}
 		}
 		sprialIndex++;
@@ -134,7 +134,7 @@ Task::TaskStatus Task_WalkTo::Start()
 		for (int x = pos.x - stopDist; x < pos.x + stopDist + 1; x++) {
 			for (int y = pos.y - stopDist; y < pos.y + stopDist+1; y++) {
 				if (floor(VectorHelper::GetMagnitude(pos - sf::Vector2i(x, y))) >= stopDist) {
-					if (pathfinder->FindPath(ownerEntity, 0, path, ownerEntity->GetPosition(), sf::Vector2i(x, y), world,false))
+					if (pathfinder->FindPath(ownerEntity, 0, path, ownerEntity->GetPosition(), sf::Vector2i(x, y), ownerEntity->getWorld(),false))
 					{
 						startedAtTarget = true;
 						pathIndex = 0;
@@ -146,7 +146,7 @@ Task::TaskStatus Task_WalkTo::Start()
 		return TaskStatus::Fail;
 	}
 
-	if (pathfinder->FindPath(ownerEntity, stopDist, path, ownerEntity->GetPosition(),pos, world))
+	if (pathfinder->FindPath(ownerEntity, stopDist, path, ownerEntity->GetPosition(),pos, ownerEntity->getWorld()))
 	{
 		pathIndex = 0;
 		return TaskStatus::Running;
@@ -205,7 +205,7 @@ Task::TaskStatus Task_WalkTo::Execute()
 	}
 	else {
 		//Re path
-		if (pathfinder->FindPath(ownerEntity, stopDist, path, ownerEntity->GetPosition(), pos, world))
+		if (pathfinder->FindPath(ownerEntity, stopDist, path, ownerEntity->GetPosition(), pos, ownerEntity->getWorld()))
 		{
 			pathIndex = 0;
 		}
@@ -231,8 +231,8 @@ Task::TaskStatus Task_PickUp::Execute()
 	}
 	else {
 		for (int i = 0; i < targetIDs.size(); i++) {
-			if (world->DoesTileContainEntity(ownerEntity->GetPosition(), targetIDs[i], true)) {
-				Entity* e = world->GetEntityInTileByID(targetIDs[i], ownerEntity->GetPosition());
+			if (ownerEntity->getWorld()->DoesTileContainEntity(ownerEntity->GetPosition(), targetIDs[i], true)) {
+				Entity* e = ownerEntity->getWorld()->GetEntityInTileByID(targetIDs[i], ownerEntity->GetPosition());
 				if (e != nullptr) {
 					ownerEntity->AddItemToInventory(e);
 					std::string s = ownerEntity->GetIndividualName() + " picked up " + e->GetObjectName();
@@ -257,7 +257,7 @@ Task::TaskStatus Task_Drop::Execute()
 				LogHandler::Instance().WriteLog(s, ownerEntity->GetPosition(), logContext::WORLD);
 				sf::Vector2i newPos = **targetPos;
 				(*toDrop)->SetPosition(newPos.x, newPos.y);
-				ownerEntity->DropItem(*toDrop);	
+				ownerEntity->DropItem(*toDrop,ownerEntity->getWorld());	
 				return Task::Complete;
 			}
 		}
@@ -452,9 +452,9 @@ Task::TaskStatus Task_LocateStockDesignation::Execute()
 {
 	for (int i = sprialIndex; i < spiral.size(); i++) {
 		sf::Vector2i offset = (spiral[i] - sf::Vector2i(rangeOffset, rangeOffset + 1)) + ownerEntity->GetPosition();
-		if (world->DoesTileContainDesignations(offset,typetoCheck))
+		if (ownerEntity->getWorld()->DoesTileContainDesignations(offset,typetoCheck))
 		{
-			std::vector<Designation*> d = world->GetTileDesignations(offset);
+			std::vector<Designation*> d = ownerEntity->getWorld()->GetTileDesignations(offset);
 			for (int j = 0; j < d.size(); j++) {
 				if (d[j]->type == typetoCheck) {
 					sf::Vector2i pos;
@@ -536,18 +536,18 @@ Task::TaskStatus Task_ConstructWall::Execute()
 		if (EntityHandler::Instance().IsEntityValid(*targetEntity)) {
 
 			//Remove the current wall to replace it
-			if (world->GetWallTileIDAtPosition(**target) >= 0) {
-				int entityID = EntityHandler::Instance().GetEntityFromWorldTile(world->GetWallTileIDAtPosition(**target));
+			if (ownerEntity->getWorld()->GetWallTileIDAtPosition(**target) >= 0) {
+				int entityID = EntityHandler::Instance().GetEntityFromWorldTile(ownerEntity->getWorld()->GetWallTileIDAtPosition(**target));
 				if (entityID >= 0) {
-					ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID));
+					ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID,ownerEntity->GetPosition()));
 				}
 			}
 
 			int tileID = EntityHandler::Instance().GetWorldTileFromEntity((*targetEntity)->GetID());
 			if (tileID >= 0) {
-				world->SetWallTile(**target, tileID);
+				ownerEntity->getWorld()->SetWallTile(**target, tileID);
 			}
-			EntityHandler::Instance().DestroyEntity(*targetEntity, world);
+			EntityHandler::Instance().DestroyEntity(*targetEntity, ownerEntity->getWorld(),false);
 			return Task::Complete;
 		}
 	}
@@ -556,13 +556,13 @@ Task::TaskStatus Task_ConstructWall::Execute()
 
 Task::TaskStatus Task_DeconstructWall::Execute()
 {
-	if (world->GetWallTileIDAtPosition(**target) >= 0) {
-		int entityID = EntityHandler::Instance().GetEntityFromWorldTile(world->GetWallTileIDAtPosition(**target));
+	if (ownerEntity->getWorld()->GetWallTileIDAtPosition(**target) >= 0) {
+		int entityID = EntityHandler::Instance().GetEntityFromWorldTile(ownerEntity->getWorld()->GetWallTileIDAtPosition(**target));
 		if (entityID >= 0) {
-			ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID));
+			ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID, ownerEntity->GetPosition()));
 		}
 	}
-	world->SetWallTile(**target, -1);
+	ownerEntity->getWorld()->SetWallTile(**target, -1);
 	return Task::Complete;
 }
 
@@ -574,18 +574,18 @@ Task::TaskStatus Task_ConstructFloor::Execute()
 		if (EntityHandler::Instance().IsEntityValid(*targetEntity)) {
 
 			//Remove the current floor to replace it
-			if (world->GetGroundTileIDAtPosition(**target) > 0) {
-				int entityID = EntityHandler::Instance().GetEntityFromWorldTile(world->GetGroundTileIDAtPosition(**target));
+			if (ownerEntity->getWorld()->GetGroundTileIDAtPosition(**target) > 0) {
+				int entityID = EntityHandler::Instance().GetEntityFromWorldTile(ownerEntity->getWorld()->GetGroundTileIDAtPosition(**target));
 				if (entityID >= 0) {
-					ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID));
+					ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID, ownerEntity->GetPosition()));
 				}
 			}
 
 			int tileID = EntityHandler::Instance().GetWorldTileFromEntity((*targetEntity)->GetID());
 			if (tileID >=0) {
-				world->SetGroundTile(**target, tileID);
+				ownerEntity->getWorld()->SetGroundTile(**target, tileID);
 			}
-			EntityHandler::Instance().DestroyEntity(*targetEntity, world);
+			EntityHandler::Instance().DestroyEntity(*targetEntity, ownerEntity->getWorld(),false);
 			return Task::Complete;
 		}
 	}
@@ -594,11 +594,11 @@ Task::TaskStatus Task_ConstructFloor::Execute()
 
 Task::TaskStatus Task_DeconstructFloor::Execute()
 {
-	int entityID = EntityHandler::Instance().GetEntityFromWorldTile(world->GetGroundTileIDAtPosition(**target));
+	int entityID = EntityHandler::Instance().GetEntityFromWorldTile(ownerEntity->getWorld()->GetGroundTileIDAtPosition(**target));
 	if (entityID >= 0) {
-		ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID));
+		ownerEntity->AddItemToInventory(EntityHandler::Instance().CreateEntity(entityID, ownerEntity->GetPosition()));
 	}
-	world->SetGroundTile(**target, 0);
+	ownerEntity->getWorld()->SetGroundTile(**target, 0);
 	
 	return Task::Complete;
 }
@@ -623,12 +623,12 @@ Task::TaskStatus Task_DropInStockDesignation::Execute()
 	if (toDrop != nullptr) {
 		if (EntityHandler::Instance().IsEntityValid(*toDrop)) {
 			if ((*toDrop)->GetParent() == ownerEntity) {
-				std::vector<Designation*> designations = world->GetTileDesignations(ownerEntity->GetPosition());
+				std::vector<Designation*> designations = ownerEntity->getWorld()->GetTileDesignations(ownerEntity->GetPosition());
 				for (int i = 0; i < designations.size(); i++) {
 					if (designations[i]->type == typetoCheck) {
 						std::string s = ownerEntity->GetIndividualName() + " dropped " + (*toDrop)->GetObjectName();
 						LogHandler::Instance().WriteLog(s, ownerEntity->GetPosition(), logContext::WORLD);
-						ownerEntity->DropItem(*toDrop);
+						ownerEntity->DropItem(*toDrop, ownerEntity->getWorld());
 						(*toDrop)->SetDesignationParent(designations[i]);
 						return Task::Complete;
 					}
@@ -691,11 +691,11 @@ Task::TaskStatus Task_CreateStaircase::Execute()
 Task::TaskStatus Task_UseStaircase::Execute()
 {
 	if (ownerEntity->getWorld() == OverWorld) {
-		OverWorld->DespawnEntity(ownerEntity, ownerEntity->GetPosition());
+		OverWorld->DespawnEntity(ownerEntity, ownerEntity->GetPosition(),false);
 		UnderWorld->SpawnEntity(ownerEntity, ownerEntity->GetPosition());
 	}
 	else {
-		UnderWorld->DespawnEntity(ownerEntity, ownerEntity->GetPosition());
+		UnderWorld->DespawnEntity(ownerEntity, ownerEntity->GetPosition(), false);
 		OverWorld->SpawnEntity(ownerEntity, ownerEntity->GetPosition());
 	}
 	return Task::Complete;
@@ -733,6 +733,30 @@ Task::TaskStatus Task_TurnOffLight::Execute()
 	Entity_Light* light = dynamic_cast<Entity_Light*>(*targetLight);
 	if (light != NULL) {
 		light->TurnOff();
+		return Task::Complete;
+	}
+	return Task::Fail;
+}
+
+Task::TaskStatus Task_Destroy::Execute()
+{
+	EntityHandler::Instance().DestroyEntity(*target, ownerEntity->getWorld(), true);
+	return Task::Complete;
+}
+
+Task::TaskStatus Task_PlantSeed::Execute()
+{
+	std::vector<int> plantIDs = EntityHandler::Instance().GetIDGroup(EntityHandler::Plants);
+	for (int id = 0; id < plantIDs.size(); id++) {
+		if (ownerEntity->getWorld()->DoesTileContainEntity(ownerEntity->GetPosition(), plantIDs[id], true))
+		{
+			return Task::Fail;//this is already a crop
+		}
+	}
+	Entity_Seed* seed = dynamic_cast<Entity_Seed*>(*targetSeed);
+	if (seed != NULL) {
+		EntityHandler::Instance().CreateAndSpawnEntity(seed->plantID, ownerEntity->getWorld(), ownerEntity->GetPosition());
+		EntityHandler::Instance().DestroyEntity(*targetSeed, ownerEntity->getWorld(), true);
 		return Task::Complete;
 	}
 	return Task::Fail;

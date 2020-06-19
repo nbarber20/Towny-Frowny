@@ -48,8 +48,12 @@ public:
 		{
 			// error...
 		}
+
+		sf::Texture& fontTexture = const_cast<sf::Texture&>(font.getTexture(13));
+		fontTexture.setSmooth(false);
 		screenText.setFont(font);
-		screenText.setCharacterSize(13);
+		screenText.setCharacterSize(26);
+		screenText.setScale(0.5f, 0.5f);
 		selectionCursor = new sf::RectangleShape(sf::Vector2f(1, 1));
 		selectionCursor->setOutlineThickness(1);
 
@@ -65,7 +69,6 @@ public:
 			std::make_pair(System,new UIWindow(window,this)),
 		};
 
-
 		buttons = {
 			WindowButton(sf::Vector2f(804, 0), sf::Vector2f(857, 19),new sf::Sprite(*UIPanelTex, sf::IntRect(204, 0, 54, 20)),Tasks),
 			WindowButton(sf::Vector2f(858, 0), sf::Vector2f(911, 19),new sf::Sprite(*UIPanelTex, sf::IntRect(258, 0, 54, 20)),Inventory),
@@ -74,7 +77,6 @@ public:
 			WindowButton(sf::Vector2f(956, 780), sf::Vector2f(999, 799),new sf::Sprite(*UIPanelTex, sf::IntRect(267, 21, 44, 20)),Logs),
 			WindowButton(sf::Vector2f(893, 780), sf::Vector2f(954, 799),new sf::Sprite(*UIPanelTex, sf::IntRect(204, 21, 63, 20)),System),
 		};
-
 
 		SetWindow(Tasks);
 	}

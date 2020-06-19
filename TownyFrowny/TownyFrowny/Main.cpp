@@ -45,7 +45,7 @@ int main()
 	PathFinder* pathFinder = new PathFinder();
 
 	PlayerController* playerController = new PlayerController(pathFinder, &window);
-	EntityHandler::Instance().Init(new TaskManager(OverWorld,UnderWorld, pathFinder), playerController, selectedWorld);
+	EntityHandler::Instance().Init(new TaskManager(OverWorld,UnderWorld, pathFinder), playerController);
 
 	UIHandler::Instance().Setup(playerController, &window);
 
@@ -81,11 +81,12 @@ int main()
 			{
 				window.close();
 			}
-			/*
+			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
 			{
-				EntityHandler::Instance().SpawnAtCursor(40, selectedWorld, &window);
+				EntityHandler::Instance().SpawnAtCursor(52, selectedWorld, &window);
 			}
+			/*
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
 			{
 				EntityHandler::Instance().SpawnAtCursor(11, selectedWorld, &window);

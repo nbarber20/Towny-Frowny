@@ -115,7 +115,7 @@ void Entity_Living::RemoveItemFromInventory(Entity* e)
 
 void Entity_Living::Eat(Entity* e)
 {
-	EntityHandler::Instance().DestroyEntity(e, world);
+	EntityHandler::Instance().DestroyEntity(e, world,true);
 	hungerLevel = 0;
 	std::string s = individualName + " ate a " + e->GetObjectName();
 	LogHandler::Instance().WriteLog(s, this->GetPosition(), logContext::WORLD);
@@ -137,9 +137,9 @@ void Entity_Living::TakeDamage(int ammount, Entity_Living* source)
 void Entity_Living::Die(Entity_Living* source)
 {
 	LogHandler::Instance().WriteLog(individualName + " was killed by " + source->individualName, this->GetPosition(), logContext::WORLD);
-	clearAllTasks();
-	for (auto item : heldItems) {
-		DropItem(item);
+	clearAllTasks(); 
+	while (heldItems.size() > 0) {
+		DropItem(heldItems[0], this->world);
 	}
 	dead = true;
 }
@@ -147,14 +147,6 @@ void Entity_Living::Die(Entity_Living* source)
 bool Entity_Living::IsAlive()
 {
 	return !dead;
-}
-
-void Entity_Living::DropItem(Entity* item)
-{
-	if (item->GetParent() == this) {
-		item->SetParent(nullptr);
-		world->SpawnEntity(item, item->GetPosition());
-	}
 }
 
 std::vector<Entity*>* Entity_Living::GetBodilyInventory()
@@ -184,19 +176,21 @@ void Entity_Living::clearAllTasks()
 
 void Entity_Living::startTaskQueue()
 {
-	for (auto p : TaskTree[taskTreeIndex]->Branch)
-	{
-		p->Setup(world, this, this);
-		p->Reset();
+	if (TaskTree.size() > 0) {
+		for (auto p : TaskTree[taskTreeIndex]->Branch)
+		{
+			p->Setup(this, this);
+			p->Reset();
+		}
+		idle = false;
 	}
-	idle = false;
 }
+
 void Entity_Living::startTaskQueue(Entity_Living* issuer)
 {
 	for (auto a: TaskTree[taskTreeIndex]->Branch)
 	{
-		//TODO: sometimes this breaks for no reason
-		a->Setup(world,this, issuer);
+		a->Setup(this, issuer);
 		a->Reset();
 	}
 	idle = false;

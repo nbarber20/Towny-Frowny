@@ -103,7 +103,8 @@ void World::GenerateEntities()
 					dospawn = true;
 				}
 				if (dospawn) {
-					treepos.push_back(EntityHandler::Instance().CreateAndSpawnEntity(EntityID, this, sf::Vector2i(x, y)));
+					Entity* tree = EntityHandler::Instance().CreateAndSpawnEntity(EntityID, this, sf::Vector2i(x, y));
+					treepos.push_back(tree);
 					tileToTick.push_back(GetWorldTile(sf::Vector2i(x, y)));
 				}
 			}
@@ -112,13 +113,19 @@ void World::GenerateEntities()
 	
 	for (int i = 0; i < treepos.size();i++) {
 		std::vector<WorldTile*> neighbors = GetNeighborsOfTile(treepos[i]->GetPosition());
+		int neighborCount = 0;
 		for (auto neighbor : neighbors) {
 			if (neighbor == nullptr)continue;
-			if (DoesTileContainEntity(neighbor->GetPosition(), treepos[i]->GetID(), false) == false) {
-				if (TreeDeletionNoise->GetNoise(treepos[i]->GetPosition().x, treepos[i]->GetPosition().y) < 0) {
-					EntityHandler::Instance().DestroyEntity(treepos[i], this);
-					break;
-				}
+			if (DoesTileContainEntity(neighbor->GetPosition(), treepos[i]->GetID(), false) == true) {
+				neighborCount++;
+			}
+		}
+		if (neighborCount == 4) {
+			dynamic_cast<Entity_Plant*>(treepos[i])->SetGrowthStep(1,true);
+		}
+		else{
+			if (TreeDeletionNoise->GetNoise(treepos[i]->GetPosition().x, treepos[i]->GetPosition().y) < 0) {
+				EntityHandler::Instance().DestroyEntity(treepos[i], this,false);
 			}
 		}
 	}
@@ -244,13 +251,13 @@ void World::SpawnEntity(Entity* entity, sf::Vector2i tilePosition)
 	entity->OnSpawn(this);
 }
 
-void World::DespawnEntity(Entity* entity, sf::Vector2i tilePosition)
+void World::DespawnEntity(Entity* entity, sf::Vector2i tilePosition,bool doDropItems)
 {
 	tilePosition = VectorHelper::ClampVector(tilePosition, sf::Vector2i(0, 0), sf::Vector2i(GetWorldSize() - 1, GetWorldSize() - 1));
 	if (DoesTileContainEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity)) {
 		RemoveEntity(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y], entity);
 		tileToTick.push_back(worldTiles[(GetWorldSize()*tilePosition.x) + tilePosition.y]);
-		entity->OnDespawn(this);
+		entity->OnDespawn(this, doDropItems);
 		return;
 	}
 	LogHandler::Instance().WriteLog( "Failed to despawn "+entity->GetObjectName(), tilePosition, logContext::ERROR);
@@ -353,7 +360,6 @@ Entity* World::GetEntityInTileByID(wchar_t entityId, sf::Vector2i tile)
 		if (id == entityId) return (ptr[i]);
 	}
 	return nullptr;
-	//TODO: throw an error??
 }
 
 int World::GetWorldSize()

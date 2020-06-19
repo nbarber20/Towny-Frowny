@@ -1,14 +1,16 @@
 #pragma once
 #include "Entity.h"
+#include "World.h"
 class Entity_Container : public Entity {
 public:
-	Entity_Container(wchar_t EntityID, sf::Vector2i spritePos, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID,spritePos, worldref, TargetedBehaviors)
+	Entity_Container(wchar_t EntityID, sf::Vector2i spritePos, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID,spritePos, TargetedBehaviors)
 	{
 	};
 	void AddItemToInventory(Entity* e)
 	{
 		e->SetParent(this);
 		heldItems.push_back(e);
+		e->SetPosition(x, y);
 	};
 	virtual void RemoveItemFromInventory(Entity* e) 
 	{
@@ -36,7 +38,19 @@ public:
 			return MoveToTile(x + dx, y + dy);
 		}
 	}
-
+	virtual void OnDespawn(World* newworld, bool doDropItems) override {
+		Entity::OnDespawn(newworld, doDropItems);
+		if (doDropItems == true) {
+			while (heldItems.size() > 0) {
+				DropItem(heldItems[0], newworld);
+			}
+		}
+	}
+	virtual void DropItem(Entity* item, World* newworld)
+	{
+		item->SetParent(nullptr);
+		newworld->SpawnEntity(item, item->GetPosition());
+	}
 	virtual Entity_Container* clone() const { return new Entity_Container(*this); };
 
 protected:

@@ -162,9 +162,9 @@
     <ClInclude Include="Entity_Human.h" />
     <ClInclude Include="Entity_Light.h" />
     <ClInclude Include="Entity_Manufactured.h" />
-    <ClInclude Include="Entity_Material.h" />
     <ClInclude Include="Entity_Pet.h" />
     <ClInclude Include="Entity_Plant.h" />
+    <ClInclude Include="Entity_Seed.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Recipies.h" />
     <ClInclude Include="UIHandler.h" />

@@ -174,13 +174,22 @@ void Entity_Human::SetTargetedBehavior(TargetedBehaviorStep* b)
 	case TargetedHumanBehaviors::Targeted_TurnOffLight:
 		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_TurnLightOff(&b->entity), taskManager));
 		break;
+	case TargetedHumanBehaviors::Targeted_HarvestCrop:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_HarvestPlant(&b->entity), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_UpRoot:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_DestroyEntity(&b->entity), taskManager));
+		break;
+	case TargetedHumanBehaviors::Targeted_PlantSeed:
+		TaskTree.push_back(new BehaviorBranch(taskManager->TargetTREE_PlantSeed(&b->entity,&b->Pos), taskManager));
+		break;		
 	}
 
 	startTaskQueue();
 }
-
-void Entity_Human::Initilize()
+void Entity_Human::Initilize(World* worldRef)
 {
+	Entity_Living::Initilize(worldRef);
 	individualName = NameGenerator::Instance().GenName();
 	srand(time(NULL));
 	int id = rand() % TileManager::Instance().GetNumEntityVariants(spriteX);

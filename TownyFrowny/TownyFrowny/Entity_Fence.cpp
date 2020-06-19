@@ -75,9 +75,9 @@ void Entity_Fence::OnSpawn(World* newworld)
 	}
 }
 
-void Entity_Fence::OnDespawn(World* newworld)
+void Entity_Fence::OnDespawn(World* newworld, bool doDropItems)
 {
-	Entity::OnDespawn(newworld);
+	Entity::OnDespawn(newworld, doDropItems);
 	std::vector<WorldTile*> neighbors = world->GetNeighborsOfTile(GetPosition());
 	for (auto neighbor : neighbors) {
 		if (neighbor != nullptr) {

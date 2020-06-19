@@ -127,6 +127,14 @@ public:
 		};
 	}
 
+	std::vector<Task*> TargetTREE_HarvestPlant(Entity** plantTarget) {
+		return
+		{
+			new Task_WalkTo(pathFinder,1,plantTarget, 1, 10), //go next to it
+			new Task_Take(plantTarget, EntityHandler::Instance().GetIDGroup(EntityHandler::PlantProduct),true, 1, 10),
+		};
+	}
+
 	std::vector<Task*> TargetTREE_SlaughterAnimal(Entity** AnimalTarget) {
 		return
 		{		
@@ -247,6 +255,20 @@ public:
 		{
 			new Task_WalkTo(pathFinder,1,Light, 1, 10),
 			new Task_TurnOffLight(Light,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_DestroyEntity(Entity** Target) {
+		return
+		{
+			new Task_WalkTo(pathFinder,1,Target, 1, 10),
+			new Task_Destroy(Target,1,10),
+		};
+	}
+	std::vector<Task*> TargetTREE_PlantSeed(Entity** TargetSeed, sf::Vector2i** Position) {
+		return
+		{
+			new Task_WalkTo(pathFinder,0,Position, 1, 10),
+			new Task_PlantSeed(TargetSeed,1,10),
 		};
 	}
 private:

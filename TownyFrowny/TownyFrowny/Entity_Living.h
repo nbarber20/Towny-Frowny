@@ -9,7 +9,7 @@ class TaskManager;
 
 class Entity_Living : public Entity_Container {
 public:
-	Entity_Living(wchar_t EntityID, sf::Vector2i spritePos, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Container(EntityID,spritePos, worldref,TargetedBehaviors)
+	Entity_Living(wchar_t EntityID, sf::Vector2i spritePos, TaskManager* manager, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Container(EntityID,spritePos,TargetedBehaviors)
 	{
 		this->taskManager = manager; 
 		canMove = true;
@@ -30,7 +30,6 @@ public:
 	void TakeDamage(int ammount, Entity_Living* source);
 	virtual void Die(Entity_Living* source);
 	bool IsAlive();
-	void DropItem(Entity* item);
 	virtual std::string GetIndividualName();
 	virtual void clearAllTasks();
 	void startTaskQueue();

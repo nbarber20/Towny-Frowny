@@ -7,9 +7,8 @@
 #include "TaskManager.h"
 #include "Entity_Living.h"
 #include "Designation.h"
-Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref , std::vector<TargetedHumanBehaviors> TargetedBehaviors)
+Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, std::vector<TargetedHumanBehaviors> TargetedBehaviors)
 {
-	world = worldref;
 	this->spriteX= spritePos.x;
 	this->spriteY = spritePos.y;
 	this->EntityID = EntityID;
@@ -22,13 +21,14 @@ Entity::Entity(wchar_t EntityID, sf::Vector2i spritePos, World* worldref , std::
 
 void Entity::OnSpawn(World* newworld)
 {
+	this->parent = nullptr;
 	inworld = true;
 	world = newworld;
 	world->tileToTick.push_back(world->GetWorldTile(this->GetPosition()));
 }
 
 
-void Entity::OnDespawn(World* newworld)
+void Entity::OnDespawn(World* newworld,bool doDropItems)
 {
 	inworld = false;
 	world->tileToTick.push_back(world->GetWorldTile(this->GetPosition()));
@@ -36,9 +36,8 @@ void Entity::OnDespawn(World* newworld)
 
 void Entity::RemoveFromWorld()
 {
-	world->DespawnEntity(this,sf::Vector2i(x,y));
-	OnDespawn(world);
-	inworld = false;
+	world->DespawnEntity(this,sf::Vector2i(x,y),false);
+	OnDespawn(world,false);
 }
 
 void Entity::Tick()
@@ -60,6 +59,7 @@ sf::Vector2i Entity::GetPosition()
 
 void Entity::DrawEntity()
 {
+	if (inworld == false)return;
 	sf::Sprite* sprite = TileManager::Instance().GetEntityTileByID(spriteX, spriteY)->sprite;
 	sf::Vector2f worldf;
 	worldf.x = x;
@@ -118,8 +118,8 @@ Entity_Container* Entity::GetParent()
 
 void Entity::SetParent(Entity_Container* e)
 {
-	if (inworld)RemoveFromWorld();
-	if (parent!=nullptr) parent->RemoveItemFromInventory(this); //we are in an inv, so remove from that first
+	if (inworld&&e != nullptr)RemoveFromWorld();
+	if (parent != nullptr) parent->RemoveItemFromInventory(this); //we are in an inv, so remove from that first
 	if (designationParent != nullptr) designationParent = nullptr; //we are in a stock designation so remove ourselves from that list
 	this->parent = e;
 }
@@ -149,6 +149,8 @@ bool Entity::GetMovementCapability()
 void Entity::SetSpriteVariant(wchar_t x, wchar_t y)
 {
 	spriteX = x;
+	int variants = TileManager::Instance().GetNumEntityVariants(x);
+	if (y > variants) y = variants;
 	spriteY = y;
 	if (inworld) {
 		world->tileToTick.push_back(world->GetWorldTile(GetPosition()));

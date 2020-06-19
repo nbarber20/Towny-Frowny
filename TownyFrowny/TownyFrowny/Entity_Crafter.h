@@ -3,7 +3,7 @@
 class Entity_Crafter : public Entity_Living
 {
 public:
-	Entity_Crafter(wchar_t EntityID, sf::Vector2i spritePos, TaskManager* manager, World* worldref, std::vector<int> craftable, std::vector<TargetedHumanBehaviors> TargetedBehaviors) :Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors) {
+	Entity_Crafter(wchar_t EntityID, sf::Vector2i spritePos, TaskManager* manager, std::vector<int> craftable, std::vector<TargetedHumanBehaviors> TargetedBehaviors) :Entity_Living(EntityID, spritePos, manager, TargetedBehaviors) {
 		this->craftable = craftable;
 	};
 	virtual Entity_Crafter* clone() const { return new Entity_Crafter(*this); };

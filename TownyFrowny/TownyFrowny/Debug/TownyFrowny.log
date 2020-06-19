@@ -1,7 +1,1185 @@
-﻿  Entity_Human.cpp
+﻿  Entity.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(26): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity.cpp(75): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Animal.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.cpp(26): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(31): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,int,0>(std::pair<Entity::Behaviors,int> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(25): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,int,0>(std::pair<Entity::Behaviors,int> &&) noexcept' being compiled
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(31): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Crafter.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_crafter.cpp(26): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_crafter.cpp(29): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_crafter.cpp(45): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_crafter.cpp(46): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Food.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Human.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(12): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(76): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(194): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Living.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(16): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(20): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(47): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(55): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(63): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(89): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(170): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_living.cpp(201): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Entity_Plant.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_plant.cpp(18): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_plant.cpp(31): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_plant.cpp(32): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_plant.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(31): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  GroundTile.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(31): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Main.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(31): warning C4244: 'argument': conversion from 'time_t' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(34): warning C4244: 'argument': conversion from 'time_t' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(70): warning C4244: 'argument': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(157): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(167): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\main.cpp(188): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_animal.h(31): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  PlayerController.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(67): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(88): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(95): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(108): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(120): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(124): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(132): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(152): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(160): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(196): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(206): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(209): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(232): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(242): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(247): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(257): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(262): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(281): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(290): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(303): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(320): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(324): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(365): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(375): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(239): warning C4244: 'initializing': conversion from '_Ty' to '_Ty1', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              _Ty1=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(243): note: see reference to function template instantiation 'std::pair<float,std::pair<int,int>>::pair<int,std::pair<int,int>,0>(std::pair<int,std::pair<int,int>> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\playercontroller.cpp(243): note: see reference to function template instantiation 'std::pair<float,std::pair<int,int>>::pair<int,std::pair<int,int>,0>(std::pair<int,std::pair<int,int>> &&) noexcept' being compiled
+  Task.cpp
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
   e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
@@ -39,8 +1217,8 @@ e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(59): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(66): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(57): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.h(64): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
           with
           [
@@ -56,7 +1234,10 @@ e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C424
           [
               T=int
           ]
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(85): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
@@ -90,18 +1271,34 @@ e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning 
           ]
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
   e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(35): warning C4018: '>=': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(169): warning C4018: '>=': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(177): warning C4018: '<': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(217): warning C4018: '<': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(289): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(106): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(116): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(117): warning C4018: '<': signed/unsigned mismatch
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(133): warning C4018: '<': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(12): warning C4018: '<': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(76): warning C4018: '<': signed/unsigned mismatch
-e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.cpp(185): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(56): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(58): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(83): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(85): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(197): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(233): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(274): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(300): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(362): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(433): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(453): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(458): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(496): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(519): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(520): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(627): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(663): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(750): warning C4018: '<': signed/unsigned mismatch
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
           with
           [
@@ -113,5 +1310,310 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
           ]
   e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
   e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  UIWindow_Inventory.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(8): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(10): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(20): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(23): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(26): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uiwindow_inventory.cpp(39): warning C4244: 'argument': conversion from 'float' to 'const unsigned int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  World.cpp
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): warning C4099: 'Designation': type name first seen using 'class' now seen using 'struct'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\designation.h(7): note: see declaration of 'Designation'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(30): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(48): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(56): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\vectorhelper.h(57): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(26): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(99): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\camera.h(100): warning C4244: '=': conversion from 'float' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(17): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\namegenerator.h(21): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(28): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(22): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(23): warning C4244: '*=': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(35): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\pathfinder.h(52): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\uihandler.h(87): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(44): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(53): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(62): warning C4018: '>': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(80): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(81): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(104): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\loghandler.h(106): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_light.h(3): warning C4099: 'WorldTile': type name first seen using 'struct' now seen using 'class'
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\worldtile.h(5): note: see declaration of 'WorldTile'
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(39): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(180): warning C4018: '>=': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(188): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(230): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(294): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entityhandler.h(308): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(16): warning C4244: 'argument': conversion from 'int' to 'FN_DECIMAL', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(44): warning C4244: 'argument': conversion from 'int' to 'FN_DECIMAL', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(74): warning C4244: 'argument': conversion from 'time_t' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(78): warning C4244: 'argument': conversion from 'time_t' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(88): warning C4244: 'argument': conversion from 'int' to 'FN_DECIMAL', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(114): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(127): warning C4244: 'argument': conversion from 'T' to 'FN_DECIMAL', possible loss of data
+          with
+          [
+              T=int
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(150): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(151): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(154): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(155): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(202): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(205): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(205): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(430): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(431): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(437): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(443): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(446): warning C4018: '<': signed/unsigned mismatch
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\world.cpp(578): warning C4018: '<': signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.15.26726\include\utility(240): warning C4244: 'initializing': conversion from '_Ty' to '_Ty2', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              _Ty2=float
+          ]
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(44): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_human.h(38): note: see reference to function template instantiation 'std::pair<Entity::Behaviors,float>::pair<Entity::Behaviors,double,0>(std::pair<Entity::Behaviors,double> &&) noexcept' being compiled
+  Generating Code...
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\task.cpp(673): warning C4715: 'Task_SourceMaterials::Execute': not all control paths return a value
 e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(14): warning C4715: 'Recipies::getRecipe': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(40): warning C4715: 'Entity_Container::StepTiles': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(40): warning C4715: 'Entity_Container::StepTiles': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(14): warning C4715: 'Recipies::getRecipe': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\recipies.h(14): warning C4715: 'Recipies::getRecipe': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity_container.h(40): warning C4715: 'Entity_Container::StepTiles': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity.cpp(85): warning C4715: 'Entity::MoveToTile': not all control paths return a value
+e:\personalwork\towny-frowny\townyfrowny\townyfrowny\entity.cpp(92): warning C4715: 'Entity::StepTiles': not all control paths return a value
   TownyFrowny.vcxproj -> E:\PersonalWork\Towny-Frowny\TownyFrowny\Debug\TownyFrowny.exe

@@ -9,14 +9,14 @@ class Entity_Human : public Entity_Living {
 public:
 	
 
-	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, PlayerController* playerController, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
+	Entity_Human(wchar_t EntityID, sf::Vector2i spritePos, PlayerController* playerController, TaskManager* manager, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, TargetedBehaviors)
 	{
 		volume = 6;
 		this->playerController = playerController;
 	};
 	void SetBehavoir(Entity::Behaviors b);
 	void SetTargetedBehavior(TargetedBehaviorStep* b);
-	void Initilize() override;
+	void Initilize(World* worldRef) override;
 	void Tick() override;
 	void TaskComplete(Task* t) override;
 	void TaskFail(Task* t) override;

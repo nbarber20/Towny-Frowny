@@ -2,16 +2,17 @@
 #include "TaskManager.h"
 #include "EntityHandler.h"
 
-Entity_Animal::Entity_Animal(wchar_t EntityID, sf::Vector2i spritePos, int volume, wchar_t MeatID, TaskManager* manager, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, worldref, TargetedBehaviors)
+Entity_Animal::Entity_Animal(wchar_t EntityID, sf::Vector2i spritePos, int volume, wchar_t MeatID, TaskManager* manager, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity_Living(EntityID, spritePos, manager, TargetedBehaviors)
 {
 	this->volume = volume;
 	this->MeatID = MeatID;
 }
 
-void Entity_Animal::Initilize()
+void Entity_Animal::Initilize(World* worldref)
 {
+	Entity_Living::Initilize(worldref);
 	individualName = NameGenerator::Instance().GenNameFirstName() + " the" + GetObjectName();
-	AddItemToBodilyInventory(EntityHandler::Instance().CreateEntity(MeatID));
+	AddItemToBodilyInventory(EntityHandler::Instance().CreateEntity(MeatID, GetPosition()));
 }
 
 void Entity_Animal::Tick()

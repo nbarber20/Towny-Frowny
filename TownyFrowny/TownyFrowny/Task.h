@@ -12,8 +12,7 @@ public:
 		this->length = stepCount;
 	};
 	virtual ~Task() {}
-	virtual void Setup(World* w, Entity_Living* o, Entity_Living* i) {
-		world = w;
+	virtual void Setup(Entity_Living* o, Entity_Living* i) {
 		ownerEntity = o;
 		issuer = i;
 	};
@@ -47,7 +46,6 @@ protected:
 	int tickCount;
 	int length;
 	int tickspeed;
-	World* world;
 	bool began;
 	bool finished;
 	int loopCount = 0;
@@ -491,4 +489,24 @@ public:
 	TaskStatus Execute() override;
 private:
 	Entity** targetLight;
+};
+
+class Task_Destroy : public Task {
+public:
+	Task_Destroy(Entity** target, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->target = target;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** target;
+};
+
+class Task_PlantSeed : public Task {
+public:
+	Task_PlantSeed(Entity** targetSeed, int tickSpeed, int length) :Task(tickspeed, length) {
+		this->targetSeed = targetSeed;
+	};
+	TaskStatus Execute() override;
+private:
+	Entity** targetSeed;
 };

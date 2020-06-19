@@ -2,7 +2,7 @@
 #include "Entity.h"
 class Entity_Door : public Entity {
 public:
-	Entity_Door(wchar_t EntityID, sf::Vector2i spritePos, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, worldref, TargetedBehaviors)
+	Entity_Door(wchar_t EntityID, sf::Vector2i spritePos, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, TargetedBehaviors)
 	{
 	};
 	virtual Entity_Door* clone() const { return new Entity_Door(*this); };

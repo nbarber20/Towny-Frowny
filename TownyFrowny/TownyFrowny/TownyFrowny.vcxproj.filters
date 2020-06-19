@@ -148,9 +148,6 @@
     <ClInclude Include="Entity_Plant.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Entity_Material.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Entity_Container.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -224,6 +221,9 @@
       <Filter>Header Files\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="EntityHandler.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity_Seed.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>

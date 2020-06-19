@@ -2,7 +2,7 @@
 #include "Entity.h"
 class Entity_Manufactured : public Entity {
 public:
-	Entity_Manufactured(wchar_t EntityID, sf::Vector2i spritePos, bool doesRotate, World* worldref, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, worldref, TargetedBehaviors)
+	Entity_Manufactured(wchar_t EntityID, sf::Vector2i spritePos, bool doesRotate, std::vector<TargetedHumanBehaviors> TargetedBehaviors) : Entity(EntityID, spritePos, TargetedBehaviors)
 	{
 		this->doesRotate = doesRotate;
 	};
